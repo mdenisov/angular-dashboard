@@ -1,0 +1,56 @@
+<section id="sidebar" class="sidebar" ng-controller="SidebarCtrl">
+
+    <nav role="navigation" id="navigation" class="navigation">
+        <ul class="navigation__list">
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('daytheme')}">
+                <a class="navigation__link" role="nav-main" href="#/news/daytheme"><i class="navigation__link__icon fa fa-bomb"></i>Тема дня</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('lenta')}">
+                <a class="navigation__link" role="nav-main" href="#/news/lenta"><i class="navigation__link__icon fa fa-list"></i>Лента новостей</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('bankpress')}">
+                <a class="navigation__link" role="nav-main" href="#/news/bankpress"><i class="navigation__link__icon fa fa-bar-chart"></i>Мониторинг банковской прессы</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('interview')}">
+                <a class="navigation__link" role="nav-main" href="#/news/interview"><i class="navigation__link__icon fa fa-microphone"></i>Интервью</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('author')}">
+                <a class="navigation__link" role="nav-main" href="#/news/author"><i class="navigation__link__icon fa fa-user"></i>Авторы</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('columnists')}">
+                <a class="navigation__link" role="nav-main" href="#/news/columnists"><i class="navigation__link__icon fa fa-list"></i>Колумнисты</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('video')}">
+                <a class="navigation__link" role="nav-main" href="#/news/video"><i class="navigation__link__icon fa fa-video-camera"></i>Видеоматериалы</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('pressrelease')}">
+                <a class="navigation__link" role="nav-main" href="#/news/pressrelease"><i class="navigation__link__icon fa fa-newspaper-o"></i>Пресс-релизы</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('proetcontra')}">
+                <a class="navigation__link" role="nav-main" href="#/news/proetcontra"><i class="navigation__link__icon fa fa-question"></i>Спорный момент</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('stars')}">
+                <a class="navigation__link" role="nav-main" href="#/news/stars"><i class="navigation__link__icon fa fa-star"></i>Звёзды в банке</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('bankingnews')}">
+                <a class="navigation__link" role="nav-main" href="#/news/bankingnews"><i class="navigation__link__icon fa fa-list"></i>Banking news</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('research')}">
+                <a class="navigation__link" role="nav-main" href="#/news/research"><i class="navigation__link__icon fa fa-line-chart"></i>Исследования</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('authorcompany')}">
+                <a class="navigation__link" role="nav-main" href="#/news/authorcompany"><i class="navigation__link__icon fa fa-user"></i>Авторы исследований</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('sitenews')}">
+                <a class="navigation__link" role="nav-main" href="#/news/sitenews"><i class="navigation__link__icon fa fa-align-right"></i>Новости проекта</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('advnews')}">
+                <a class="navigation__link" role="nav-main" href="#/news/advnews"><i class="navigation__link__icon fa fa-gift"></i>Новости рекламы (спецпредложения)</a>
+            </li>
+            <li class="navigation__item" ng-class="{'navigation__item--active': isActive('secularnews')}">
+                <a class="navigation__link" role="nav-main" href="#/news/secularnews"><i class="navigation__link__icon fa fa-group"></i>Светские новости</a>
+            </li>
+        </ul>
+    </nav>
+
+</section>

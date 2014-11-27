@@ -1,0 +1,80 @@
+<!--<h4>My projects</h4>-->
+
+<!--<div ng-include="'js/app/projects/projects-list.tpl.html'"></div>-->
+
+<div class="page-header">
+    <h2>Users</h2>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline" role="form">
+            <div class="form-group sort">
+                <div class="btn-group" dropdown>
+                    <button type="button" class="btn btn-sm btn-primary">Sort By</button>
+                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Sort By</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a ng-click="sort('id')">
+                                Id <i ng-class="{'glyphicon glyphicon-chevron-up' : isSortUp('id'), 'glyphicon glyphicon-chevron-down' : isSortDown('id')}"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="sort('name')">
+                                Name <i ng-class="{'glyphicon glyphicon-chevron-up' : isSortUp('name'), 'glyphicon glyphicon-chevron-down' : isSortDown('name')}"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="sort('email')">
+                                Email <i ng-class="{'glyphicon glyphicon-chevron-up' : isSortUp('email'), 'glyphicon glyphicon-chevron-down' : isSortDown('email')}"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control input-sm" placeholder="Enter name or email" ng-model="search">
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-bordered table-condensed1 table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="span8">Name</th>
+            <th class="span1">Email</th>
+            <th class="span1">Role</th>
+            <th class="span2">Tools</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users | limitTo:10 | startsWithLetter:search | orderBy:sortField:reverse" ng-click="edit(user.$id())">
+            <td>
+                <a href="#/users/{{user.id}}">{{user.name}}</a>
+            </td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td>
+                <button class="btn btn-sm btn-default edit" ng-click="edit(user.$id())">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button class="btn btn-sm btn-danger remove" ng-click="remove(user, $index, $event)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </td>
+        </tr>
+        <tr ng-show="!users.length">
+            <td colspan="4">No users for you!</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <button class="btn btn-primary btn-sm pull-right" role="button" ng-click="new()">Add User</button>
+    </div>
+</div>

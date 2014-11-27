@@ -1,0 +1,6 @@
+
+.idea/*
+vendor/*
+dist/*
+js_/*
+node_modules/*
