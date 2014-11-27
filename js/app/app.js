@@ -3,6 +3,7 @@ angular.module('app', [
         'ngRoute',
         'ngResource',
         'ngSanitize',
+		'ngSwitcher',
 
         'ui.bootstrap',
 
@@ -11,6 +12,7 @@ angular.module('app', [
         'directives.crud',
 
         'index',
+		'daytheme',
         'users',
 		'settings',
 
@@ -20,17 +22,11 @@ angular.module('app', [
 
     .constant('I18N.MESSAGES', {
         'errors.route.changeError':'Route change error',
-        'crud.user.save.success':"A user with id '{{id}}' was saved successfully.",
-        'crud.user.remove.success':"A user with id '{{id}}' was removed successfully.",
-        'crud.user.remove.error':"Something went wrong when removing user with id '{{id}}'.",
-        'crud.user.save.error':"Something went wrong when saving a user...",
-        'crud.project.save.success':"A project with id '{{id}}' was saved successfully.",
-        'crud.project.remove.success':"A project with id '{{id}}' was removed successfully.",
-        'crud.project.save.error':"Something went wrong when saving a project...",
-        'login.reason.notAuthorized':"You do not have the necessary access permissions.  Do you want to login as someone else?",
-        'login.reason.notAuthenticated':"You must be logged in to access this part of the application.",
-        'login.error.invalidCredentials': "Login failed.  Please check your credentials and try again.",
-        'login.error.serverError': "There was a problem with authenticating: {{exception}}."
+
+        'crud.news.save.success':"A news with id '{{id}}' was saved successfully.",
+        'crud.news.remove.success':"A news with id '{{id}}' was removed successfully.",
+        'crud.news.remove.error':"Something went wrong when removing news with id '{{id}}'.",
+        'crud.news.save.error':"Something went wrong when saving a news..."
     })
 
     .constant('CONFIG', {
@@ -38,7 +34,7 @@ angular.module('app', [
     })
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.otherwise({redirectTo:'/'});
+        $routeProvider.otherwise({redirectTo:'/news'});
     }])
 
     .controller('AppCtrl', ['$scope', '$location', 'i18nNotifications', 'breadcrumbs',
@@ -85,7 +81,7 @@ angular.module('app', [
 			$scope.currentPath = '/';
 
 			$scope.$on('$routeChangeSuccess', function(event, current) {
-				$scope.currentPath = current.$$route.originalPath;
+//				$scope.currentPath = current.$$route.originalPath;
 			});
 
 			$scope.isActive = function(path) {

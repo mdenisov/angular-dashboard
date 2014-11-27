@@ -89,19 +89,16 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 options: {
-                    banner: "<%= banner %>"
+                    banner: "<%= banner %>",
+					sourceMap: true
                 },
                 src: ['<%= src.js %>', '<%= src.jsTpl %>'],
                 dest: '<%= distdir %>/js/<%= pkg.name %>.js'
             },
-            index: {
-                src: ['index.html'],
-                dest: '<%= distdir %>/index.html',
-                options: {
-                    process: true
-                }
-            },
             vendor: {
+				options: {
+					sourceMap: true
+				},
                 src: [
 					'vendor/angular/angular.js',
 					'vendor/angular-route/angular-route.js',
@@ -153,10 +150,7 @@ module.exports = function(grunt) {
             },
             build: {
                 files: ['<%= src.js %>', '<%= src.lessWatch %>', '<%= src.tpl.app %>', '<%= src.tpl.common %>'],
-                tasks: ['build', 'timestamp'],
-				options: {
-					spawn: false
-				}
+                tasks: ['release', 'timestamp']
             }
         },
         jshint: {

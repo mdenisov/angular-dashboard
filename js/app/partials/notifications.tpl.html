@@ -1,4 +1,6 @@
-<div ng-class="['alert', 'alert-'+notification.type]" ng-repeat="notification in notifications.getCurrent()">
-    <button type="button" class="close" ng-click="removeNotification(notification)">&times;</button>
-    {{notification.message}}
-</div>
+<ul class="notifications">
+    <li ng-class="['notifications__item', 'animated', 'fast', 'fadeInRight', notification.type]" ng-repeat="notification in notifications.getCurrent()">
+        <span class="notifications__close" ng-click="removeNotification(notification)">закрыть x</span>
+        {{notification.message}}
+    </li>
+</ul>

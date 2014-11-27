@@ -1,6 +1,5 @@
 
 angular.module('index', [
-        'services.crud',
         'dataResource',
 
         'services.i18nNotifications',
@@ -8,11 +7,11 @@ angular.module('index', [
     ])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/', {
-            templateUrl:'js/app/news/index-list.tpl.html',
-            controller:'IndexViewCtrl',
+        $routeProvider.when('/news', {
+            templateUrl:'news/list.tpl.html',
+            controller:'NewsListCtrl',
             resolve:{
-				news: ['Users', function (News) {
+				items: ['News', function (News) {
                     return News.all();
                 }]
             }
@@ -23,45 +22,6 @@ angular.module('index', [
 		function ($dataResource) {
 
 			var News = $dataResource('news');
-
-			News.forUser = function(userId, successcb, errorcb) {
-				//TODO: get projects for this user only (!)
-				return Projects.query({}, successcb, errorcb);
-			};
-
-			News.prototype.isProductOwner = function (userId) {
-				return this.productOwner === userId;
-			};
-			News.prototype.canActAsProductOwner = function (userId) {
-				return !this.isScrumMaster(userId) && !this.isDevTeamMember(userId);
-			};
-			News.prototype.isScrumMaster = function (userId) {
-				return this.scrumMaster === userId;
-			};
-			News.prototype.canActAsScrumMaster = function (userId) {
-				return !this.isProductOwner(userId);
-			};
-			News.prototype.isDevTeamMember = function (userId) {
-				return this.teamMembers.indexOf(userId) >= 0;
-			};
-			News.prototype.canActAsDevTeamMember = function (userId) {
-				return !this.isProductOwner(userId);
-			};
-
-			News.prototype.getRoles = function (userId) {
-				var roles = [];
-				if (this.isProductOwner(userId)) {
-					roles.push('PO');
-				} else {
-					if (this.isScrumMaster(userId)){
-						roles.push('SM');
-					}
-					if (this.isDevTeamMember(userId)){
-						roles.push('DEV');
-					}
-				}
-				return roles;
-			};
 
 			return News;
 		}
@@ -87,9 +47,9 @@ angular.module('index', [
 		};
 	})
 
-    .controller('IndexViewCtrl', ['$scope', '$location', 'news',
-        function ($scope, $location, news) {
-            $scope.news = news;
+	.controller('NewsListCtrl', ['$scope', '$location', 'items', 'i18nNotifications',
+		function ($scope, $location, items, i18nNotifications) {
+            $scope.items = items;
 
 			// Show on page control
 			$scope.itemLimits = {
@@ -103,6 +63,10 @@ angular.module('index', [
 
 			// Filter logics
 			$scope.showFilder = false;
+
+			$scope.searchByFilter = function() {
+				i18nNotifications.pushForCurrentRoute('crud.news.remove.success', 'success', {});
+			};
 
 			$scope.toggleFilter = function() {
 				$scope.showFilder = !($scope.showFilder);
