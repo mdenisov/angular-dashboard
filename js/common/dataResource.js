@@ -50,7 +50,7 @@ angular.module('dataResource', [])
                         (angular.extend({}, defaultParams, queryJson))
                         : {};
 
-                    angular.forEach(params, function(value, key){
+                    angular.forEach(params, function(value, key) {
                         q.push(key);
                         q.push(value);
                     });

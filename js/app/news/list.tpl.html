@@ -206,7 +206,7 @@
                         <tr ng-repeat="item in items | limitTo:limit | startsWithLetter:search | orderBy:sortField:reverse">
                             <td>{{item.id}}</td>
                             <td class="text-left">
-                                <a href="#/news/daytheme/{{item.id}}">{{item.title}}</a>
+                                <a href="#/news/edit/{{item.id}}">{{item.title}}</a>
                             </td>
                             <td>
                                 <a class="action" tooltip="{{!item.active ? 'Активировать' : 'Деактивировать'}}" ng-click="toggleActiv(item, $index, $event)">

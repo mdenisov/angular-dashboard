@@ -27,12 +27,13 @@ function updateNews($id) {
     $request = \Slim\Slim::getInstance()->request();
     $body = $request->getBody();
     $user = json_decode($body);
-    $sql = "UPDATE news SET title=:title, active=:active, status=:status, date_start=DATE_FORMAT(:date_start, '%Y-%m-%d'), date_finish=DATE_FORMAT(:date_finish, '%Y-%m-%d'), text=:text WHERE id=:id";
+    $sql = "UPDATE news SET title=:title, active=:active, correction=:correction, status=:status, date_start=DATE_FORMAT(:date_start, '%Y-%m-%d'), date_finish=DATE_FORMAT(:date_finish, '%Y-%m-%d'), text=:text WHERE id=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("title", $user->title);
         $stmt->bindParam("active", $user->active);
+        $stmt->bindParam("correction", $user->correction);
         $stmt->bindParam("status", $user->status);
         $stmt->bindParam("date_start", $user->date_start);
         $stmt->bindParam("date_finish", $user->date_finish);
@@ -62,12 +63,13 @@ function deleteNews($id) {
 function addNews() {
     $request = \Slim\Slim::getInstance()->request();
     $user = json_decode($request->getBody());
-    $sql = "INSERT INTO news (title, active, status, date_start, date_finish, text) VALUES (:title, :active, :status, STR_TO_DATE(:date_start, '%Y/%m/%d'), STR_TO_DATE(:date_finish, '%Y/%m/%d'), :text)";
+    $sql = "INSERT INTO news (title, active, correction, status, date_start, date_finish, text) VALUES (:title, :active, :correction, :status, STR_TO_DATE(:date_start, '%Y/%m/%d'), STR_TO_DATE(:date_finish, '%Y/%m/%d'), :text)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("title", $user->title);
         $stmt->bindParam("active", $user->active);
+        $stmt->bindParam("correction", $user->correction);
         $stmt->bindParam("status", $user->status);
         $stmt->bindParam("date_start", $user->date_start);
         $stmt->bindParam("date_finish", $user->date_finish);

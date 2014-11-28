@@ -25,6 +25,7 @@ angular.module('daytheme', [
 					return News.getById($route.current.params.itemId);
 				}]
 			});
+
 	}])
 
 	.factory('News', ['dataResource',
@@ -56,7 +57,7 @@ angular.module('daytheme', [
 		};
 	})
 
-    .controller('NewsListCtrl', ['$scope', 'crudListMethods', '$location', 'items', 'i18nNotifications',
+    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', '$location', 'items', 'i18nNotifications',
         function ($scope, crudListMethods, $location, items, i18nNotifications) {
             $scope.items = items;
 
@@ -135,7 +136,7 @@ angular.module('daytheme', [
         }
     ])
 
-	.controller('NewsEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
+	.controller('NewsDaythemeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
 		function ($scope, $location, item, i18nNotifications) {
 
 			$scope.item = item;

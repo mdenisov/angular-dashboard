@@ -10,24 +10,28 @@ angular.module('news', [
 	.config(['crudRouteProvider', function (crudRouteProvider) {
 
 		crudRouteProvider.routesFor('News', '', '', ['Новости', 'Новости'])
-			.whenList({
-				items: ['News', function(News) {
-					return News.all();
-				}]
+			.when('/news', {
+				label: 'Новости',
+				templateUrl:'news/list.tpl.html',
+				controller:'AllNewsListCtrl',
+				resolve:{
+					items: ['News', function(News) {
+						return News.all();
+					}]
+				}
 			})
-	}])
+			.when('/news/edit/:itemId', {
+				label: 'Редактирование новости',
+				templateUrl:'news/edit.tpl.html',
+				controller:'AllNewsEditCtrl',
+				resolve:{
+					item: ['$route', 'News', function ($route, News) {
+						return News.getById($route.current.params.itemId);
+					}]
+				}
+			})
 
-//    .config(['$routeProvider', function ($routeProvider) {
-//        $routeProvider.when('/news', {
-//            templateUrl:'news/list.tpl.html',
-//            controller:'NewsListCtrl',
-//            resolve:{
-//				items: ['News', function (News) {
-//                    return News.all();
-//                }]
-//            }
-//        });
-//    }])
+	}])
 
 	.factory('News', ['dataResource',
 		function ($dataResource) {
@@ -58,9 +62,11 @@ angular.module('news', [
 		};
 	})
 
-	.controller('NewsListCtrl', ['$scope', '$location', 'items', 'i18nNotifications',
-		function ($scope, $location, items, i18nNotifications) {
+	.controller('AllNewsListCtrl', ['$scope', 'crudListMethods', '$location', 'items', 'i18nNotifications',
+		function ($scope, crudListMethods, $location, items, i18nNotifications) {
             $scope.items = items;
+
+			angular.extend($scope, crudListMethods('/news'));
 
 			// Show on page control
 			$scope.itemLimits = {
@@ -133,4 +139,41 @@ angular.module('news', [
 			};
 
         }
-    ]);
+    ])
+
+	.controller('AllNewsEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
+		function ($scope, $location, item, i18nNotifications) {
+
+			$scope.item = item;
+
+			$scope.redactorOptions = {
+				buttons: ['formatting', '|', 'bold', 'italic']
+			};
+
+			$scope.onSave = function (item) {
+				i18nNotifications.pushForNextRoute('crud.news.save.success', 'success', {id : item.$id()});
+				$location.path('/news');
+			};
+
+			$scope.onError = function() {
+				i18nNotifications.pushForCurrentRoute('crud.news.save.error', 'danger');
+			};
+
+			$scope.onRemove = function(item) {
+				i18nNotifications.pushForNextRoute('crud.news.remove.success', 'success', {id : item.$id()});
+				$location.path('/news');
+			};
+
+			$scope.open = function($event, opened) {
+				$event.preventDefault();
+				$event.stopPropagation();
+
+				$scope.closeAll();
+				$scope.datepickers[opened] = true;
+			};
+			$scope.closeAll = function() {
+				$scope.datepickers = [];
+			};
+
+		}
+	]);

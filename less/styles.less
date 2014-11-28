@@ -931,12 +931,21 @@ label {
 	}
 }
 
+.splash {
+	display: none;
+}
 
-.loader {
+[ng-cloak].splash {
+	display: block !important;
+}
+
+.splash {
 	z-index: 2000000000;
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: rgb(255, 255, 255);
-//	background: rgba(255, 255, 255, .9);
+	top: 0;
+	left: 0;
+	background: rgb(255, 255, 255) url("../img/spinner.gif") center center no-repeat;
+	//	background: rgba(255, 255, 255, .9);
 }
