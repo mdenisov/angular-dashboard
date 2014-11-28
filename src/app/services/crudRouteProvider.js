@@ -28,18 +28,18 @@ function crudRouteProvider($routeProvider) {
     // In any case, the point is that this function is the key part of this "provider helper".
     // We use it to create routes for CRUD operations.  We give it some basic information about
     // the resource and the urls then it it returns our own special routeProvider.
-    this.routesFor = function(resourceName, urlPrefix, routePrefix, labels) {
+    this.routesFor = function(resourceName, moduleName, routePrefix, labels) {
         var baseUrl = resourceName.toLowerCase();
         var baseRoute = '/' + resourceName.toLowerCase();
         var baseTplUrl = baseUrl;
         var routeLabels = [];
-        routePrefix = routePrefix || urlPrefix;
+        routePrefix = routePrefix || moduleName;
 
         // Prepend the urlPrefix if available.
-        if (angular.isString(urlPrefix) && urlPrefix !== '') {
-            baseUrl = baseUrl + '/' + urlPrefix.toLowerCase();
-			baseTplUrl = baseTplUrl + '/' + urlPrefix.toLowerCase();
-        }
+        //if (angular.isString(urlPrefix) && urlPrefix !== '') {
+        //    baseUrl = baseUrl + '/' + urlPrefix.toLowerCase();
+			//baseTplUrl = baseTplUrl + '/' + urlPrefix.toLowerCase();
+        //}
 
         // Prepend the routePrefix if it was provided;
         if (routePrefix !== null && routePrefix !== undefined && routePrefix !== '') {
@@ -57,7 +57,7 @@ function crudRouteProvider($routeProvider) {
 
         // Create the templateUrl for a route to our resource that does the specified operation.
         var templateUrl = function(operation) {
-            return baseTplUrl + '/' + operation.toLowerCase() + '.tpl.html';
+            return 'views' + '/' + moduleName.toLowerCase() + '/' + operation.toLowerCase() + '.tpl.html';
         };
         // Create the controller name for a route to our resource that does the specified operation.
         var controllerName = function(operation) {

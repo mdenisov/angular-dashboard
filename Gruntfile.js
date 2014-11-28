@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     // Default task.
 //    grunt.registerTask('default', ['jshint', 'build', 'karma:unit']);
     grunt.registerTask('default', [/*'jshint',*/ 'build']);
-    grunt.registerTask('build', ['clean', 'html2js', 'concat', 'less:build', 'copy:assets']);
+    grunt.registerTask('build', ['clean', 'html2js', 'concat', 'less:build', 'autoprefixer', 'copy:assets']);
     grunt.registerTask('release', ['clean', 'html2js', 'uglify', /*'jshint', 'karma:unit', 'concat:index',*/ 'less:min', 'copy:assets']);
     grunt.registerTask('test-watch', ['karma:watch']);
 
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
                 app: ['src/app/**/*.tpl.html'],
                 common: ['src/common/**/*.tpl.html']
             },
-            less: ['less/main.less'], // recess:build doesn't accept ** in its file patterns
+            less: ['less/main.less'],
             lessWatch: ['less/**/*.less']
         },
         clean: ['<%= distdir %>/*'],
@@ -96,14 +96,14 @@ module.exports = function(grunt) {
             dist: {
                 options: {
                     banner: "<%= banner %>",
-					sourceMap: true
+                    sourceMap: true
                 },
                 src: ['<%= src.js %>', '<%= src.jsTpl %>'],
                 dest: '<%= distdir %>/js/<%= pkg.name %>.js'
             },
             vendor: {
 				options: {
-					sourceMap: true
+                    sourceMap: true
 				},
                 src: [
 					'vendor/jquery/dist/jquery.js',
@@ -114,6 +114,11 @@ module.exports = function(grunt) {
 					'vendor/angular-route/angular-route.js',
 					'vendor/angular-resource/angular-resource.js',
 					'vendor/angular-sanitize/angular-sanitize.js',
+                    'vendor/angular-aria/angular-aria.js',
+                    'vendor/angular-cookies/angular-cookies.js',
+                    'vendor/angular-sanitize/angular-sanitize.js',
+                    'vendor/angular-touch/angular-touch.js',
+                    'vendor/angular-messages/angular-messages.js',
 					'vendor/angular-bootstrap/ui-bootstrap.js',
 					'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
 					'vendor/ng-breadcrumbs/dist/ng-breadcrumbs.js',
@@ -125,7 +130,8 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 options: {
-                    banner: "<%= banner %>"
+                    banner: "<%= banner %>",
+                    sourceMap: true
                 },
                 src: ['<%= src.js %>', '<%= src.jsTpl %>'],
                 dest: '<%= distdir %>/js/<%= pkg.name %>.js'
@@ -146,12 +152,32 @@ module.exports = function(grunt) {
             },
             min: {
                 options: {
-                    paths: ["assets/css"],
-                    cleancss: true
+                    cleancss: true,
+                    paths: ["assets/css"]
                 },
                 files: {
                     '<%= distdir %>/css/<%= pkg.name %>.css': ['<%= src.less %>']
                 }
+            }
+        },
+        autoprefixer: {
+            options: {
+                browsers: [
+                    'Android 2.3',
+                    'Android >= 4',
+                    'Chrome >= 20',
+                    'Firefox >= 24', // Firefox 24 is the latest ESR
+                    'Explorer >= 8',
+                    'iOS >= 6',
+                    'Opera >= 12',
+                    'Safari >= 6'
+                ]
+            },
+            release: {
+                options: {
+                    map: true
+                },
+                src: '<%= distdir %>/css/<%= pkg.name %>.css'
             }
         },
         watch: {

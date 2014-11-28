@@ -11,18 +11,20 @@
 
     <div id="page-content" class="panel-body">
 
-        <form class="form-horizontal" novalidate crud-edit="item">
+        <form class="form-horizontal" crud-edit="item" name="form">
 
             <tabset>
 
                 <tab heading="Основные">
 
                     <div class="padding--vertical">
-                        <div class="form-group" show-errors>
+                        <div class="form-group">
                             <label class="control-label col-md-1">Заголовок</label>
                             <div class="col-md-8">
                                 <textarea class="form-control" name="title" ng-model="item.title" required></textarea>
-                                <span ng-show="showError('title', 'required')" class="help-block">This field is required.</span>
+                                <div ng-messages="form.title.$error">
+                                    <div ng-message="required" class="help-block text-danger">Обязательно для заполнения</div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -104,7 +106,10 @@
                         <div class="form-group">
                             <label class="control-label col-md-1">Ссылка на источник</label>
                             <div class="col-md-8">
-                                <input class="form-control" type="text" name="source_url" ng-model="item.source_url"/>
+                                <input class="form-control" type="url" name="source_url" ng-model="item.source_url"/>
+                                <div ng-messages="form.source_url.$error">
+                                    <div ng-message="url" class="help-block text-danger">Неверная ссылка</div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -122,13 +127,19 @@
                         <div class="form-group">
                             <label class="control-label col-md-1">Анонс</label>
                             <div class="col-md-8">
-                                <textarea class="form-control" name="preview_text" ng-model="item.preview_text" redactor="{air: true}"></textarea>
+                                <textarea class="form-control" name="preview_text" ng-model="item.preview_text" redactor required></textarea>
+                                <div ng-messages="form.preview_text.$error">
+                                    <div ng-message="required" class="help-block text-danger">Обязательно для заполнения</div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-1">Текст</label>
                             <div class="col-md-8">
-                                <textarea class="form-control" name="text" ng-model="item.text" redactor></textarea>
+                                <textarea class="form-control" name="text" ng-model="item.text" redactor required></textarea>
+                                <div ng-messages="form.text.$error">
+                                    <div ng-message="required" class="help-block text-danger">Обязательно для заполнения</div>
+                                </div>
                             </div>
                         </div>
                     </div>

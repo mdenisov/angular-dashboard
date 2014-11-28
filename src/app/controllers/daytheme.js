@@ -1,35 +1,29 @@
 
-angular.module('news', [
-		'services.crud',
+angular.module('daytheme', [
+        'services.crud',
         'dataResource',
 
-        'services.i18nNotifications',
-        'show-errors'
+        'services.i18nNotifications'
     ])
 
 	.config(['crudRouteProvider', function (crudRouteProvider) {
 
-		crudRouteProvider.routesFor('News', '', '', ['Новости', 'Новости'])
-			.when('/news', {
-				label: 'Новости',
-				templateUrl:'news/list.tpl.html',
-				controller:'AllNewsListCtrl',
-				resolve:{
-					items: ['News', function(News) {
-						return News.all();
-					}]
-				}
+		crudRouteProvider.routesFor('News', 'Daytheme', '', ['Тема дня', 'новости'])
+			.whenList({
+				items: ['News', function(News) {
+					return News.all();
+				}]
 			})
-			.when('/news/edit/:itemId', {
-				label: 'Редактирование новости',
-				templateUrl:'news/edit.tpl.html',
-				controller:'AllNewsEditCtrl',
-				resolve:{
-					item: ['$route', 'News', function ($route, News) {
-						return News.getById($route.current.params.itemId);
-					}]
-				}
+			.whenNew({
+				item: ['News', function(News) {
+					return new News();
+				}]
 			})
+			.whenEdit({
+				item: ['$route', 'News', function ($route, News) {
+					return News.getById($route.current.params.itemId);
+				}]
+			});
 
 	}])
 
@@ -62,11 +56,11 @@ angular.module('news', [
 		};
 	})
 
-	.controller('AllNewsListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications',
-		function ($scope, crudListMethods, items, i18nNotifications) {
+    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications',
+        function ($scope, crudListMethods, items, i18nNotifications) {
             $scope.items = items;
 
-			angular.extend($scope, crudListMethods('/news'));
+			angular.extend($scope, crudListMethods('/news/daytheme'));
 
 			// Show on page control
 			$scope.itemLimits = {
@@ -82,7 +76,7 @@ angular.module('news', [
 			$scope.showFilder = false;
 
 			$scope.searchByFilter = function() {
-				i18nNotifications.pushForCurrentRoute('crud.news.remove.success', 'success', {});
+				i18nNotifications.pushForCurrentRoute('errors.system.general', 'error', {});
 			};
 
 			$scope.toggleFilter = function() {
@@ -141,7 +135,7 @@ angular.module('news', [
         }
     ])
 
-	.controller('AllNewsEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
+	.controller('NewsDaythemeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
 		function ($scope, $location, item, i18nNotifications) {
 
 			$scope.item = item;
@@ -152,16 +146,16 @@ angular.module('news', [
 
 			$scope.onSave = function (item) {
 				i18nNotifications.pushForNextRoute('crud.news.save.success', 'success', {id : item.$id()});
-				$location.path('/news');
+				$location.path('/news/daytheme');
 			};
 
 			$scope.onError = function() {
-				i18nNotifications.pushForCurrentRoute('crud.news.save.error', 'danger');
+				i18nNotifications.pushForCurrentRoute('crud.news.save.error', 'error');
 			};
 
 			$scope.onRemove = function(item) {
 				i18nNotifications.pushForNextRoute('crud.news.remove.success', 'success', {id : item.$id()});
-				$location.path('/news');
+				$location.path('/news/daytheme');
 			};
 
 			$scope.open = function($event, opened) {

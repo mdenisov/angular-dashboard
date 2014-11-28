@@ -1,8 +1,12 @@
 
 angular.module('app', [
-        'ngRoute',
+        'ngAria',
+        'ngCookies',
+        'ngMessages',
         'ngResource',
+        'ngRoute',
         'ngSanitize',
+        'ngTouch',
 		'ngSwitcher',
 		'ng-breadcrumbs',
 		//'angular-redactor',
@@ -12,7 +16,7 @@ angular.module('app', [
         'services.i18nNotifications',
         'directives.crud',
 
-        'news',
+        'home',
 		'daytheme',
 		'settings',
 
@@ -21,12 +25,18 @@ angular.module('app', [
     ])
 
     .constant('I18N.MESSAGES', {
-        'errors.route.changeError':'Route change error',
+        'errors.validation.required': 'Обязательно для заполнения.',
+        'errors.validation.invalid.email': 'Обязательно для заполнения.',
+        'errors.validation.invalid.url': 'Неверная ссылка.',
 
-        'crud.news.save.success':"A news with id '{{id}}' was saved successfully.",
-        'crud.news.remove.success':"A news with id '{{id}}' was removed successfully.",
-        'crud.news.remove.error':"Something went wrong when removing news with id '{{id}}'.",
-        'crud.news.save.error':"Something went wrong when saving a news..."
+        'errors.system.general': 'Произошла системная ошибка.',
+
+        'errors.route.changeError':'Ошибка роутинга.',
+
+        'crud.news.save.success':"Элемент с номером '{{id}}' успешно сохранен.",
+        'crud.news.remove.success':"Элемент с номером '{{id}}' успешно удален.",
+        'crud.news.remove.error':"При удалении элемента с номером '{{id}} произошла ошибка'.",
+        'crud.news.save.error':"При удалении элемента произошла ошибка"
     })
 
     .constant('CONFIG', {
@@ -34,7 +44,7 @@ angular.module('app', [
     })
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.otherwise({redirectTo:'/news'});
+        //$routeProvider.otherwise({redirectTo:'/news/home'});
     }])
 
 	//.config(function(redactorOptions) {
@@ -105,7 +115,7 @@ angular.module('app', [
 			};
 
 			$scope.home = function () {
-				$location.path('/');
+				$location.path('/news');
 			};
         }
     ])
@@ -113,7 +123,7 @@ angular.module('app', [
     .controller('SidebarCtrl', ['$scope', '$location', '$route',
         function ($scope, $location, $route) {
 
-			$scope.currentPath = '/';
+			$scope.currentPath = '/news';
 
 			$scope.$on('$routeChangeSuccess', function(event, current) {
 //				$scope.currentPath = current.$$route.originalPath;
@@ -124,7 +134,7 @@ angular.module('app', [
 			};
 
 			$scope.home = function () {
-				$location.path('/');
+				$location.path('/news');
 			};
 
         }

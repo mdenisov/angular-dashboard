@@ -149,12 +149,6 @@
 
             </div>
 
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <button class="btn btn-danger" ng-click="new()">Добавить</button>
-                </div>
-            </div>
-
             <div class="grid">
 
                 <table class="table table-striped">
@@ -212,7 +206,7 @@
                         <tr ng-repeat="item in items | limitTo:limit | startsWithLetter:search | orderBy:sortField:reverse">
                             <td>{{item.id}}</td>
                             <td class="text-left">
-                                <a ng-click="edit(item.$id())">{{item.title}}</a>
+                                <a href="#/news/edit/{{item.$id()}}">{{item.title}}</a>
                             </td>
                             <td>
                                 <a class="action" tooltip="{{!item.active ? 'Активировать' : 'Деактивировать'}}" ng-click="toggleActiv(item, $index, $event)">
@@ -235,9 +229,9 @@
                             <td>
                                 <a class="action" ng-click="changeStatus(item, $index, $event)">[1] Опубликован</a>
                             </td>
-                            <td>{{item.date_start}}</td>
+                            <td>02.10.2014 00:00</td>
                             <td> </td>
-                            <td>{{item.date_finish}}</td>
+                            <td>02.10.2014 00:15</td>
                             <td style="white-space: nowrap;">
                                 <a class="btn btn-sm btn-info btn-transparent action" tooltip="Копировать" ng-click="copy(item, $index, $event)"><i class="fa fa-copy"></i></a>
                                 <a class="btn btn-sm btn-info btn-transparent action" tooltip="Посмотреть историю" ng-click="history(item, $index, $event)"><i class="fa fa-stack-overflow"></i></a>
@@ -250,7 +244,7 @@
 
                 <div class="row">
                     <div class="col-lg-6 text-left align-xs-center">
-                        <div class="grid__info">Показаны 1-{{(news|filter:query).length}} из {{news.length}}</div>
+                        <div class="grid__info">Показаны 1-{{(items|filter:query).length}} из {{items.length}}</div>
                     </div>
                     <div class="col-lg-6  text-right align-xs-center ">
                         <ul class="pagination">

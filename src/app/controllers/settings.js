@@ -3,8 +3,7 @@ angular.module('settings', [
         'services.crud',
         'dataResource',
 
-        'services.i18nNotifications',
-        'show-errors'
+        'services.i18nNotifications'
     ])
 
     .config(['$routeProvider', function ($routeProvider) {
