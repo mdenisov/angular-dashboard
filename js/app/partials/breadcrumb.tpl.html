@@ -1,10 +1,8 @@
 <nav id="breadcrumb" class="breadcrumb-nav">
     <ol class="breadcrumb">
-        <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
-            <ng-switch on="$last">
-                <span ng-switch-when="true">{{breadcrumb.name}}</span>
-                <span ng-switch-default><a href="{{breadcrumb.path}}">{{breadcrumb.name}}</a></span>
-            </ng-switch>
+        <li ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" ng-class="{ active: $last }">
+            <a ng-if="!$last" ng-href="#{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
         </li>
     </ol>
 </nav>

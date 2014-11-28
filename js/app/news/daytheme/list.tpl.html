@@ -165,7 +165,7 @@
                                     # <i ng-class="{'fa fa-angle-up' : isSortUp('id'), 'fa fa-angle-down' : isSortDown('id')}"></i>
                                 </a>
                             </th>
-                            <th class="text-center sorting_asc">Заголовок</th>
+                            <th class="text-left sorting_asc">Заголовок</th>
                             <th class="text-center sorting">
                                 <a ng-click="sort('active')">
                                     Акт. <i ng-class="{'fa fa-angle-up' : isSortUp('active'), 'fa fa-angle-down' : isSortDown('active')}"></i>
@@ -211,7 +211,7 @@
                     <tbody align="center">
                         <tr ng-repeat="item in items | limitTo:limit | startsWithLetter:search | orderBy:sortField:reverse">
                             <td>{{item.id}}</td>
-                            <td>
+                            <td class="text-left">
                                 <a ng-click="edit(item.$id())">{{item.title}}</a>
                             </td>
                             <td>

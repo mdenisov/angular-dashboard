@@ -1,22 +1,33 @@
 
-angular.module('index', [
+angular.module('news', [
+		'services.crud',
         'dataResource',
 
         'services.i18nNotifications',
         'show-errors'
     ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/news', {
-            templateUrl:'news/list.tpl.html',
-            controller:'NewsListCtrl',
-            resolve:{
-				items: ['News', function (News) {
-                    return News.all();
-                }]
-            }
-        });
-    }])
+	.config(['crudRouteProvider', function (crudRouteProvider) {
+
+		crudRouteProvider.routesFor('News', '', '', ['Новости', 'Новости'])
+			.whenList({
+				items: ['News', function(News) {
+					return News.all();
+				}]
+			})
+	}])
+
+//    .config(['$routeProvider', function ($routeProvider) {
+//        $routeProvider.when('/news', {
+//            templateUrl:'news/list.tpl.html',
+//            controller:'NewsListCtrl',
+//            resolve:{
+//				items: ['News', function (News) {
+//                    return News.all();
+//                }]
+//            }
+//        });
+//    }])
 
 	.factory('News', ['dataResource',
 		function ($dataResource) {

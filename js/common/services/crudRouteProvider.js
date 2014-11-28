@@ -28,10 +28,11 @@ function crudRouteProvider($routeProvider) {
     // In any case, the point is that this function is the key part of this "provider helper".
     // We use it to create routes for CRUD operations.  We give it some basic information about
     // the resource and the urls then it it returns our own special routeProvider.
-    this.routesFor = function(resourceName, urlPrefix, routePrefix) {
+    this.routesFor = function(resourceName, urlPrefix, routePrefix, labels) {
         var baseUrl = resourceName.toLowerCase();
         var baseRoute = '/' + resourceName.toLowerCase();
         var baseTplUrl = baseUrl;
+        var routeLabels = [];
         routePrefix = routePrefix || urlPrefix;
 
         // Prepend the urlPrefix if available.
@@ -44,6 +45,15 @@ function crudRouteProvider($routeProvider) {
         if (routePrefix !== null && routePrefix !== undefined && routePrefix !== '') {
             baseRoute = baseRoute + '/' + routePrefix.toLowerCase();
         }
+
+		// Labels for breadcrumbs
+		// ['Разделы', 'Раздела']
+		if (labels !== null && labels !== undefined && labels !== '' && angular.isArray(labels) && labels.length === 2) {
+			routeLabels[0] = labels[0];
+			routeLabels[1] = 'Добавление ' + labels[1].toLowerCase();
+			routeLabels[2] = 'Редактирование ' + labels[1].toLowerCase();
+			routeLabels[3] = 'Просмотр ' + labels[1].toLowerCase();
+		}
 
         // Create the templateUrl for a route to our resource that does the specified operation.
         var templateUrl = function(operation) {
@@ -61,6 +71,7 @@ function crudRouteProvider($routeProvider) {
             // Create a route that will handle showing a list of items
             whenList: function(resolveFns) {
                 routeBuilder.when(baseRoute, {
+					label: routeLabels[0] || '',
                     templateUrl: templateUrl('List'),
                     controller: controllerName('List'),
                     resolve: resolveFns
@@ -70,6 +81,7 @@ function crudRouteProvider($routeProvider) {
             // Create a route that will handle creating a new item
             whenNew: function(resolveFns) {
                 routeBuilder.when(baseRoute + '/new', {
+					label: routeLabels[1] || '',
                     templateUrl: templateUrl('Edit'),
                     controller: controllerName('Edit'),
                     resolve: resolveFns
@@ -79,6 +91,7 @@ function crudRouteProvider($routeProvider) {
             // Create a route that will handle editing an existing item
             whenEdit: function(resolveFns) {
                 routeBuilder.when(baseRoute + '/:itemId', {
+					label: routeLabels[2] || '',
                     templateUrl: templateUrl('Edit'),
                     controller: controllerName('Edit'),
                     resolve: resolveFns
@@ -88,6 +101,7 @@ function crudRouteProvider($routeProvider) {
             // Create a route that will handle viewing an existing item
             whenView: function(resolveFns) {
                 routeBuilder.when(baseRoute + '/:itemId', {
+					label: routeLabels[3] || '',
                     templateUrl: templateUrl('View'),
                     controller: controllerName('View'),
                     resolve: resolveFns

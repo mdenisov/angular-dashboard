@@ -9,7 +9,7 @@ angular.module('daytheme', [
 
 	.config(['crudRouteProvider', function (crudRouteProvider) {
 
-		crudRouteProvider.routesFor('News', 'Daytheme')
+		crudRouteProvider.routesFor('News', 'Daytheme', '', ['Тема дня', 'новости'])
 			.whenList({
 				items: ['News', function(News) {
 					return News.all();
@@ -26,36 +26,6 @@ angular.module('daytheme', [
 				}]
 			});
 	}])
-
-//    .config(['$routeProvider', function ($routeProvider) {
-//        $routeProvider.when('/news/daytheme', {
-//            templateUrl:'js/app/news/index-list.tpl.html',
-//            controller:'NewsIndexCtrl',
-//            resolve:{
-//				items: ['Users', function (News) {
-//                    return News.all();
-//                }]
-//            }
-//        });
-//		$routeProvider.when('/news/daytheme/:itemId', {
-//			templateUrl:'js/app/news/daytheme/edit.tpl.html',
-//			controller:'NewsEditCtrl',
-//			resolve:{
-//				item: ['$route', 'Users', function ($route, News) {
-//					return News.getById($route.current.params.itemId);
-//				}]
-//			}
-//		});
-//		$routeProvider.when('/news/daytheme/new', {
-//			templateUrl:'js/app/news/daytheme/edit.tpl.html',
-//			controller:'NewsEditCtrl',
-//			resolve:{
-//				item: ['$route', 'Users', function ($route, News) {
-//					return News.getById($route.current.params.itemId);
-//				}]
-//			}
-//		});
-//    }])
 
 	.factory('News', ['dataResource',
 		function ($dataResource) {
@@ -169,6 +139,10 @@ angular.module('daytheme', [
 		function ($scope, $location, item, i18nNotifications) {
 
 			$scope.item = item;
+
+			$scope.redactorOptions = {
+				buttons: ['formatting', '|', 'bold', 'italic']
+			};
 
 			$scope.onSave = function (item) {
 				i18nNotifications.pushForNextRoute('crud.news.save.success', 'success', {id : item.$id()});

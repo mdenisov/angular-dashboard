@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 //    grunt.registerTask('default', ['jshint', 'build', 'karma:unit']);
     grunt.registerTask('default', [/*'jshint',*/ 'build']);
     grunt.registerTask('build', ['clean', 'html2js', 'concat', 'less:build', 'copy:assets']);
-    grunt.registerTask('release', ['clean', 'html2js', 'uglify', /*'jshint', 'karma:unit',*/ 'concat:index', 'less:min', 'copy:assets']);
+    grunt.registerTask('release', ['clean', 'html2js', 'uglify', /*'jshint', 'karma:unit', 'concat:index',*/ 'less:min', 'copy:assets']);
     grunt.registerTask('test-watch', ['karma:watch']);
 
     // Print a timestamp (useful for when watching)
@@ -100,13 +100,18 @@ module.exports = function(grunt) {
 					sourceMap: true
 				},
                 src: [
+					'vendor/jquery/dist/jquery.js',
+					'vendor/redactor/redactor.js',
+					'vendor/redactor/lang/ru.js',
+
 					'vendor/angular/angular.js',
 					'vendor/angular-route/angular-route.js',
 					'vendor/angular-resource/angular-resource.js',
 					'vendor/angular-sanitize/angular-sanitize.js',
 					'vendor/angular-bootstrap/ui-bootstrap.js',
 					'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
-					'vendor/jquery/dist/jquery.js'
+					'vendor/ng-breadcrumbs/dist/ng-breadcrumbs.js',
+					'vendor/angular-redactor/angular-redactor.js'
 				],
                 dest: '<%= distdir %>/js/vendor.js'
             }
