@@ -34,14 +34,14 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' + '<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' + ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' + ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n */\n',
         src: {
-            js: ['js/**/*.js'],
+            js: ['src/**/*.js'],
             jsTpl: ['<%= distdir %>/templates/**/*.js'],
             specs: ['test/**/*.spec.js'],
             scenarios: ['test/**/*.scenario.js'],
             html: ['index.html'],
             tpl: {
-                app: ['js/app/**/*.tpl.html'],
-                common: ['js/common/**/*.tpl.html']
+                app: ['src/app/**/*.tpl.html'],
+                common: ['src/common/**/*.tpl.html']
             },
             less: ['less/main.less'], // recess:build doesn't accept ** in its file patterns
             lessWatch: ['less/**/*.less']
@@ -59,16 +59,16 @@ module.exports = function(grunt) {
         },
         karma: {
 			unit: {
-				configFile: 'test/config/unit.js'
+				configFile: 'test/config/karma.conf.js'
 			},
 			//continuous integration mode: run tests once in PhantomJS browser.
 			continuous: {
-				configFile: 'config/karma.conf.js',
+				configFile: 'test/config/karma.conf.js',
 				singleRun: true,
 				browsers: ['PhantomJS']
 			},
             watch: {
-                options: karmaConfig('test/config/unit.js', {
+                options: karmaConfig('test/config/karma.conf.js', {
                     singleRun: false,
                     autoWatch: true
                 })
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
         html2js: {
             app: {
                 options: {
-                    base: 'js/app'
+                    base: 'src/app'
                 },
                 src: ['<%= src.tpl.app %>'],
                 dest: '<%= distdir %>/js/templates/app.js',
@@ -85,7 +85,7 @@ module.exports = function(grunt) {
             },
             common: {
                 options: {
-                    base: 'js/common'
+                    base: 'src/common'
                 },
                 src: ['<%= src.tpl.common %>'],
                 dest: '<%= distdir %>/js/templates/common.js',
@@ -107,8 +107,8 @@ module.exports = function(grunt) {
 				},
                 src: [
 					'vendor/jquery/dist/jquery.js',
-					'vendor/redactor/redactor.js',
-					'vendor/redactor/lang/ru.js',
+					//'vendor/redactor/redactor.js',
+					//'vendor/redactor/lang/ru.js',
 
 					'vendor/angular/angular.js',
 					'vendor/angular-route/angular-route.js',
@@ -117,7 +117,7 @@ module.exports = function(grunt) {
 					'vendor/angular-bootstrap/ui-bootstrap.js',
 					'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
 					'vendor/ng-breadcrumbs/dist/ng-breadcrumbs.js',
-					'vendor/angular-redactor/angular-redactor.js'
+					//'vendor/angular-redactor/angular-redactor.js'
 				],
                 dest: '<%= distdir %>/js/vendor.js'
             }

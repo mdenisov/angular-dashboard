@@ -62,8 +62,8 @@ angular.module('news', [
 		};
 	})
 
-	.controller('AllNewsListCtrl', ['$scope', 'crudListMethods', '$location', 'items', 'i18nNotifications',
-		function ($scope, crudListMethods, $location, items, i18nNotifications) {
+	.controller('AllNewsListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications',
+		function ($scope, crudListMethods, items, i18nNotifications) {
             $scope.items = items;
 
 			angular.extend($scope, crudListMethods('/news'));
