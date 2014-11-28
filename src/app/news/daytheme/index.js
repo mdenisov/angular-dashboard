@@ -57,8 +57,8 @@ angular.module('daytheme', [
 		};
 	})
 
-    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', '$location', 'items', 'i18nNotifications',
-        function ($scope, crudListMethods, $location, items, i18nNotifications) {
+    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications',
+        function ($scope, crudListMethods, items, i18nNotifications) {
             $scope.items = items;
 
 			angular.extend($scope, crudListMethods('/news/daytheme'));
