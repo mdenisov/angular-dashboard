@@ -151,8 +151,10 @@
 
             <div class="grid">
 
-                <table class="table table-striped">
-                    <thead>
+                <div class="table-big">
+
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
                             <th class="text-center sorting_asc">
                                 <a ng-click="sort('id')">
@@ -201,8 +203,8 @@
                             </th>
                             <th class="text-center sorting"></th>
                         </tr>
-                    </thead>
-                    <tbody align="center">
+                        </thead>
+                        <tbody align="center">
                         <tr ng-repeat="item in items | limitTo:limit | startsWithLetter:search | orderBy:sortField:reverse">
                             <td>{{item.id}}</td>
                             <td class="text-left">
@@ -239,8 +241,10 @@
                                 <a class="btn btn-sm btn-info btn-transparent action" tooltip="admin_sendpr_button" ng-click="copy(item, $index, $event)"><i class="fa fa-bullhorn"></i></a>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+
+                </div>
 
                 <div class="row">
                     <div class="col-lg-6 text-left align-xs-center">

@@ -157,96 +157,100 @@
 
             <div class="grid">
 
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th class="text-center sorting_asc">
-                                <a ng-click="sort('id')">
-                                    # <i ng-class="{'fa fa-angle-up' : isSortUp('id'), 'fa fa-angle-down' : isSortDown('id')}"></i>
-                                </a>
-                            </th>
-                            <th class="text-left sorting_asc">Заголовок</th>
-                            <th class="text-center sorting">
-                                <a ng-click="sort('active')">
-                                    Акт. <i ng-class="{'fa fa-angle-up' : isSortUp('active'), 'fa fa-angle-down' : isSortDown('active')}"></i>
-                                </a>
-                            </th>
-                            <th class="text-center sorting">
-                                <a ng-click="sort('block')">
-                                    Блок <i ng-class="{'fa fa-angle-up' : isSortUp('block'), 'fa fa-angle-down' : isSortDown('block')}"></i>
-                                </a>
-                            </th>
-                            <th class="text-center sorting">Кто заблокировал</th>
-                            <th class="text-center sorting">Автор</th>
+                <div class="table-big">
 
-                            <th class="text-center sorting">Последний изменивший</th>
-                            <th class="text-center sorting">
-                                <a ng-click="sort('correction')">
-                                    Корректура <i ng-class="{'fa fa-angle-up' : isSortUp('correction'), 'fa fa-angle-down' : isSortDown('correction')}"></i>
-                                </a>
-                            </th>
-                            <th class="text-center sorting">
-                                <a ng-click="sort('status')">
-                                    Статус <i ng-class="{'fa fa-angle-up' : isSortUp('status'), 'fa fa-angle-down' : isSortDown('status')}"></i>
-                                </a>
-                            </th>
-                            <th class="text-center sorting">
-                                <a ng-click="sort('start')">
-                                    Начало пуб. <i ng-class="{'fa fa-angle-up' : isSortUp('start'), 'fa fa-angle-down' : isSortDown('start')}"></i>
-                                </a>
-                            </th>
-                            <th class="text-center sorting">
-                                <a ng-click="sort('finish')">
-                                    Конец пуб. <i ng-class="{'fa fa-angle-up' : isSortUp('finish'), 'fa fa-angle-down' : isSortDown('finish')}"></i>
-                                </a>
-                            </th>
-                            <th class="text-center sorting">
-                                <a ng-click="sort('change')">
-                                    Изменена <i ng-class="{'fa fa-angle-up' : isSortUp('change'), 'fa fa-angle-down' : isSortDown('change')}"></i>
-                                </a>
-                            </th>
-                            <th class="text-center sorting"></th>
-                        </tr>
-                    </thead>
-                    <tbody align="center">
-                        <tr ng-repeat="item in items | limitTo:limit | startsWithLetter:search | orderBy:sortField:reverse">
-                            <td>{{item.id}}</td>
-                            <td class="text-left">
-                                <a ng-click="edit(item.$id())">{{item.title}}</a>
-                            </td>
-                            <td>
-                                <a class="action" tooltip="{{!item.active ? 'Активировать' : 'Деактивировать'}}" ng-click="toggleActiv(item, $index, $event)">
-                                    <i ng-class="item.active ? 'fa fa-check-circle-o text-success' : 'fa fa-times-circle text-danger'"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a class="action" tooltip="{{!item.block ? 'Заблокировать' : 'Разблокировать'}}" ng-click="toggleBlock(item, $index, $event)">
-                                    <i ng-class="!item.block ? 'fa fa-circle-o text-success' : 'fa fa-circle text-danger'"></i>
-                                </a>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a class="action" tooltip="{{!item.correction ? 'Корректура не требуется' : 'Требуется корректура'}}" ng-click="toggleCorrection(item, $index, $event)">
-                                    <i ng-class="!item.correction ? 'fa fa-circle-o text-success' : 'fa fa-circle text-danger'"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a class="action" ng-click="changeStatus(item, $index, $event)">[1] Опубликован</a>
-                            </td>
-                            <td>{{item.date_start}}</td>
-                            <td> </td>
-                            <td>{{item.date_finish}}</td>
-                            <td style="white-space: nowrap;">
-                                <a class="btn btn-sm btn-info btn-transparent action" tooltip="Копировать" ng-click="copy(item, $index, $event)"><i class="fa fa-copy"></i></a>
-                                <a class="btn btn-sm btn-info btn-transparent action" tooltip="Посмотреть историю" ng-click="history(item, $index, $event)"><i class="fa fa-stack-overflow"></i></a>
-                                <a class="btn btn-sm btn-info btn-transparent action" tooltip="Удалить" ng-click="remove(item, $index, $event)"><i class="fa fa-trash"></i></a>
-                                <a class="btn btn-sm btn-info btn-transparent action" tooltip="admin_sendpr_button" ng-click="copy(item, $index, $event)"><i class="fa fa-bullhorn"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center sorting_asc">
+                                    <a ng-click="sort('id')">
+                                        # <i ng-class="{'fa fa-angle-up' : isSortUp('id'), 'fa fa-angle-down' : isSortDown('id')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-left sorting_asc">Заголовок</th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('active')">
+                                        Акт. <i ng-class="{'fa fa-angle-up' : isSortUp('active'), 'fa fa-angle-down' : isSortDown('active')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('block')">
+                                        Блок <i ng-class="{'fa fa-angle-up' : isSortUp('block'), 'fa fa-angle-down' : isSortDown('block')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">Кто заблокировал</th>
+                                <th class="text-center sorting">Автор</th>
+
+                                <th class="text-center sorting">Последний изменивший</th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('correction')">
+                                        Корректура <i ng-class="{'fa fa-angle-up' : isSortUp('correction'), 'fa fa-angle-down' : isSortDown('correction')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('status')">
+                                        Статус <i ng-class="{'fa fa-angle-up' : isSortUp('status'), 'fa fa-angle-down' : isSortDown('status')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('start')">
+                                        Начало пуб. <i ng-class="{'fa fa-angle-up' : isSortUp('start'), 'fa fa-angle-down' : isSortDown('start')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('finish')">
+                                        Конец пуб. <i ng-class="{'fa fa-angle-up' : isSortUp('finish'), 'fa fa-angle-down' : isSortDown('finish')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('change')">
+                                        Изменена <i ng-class="{'fa fa-angle-up' : isSortUp('change'), 'fa fa-angle-down' : isSortDown('change')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting"></th>
+                            </tr>
+                        </thead>
+                        <tbody align="center">
+                            <tr ng-repeat="item in items | limitTo:limit | startsWithLetter:search | orderBy:sortField:reverse">
+                                <td>{{item.id}}</td>
+                                <td class="text-left">
+                                    <a ng-click="edit(item.$id())">{{item.title}}</a>
+                                </td>
+                                <td>
+                                    <a class="action" tooltip="{{!item.active ? 'Активировать' : 'Деактивировать'}}" ng-click="toggleActiv(item, $index, $event)">
+                                        <i ng-class="item.active ? 'fa fa-check-circle-o text-success' : 'fa fa-times-circle text-danger'"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="action" tooltip="{{!item.block ? 'Заблокировать' : 'Разблокировать'}}" ng-click="toggleBlock(item, $index, $event)">
+                                        <i ng-class="!item.block ? 'fa fa-circle-o text-success' : 'fa fa-circle text-danger'"></i>
+                                    </a>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <a class="action" tooltip="{{!item.correction ? 'Корректура не требуется' : 'Требуется корректура'}}" ng-click="toggleCorrection(item, $index, $event)">
+                                        <i ng-class="!item.correction ? 'fa fa-circle-o text-success' : 'fa fa-circle text-danger'"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="action" ng-click="changeStatus(item, $index, $event)">[1] Опубликован</a>
+                                </td>
+                                <td>{{item.date_start}}</td>
+                                <td> </td>
+                                <td>{{item.date_finish}}</td>
+                                <td style="white-space: nowrap;">
+                                    <a class="btn btn-sm btn-info btn-transparent action" tooltip="Копировать" ng-click="copy(item, $index, $event)"><i class="fa fa-copy"></i></a>
+                                    <a class="btn btn-sm btn-info btn-transparent action" tooltip="Посмотреть историю" ng-click="history(item, $index, $event)"><i class="fa fa-stack-overflow"></i></a>
+                                    <a class="btn btn-sm btn-info btn-transparent action" tooltip="Удалить" ng-click="remove(item, $index, $event)"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-sm btn-info btn-transparent action" tooltip="admin_sendpr_button" ng-click="copy(item, $index, $event)"><i class="fa fa-bullhorn"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
 
                 <div class="row">
                     <div class="col-lg-6 text-left align-xs-center">
