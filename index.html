@@ -19,25 +19,25 @@
 
         <section id="wrapper" class="wrapper">
 
-            <div ng-include="'partials/sidebar.tpl.html'"></div>
+            <div ng-include="'views/partials/sidebar.tpl.html'"></div>
 
         </section>
 
-        <div ng-include="'partials/header.tpl.html'"></div>
-        <div ng-include="'partials/breadcrumb.tpl.html'"></div>
-        <div ng-include="'partials/notifications.tpl.html'" ng-show="notifications.getCurrent().length"></div>
+        <div ng-include="'views/partials/header.tpl.html'"></div>
+        <div ng-include="'views/partials/breadcrumb.tpl.html'"></div>
+        <div ng-include="'views/partials/notifications.tpl.html'" ng-show="notifications.getCurrent().length"></div>
 
         <section class="page">
 
             <div id="content" class="content">
 
-                <section ng-view class=""></section>
+                <section ng-view></section>
 
             </div>
 
         </section>
 
-        <div ng-include="'partials/footer.tpl.html'"></div>
+        <div ng-include="'views/partials/footer.tpl.html'"></div>
 
         <div class="splash" ng-cloak></div>
 

@@ -100,7 +100,7 @@ angular.module('app', [
                 i18nNotifications.remove(notification);
             };
 
-			$scope.$on('$routeChangeSuccess', function(event, current) {
+            $scope.$on('$routeChangeSuccess', function(event, current) {
 				$scope.showSidebar = false;
 			});
 
@@ -138,4 +138,13 @@ angular.module('app', [
 			};
 
         }
-    ]);
+    ])
+
+    .run(function ($rootScope, $timeout) {
+        $rootScope.page = $('.page');
+        $rootScope.$on('$routeChangeSuccess', function () {
+            $timeout(function() {
+                $rootScope.page.scrollTop(0, 0);
+            }, 100);
+        });
+    });
