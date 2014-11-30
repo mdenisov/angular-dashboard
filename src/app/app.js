@@ -123,14 +123,8 @@ angular.module('app', [
     .controller('SidebarCtrl', ['$scope', '$location', '$route',
         function ($scope, $location, $route) {
 
-			$scope.currentPath = '/news';
-
-			$scope.$on('$routeChangeSuccess', function(event, current) {
-//				$scope.currentPath = current.$$route.originalPath;
-			});
-
 			$scope.isActive = function(path) {
-				return $scope.currentPath === path
+                return $location.path().substr(0, path.length) === path;
 			};
 
 			$scope.home = function () {
