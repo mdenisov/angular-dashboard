@@ -56,31 +56,44 @@ angular.module('daytheme', [
 		};
 	})
 
-    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications',
-        function ($scope, crudListMethods, items, i18nNotifications) {
-            $scope.items = items;
+    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
+		function ($scope, crudListMethods, items, i18nNotifications, $timeout) {
+			$scope.items = items;
 
 			angular.extend($scope, crudListMethods('/news/daytheme'));
 
-			// Show on page control
-			$scope.itemLimits = {
-				'10': 10,
-				'20': 20,
-				'30': 30,
-				'40': 40,
-				'50': 50
-			};
-			$scope.limit = 10;
+			// pagination controls
+			$scope.currentPage = 1;
+			$scope.filteredItems = $scope.items.length;
+			$scope.entryLimit = 5;
+			$scope.totalItems = $scope.items.length;
 
 			// Filter logics
-			$scope.showFilder = false;
+			$scope.showFilter = false;
+
+			$scope.filter = function() {
+				$timeout(function() {
+
+					$scope.currentPage = 1;
+					$scope.filteredItems = $scope.filtered.length;
+
+				}, 10);
+			};
+
+			$scope.setPage = function() {
+				//$timeout(function() {
+
+
+
+				//}, 10);
+			};
 
 			$scope.searchByFilter = function() {
 				i18nNotifications.pushForCurrentRoute('errors.system.general', 'error', {});
 			};
 
 			$scope.toggleFilter = function() {
-				$scope.showFilder = !($scope.showFilder);
+				$scope.showFilter = !($scope.showFilter);
 			};
 
 			$scope.open = function($event, opened) {
@@ -95,24 +108,20 @@ angular.module('daytheme', [
 			};
 
 			// Sort logics
-			$scope.sortField = 'id';
+			$scope.orderBy = 'id';
 			$scope.reverse = true;
 
-			$scope.sort = function(fieldName) {
-				if($scope.sortField === fieldName) {
-					$scope.reverse = true;
-				} else {
-					$scope.sortField = fieldName;
-					$scope.reverse = false;
-				}
+			$scope.sort = function(orderBy) {
+				$scope.orderBy = orderBy;
+				$scope.reverse = !$scope.reverse;
 			};
 
 			$scope.isSortUp = function(fieldName) {
-				return $scope.sortField === fieldName && !$scope.reverse;
+				return $scope.orderBy === fieldName && !$scope.reverse;
 			};
 
 			$scope.isSortDown = function(fieldName) {
-				return $scope.sortField === fieldName && $scope.reverse;
+				return $scope.orderBy === fieldName && $scope.reverse;
 			};
 
 			// Items logic
@@ -132,8 +141,8 @@ angular.module('daytheme', [
 
 			};
 
-        }
-    ])
+		}
+	])
 
 	.controller('NewsDaythemeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
 		function ($scope, $location, item, i18nNotifications) {

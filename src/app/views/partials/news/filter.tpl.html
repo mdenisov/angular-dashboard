@@ -1,0 +1,149 @@
+<div class="row form-group">
+
+    <div class="col-lg-6">
+        <div class="input-icon input-icon--inline">
+            <i class="ico fa fa-search"></i>
+            <input type="text" class="form-control" placeholder="Поиск..." ng-model="search" ng-change="filter()">
+        </div>
+        <a class="btn btn-primary" ng-click="searchByFilter()">Искать</a>
+        <a class="btn btn-default" ng-click="toggleFilter()">Фильтр</a>
+    </div>
+
+    <div class="col-lg-6 text-right">
+        <div class="row text-right">
+            <div class="col-md-2 pull-right">
+                <select ng-model="entryLimit" class="form-control">
+                    <option>5</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+                <!--<select name="limit" class="form-control" ng-model="entryLimit" ng-options="name as value for (name, value) in itemLimits"></select>-->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row form-group ng-hide animated fadeIn" ng-show="showFilter">
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body form-horizontal">
+                <div class="row form-group">
+                    <label class="control-label col-md-3">Активность</label>
+                    <div class="col-md-8">
+                        <label class="radio-inline"><input value="" checked="checked" type="radio" name="active">Все</label>
+                        <label class="radio-inline"><input value="1" type="radio" name="active">Активные</label>
+                        <label class="radio-inline"><input value="0" type="radio" name="active">Неактивные</label>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-3">Ключевые слова</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" name="query"/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-3">Блокировка</label>
+                    <div class="col-md-8">
+                        <label class="radio-inline"><input value="" checked="checked" type="radio" name="blocked">Все</label>
+                        <label class="radio-inline"><input value="1" type="radio" name="blocked">Блокированы</label>
+                        <label class="radio-inline"><input value="0" type="radio" name="blocked">Свободные</label>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-3">Статус</label>
+                    <div class="col-md-8">
+                        <select class="form-control" name="status">
+                            <option value="" selected="selected">Любой</option>
+                            <option value="1">[1] Опубликован</option>
+                            <option value="3">[3] Готов к публикации</option>
+                            <option value="2">[2] Черновик</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-3">Дата начала публикации</label>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="date_start_from" datepicker-popup="dd.MM.yyyy" ng-model="date_start_from" is-open="datepickers.date_start_from_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_start_from_opened')" show-button-bar="false" />
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="date_start_to" datepicker-popup="dd.MM.yyyy" ng-model="date_start_to" is-open="datepickers.date_start_to_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_start_to_opened')" show-button-bar="false" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-3">Дата окончания публикации</label>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="date_finish_from" data-toggle="datepicker"/>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="date_finish_to" data-toggle="datepicker"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-3">ID</label>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="id_from"/>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="id_to"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-3">Дата изменения</label>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="date_update_from" data-toggle="datepicker"/>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="date_update_to" data-toggle="datepicker"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-3">Дата создания</label>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="date_create_from" data-toggle="datepicker"/>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="date_create_to" data-toggle="datepicker"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="control-label col-md-3"></label>
+                    <div class="col-md-8">
+                        <button class="btn btn-primary" ng-click="searchByFilter()">Искать</button>
+                        <button class="btn" ng-click="resetFilter()">Сбросить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row form-group" ng-show="canCreateNew">
+    <div class="col-md-12">
+        <button class="btn btn-danger" ng-click="new()">Добавить</button>
+    </div>
+</div>

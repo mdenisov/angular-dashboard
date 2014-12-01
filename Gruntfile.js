@@ -131,7 +131,8 @@ module.exports = function(grunt) {
             dist: {
                 options: {
                     banner: "<%= banner %>",
-                    sourceMap: true
+                    sourceMap: true,
+					mangle: false
                 },
                 src: ['<%= src.js %>', '<%= src.jsTpl %>'],
                 dest: '<%= distdir %>/js/<%= pkg.name %>.js'
@@ -163,14 +164,9 @@ module.exports = function(grunt) {
         autoprefixer: {
             options: {
                 browsers: [
-                    'Android 2.3',
-                    'Android >= 4',
-                    'Chrome >= 20',
-                    'Firefox >= 24', // Firefox 24 is the latest ESR
-                    'Explorer >= 8',
-                    'iOS >= 6',
-                    'Opera >= 12',
-                    'Safari >= 6'
+					'opera 12',
+					'ff 15',
+					'chrome 25'
                 ]
             },
             release: {

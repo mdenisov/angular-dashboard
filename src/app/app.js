@@ -9,7 +9,7 @@ angular.module('app', [
         'ngTouch',
 		'ngSwitcher',
 		'ng-breadcrumbs',
-		//'angular-redactor',
+		'angular-redactor',
 
         'ui.bootstrap',
 
@@ -47,40 +47,41 @@ angular.module('app', [
         $routeProvider.otherwise({redirectTo:'/news'});
     }])
 
-	//.config(function(redactorOptions) {
-	//	redactorOptions.lang = 'ru';
-	//	redactorOptions.observeLinks = true;
-	//	redactorOptions.convertVideoLinks = true;
-	//	redactorOptions.buttonSource = true;
-	//	redactorOptions.emoveEmpty = ['strong', 'em', 'span', 'p'];
-	//	redactorOptions.pasteBeforeCallback = function(html) {
-	//		html = html.replace(/<br[^>]*>/g, '');
-	//		html = html.replace(/(<font style=\".+?\">|<font face=\".+?\">|<\/font>)/g, '');
-	//		html = html.replace(/(<span style=\".+?\">|<span class=\".+?\">|<\/span>)/g, '');
-	//		html = html.replace(/(<tt>|<\/tt>)/g, '');
-	//		html = html.replace(/(<span style=\"[\s\S]*?\">)/g, '');
-	//		html = html.replace(/\\n+/g, ' ');
-	//		html = html.replace(/ style=\"[^{>,\"}]*\"/g, '');
-	//		html = html.replace(/ class=\"[^{>,\"}]*\"/g, '');
-	//		html = html.replace(/<h1[^>]*>/g, '<p>');
-	//		html = html.replace(/<\/h1>/g, '</p>');
-	//		html = html.replace(/<h2[^>]*>/g, '<p>');
-	//		html = html.replace(/<\/h2>/g, '</p>');
-	//		html = html.replace(/<h3[^>]*>/g, '<p>');
-	//		html = html.replace(/<\/h3>/g, '</p>');
-	//		html = html.replace(/<b[^>]*>/g, '<strong>');
-	//		html = html.replace(/<\/b>/g, '</strong>');
-	//		html = html.replace(/<i[^>]*>/g, '<em>');
-	//		html = html.replace(/<\/i>/g, '</em>');
-	//		html = html.replace(/<big[^>]*>/g, '<strong>');
-	//		html = html.replace(/<\/big>/g, '</strong>');
-	//		html = html.replace(/<strike[^>]*>/g, '<del>');
-	//		html = html.replace(/<\/strike>/g, '</del>');
-	//		html = html.replace(/ - /g, ' � ');
-    //
-	//		return html;
-	//	};
-	//})
+
+	.config(function(redactorOptions) {
+		redactorOptions.lang = 'ru';
+		redactorOptions.observeLinks = true;
+		redactorOptions.convertVideoLinks = true;
+		redactorOptions.buttonSource = true;
+		redactorOptions.emoveEmpty = ['strong', 'em', 'span', 'p'];
+		redactorOptions.pasteBeforeCallback = function(html) {
+			html = html.replace(/<br[^>]*>/g, '');
+			html = html.replace(/(<font style=\".+?\">|<font face=\".+?\">|<\/font>)/g, '');
+			html = html.replace(/(<span style=\".+?\">|<span class=\".+?\">|<\/span>)/g, '');
+			html = html.replace(/(<tt>|<\/tt>)/g, '');
+			html = html.replace(/(<span style=\"[\s\S]*?\">)/g, '');
+			html = html.replace(/\\n+/g, ' ');
+			html = html.replace(/ style=\"[^{>,\"}]*\"/g, '');
+			html = html.replace(/ class=\"[^{>,\"}]*\"/g, '');
+			html = html.replace(/<h1[^>]*>/g, '<p>');
+			html = html.replace(/<\/h1>/g, '</p>');
+			html = html.replace(/<h2[^>]*>/g, '<p>');
+			html = html.replace(/<\/h2>/g, '</p>');
+			html = html.replace(/<h3[^>]*>/g, '<p>');
+			html = html.replace(/<\/h3>/g, '</p>');
+			html = html.replace(/<b[^>]*>/g, '<strong>');
+			html = html.replace(/<\/b>/g, '</strong>');
+			html = html.replace(/<i[^>]*>/g, '<em>');
+			html = html.replace(/<\/i>/g, '</em>');
+			html = html.replace(/<big[^>]*>/g, '<strong>');
+			html = html.replace(/<\/big>/g, '</strong>');
+			html = html.replace(/<strike[^>]*>/g, '<del>');
+			html = html.replace(/<\/strike>/g, '</del>');
+			html = html.replace(/ - /g, ' � ');
+
+			return html;
+		};
+	})
 
     .controller('AppCtrl', ['$scope', '$location', 'i18nNotifications', 'breadcrumbs',
         function($scope, $location, i18nNotifications, breadcrumbs) {
