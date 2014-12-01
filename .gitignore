@@ -1,6 +1,6 @@
 1/*
 .idea/*
-vendor/*
+vendor/bower/*
 dist/*
 js_/*
 node_modules/*

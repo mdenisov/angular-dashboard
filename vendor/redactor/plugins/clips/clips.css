@@ -1,0 +1,91 @@
+.clip {
+    display: inline-block;
+    color: #fff;
+    padding: 18px 30px;
+    background: #f1f1f1;
+    border-radius: 3px;
+    cursor: pointer;
+
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+
+    /*float: left;*/
+    margin: 18px 18px 18px 0;
+    position: relative;
+}
+
+.clip[data-name="clip_twitter"] {
+    background: #00c7f7;
+}
+.clip[data-name="clip_news"] {
+    background: #f3c536;
+}
+.clip[data-name="clip_quote"] {
+    background: #fa7b58;
+}
+.clip[data-name="clip_question"] {
+    background: #94b758;
+}
+
+.clip[data-name^="clip_"]:before {
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    content: "\f099";
+    font-family: 'FontAwesome';
+    font-size: 36px;
+    line-height: 1;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.clip[data-name="clip_twitter"]:before {
+    content: "\f099";
+}
+.clip[data-name="clip_news"]:before {
+    content: "\f0f6";
+}
+.clip[data-name="clip_quote"]:before {
+    content: "\f10e";
+}
+.clip[data-name="clip_question"]:before {
+    content: "\f128";
+}
+
+.clips-form {
+    padding: 5px 40px 10px 40px;
+}
+
+.re-clips:before {
+    content: "\e617";
+}
+
+#redactor-modal input[type="text"], #redactor-modal textarea, #redactor-modal select {
+    box-sizing: border-box;
+}
+
+#redactor-modal .radio.inline, #redactor-modal .checkbox.inline {
+    display: inline-block;
+    padding-top: 5px;
+    padding-left: 20px;
+    margin: 0 !important;
+    vertical-align: middle;
+}
+
+#redactor-modal .radio.inline + .radio.inline, #redactor-modal .checkbox.inline + .checkbox.inline {
+    margin-left: 10px !important;
+}
+
+#redactor-modal .control-group.error input, #redactor-modal .control-group.error select, #redactor-modal .control-group.error textarea {
+    border-color: #b94a48;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+#redactor-modal .control-group.error label, #redactor-modal .control-group.error .help-block, #redactor-modal .control-group.error .help-inline {
+    color: #b94a48;
+}

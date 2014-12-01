@@ -1,0 +1,42 @@
+.placeholder {
+    display: inline-block;
+    color: #fff;
+    padding: 18px 30px;
+    background: #f1f1f1;
+    border-radius: 3px;
+    cursor: pointer;
+
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+
+    /*float: left;*/
+    margin: 18px 18px 18px 0;
+    position: relative;
+}
+
+.placeholder[data-name="placeholder_gallery"] {
+    background: #335397;
+}
+
+.placeholder[data-name^="placeholder_"]:before {
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    content: "\f099";
+    font-family: 'FontAwesome';
+    font-size: 36px;
+    line-height: 1;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.re-placeholders:before {
+    content: "\e61f";
+}
+
+.placeholder[data-name="placeholder_gallery"]:before {
+    content: "\f03e";
+}
