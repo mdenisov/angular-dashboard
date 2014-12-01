@@ -15,19 +15,24 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'vendor/jquery/dist/jquery.js',
-        //'vendor/redactor/redactor.js',
-        //'vendor/redactor/lang/ru.js',
+		'vendor/bower/jquery/dist/jquery.js',
+		'vendor/redactor/redactor.js',
+		'vendor/redactor/lang/ru.js',
 
-        'vendor/angular/angular.js',
-        'vendor/angular-route/angular-route.js',
-        'vendor/angular-resource/angular-resource.js',
-        'vendor/angular-sanitize/angular-sanitize.js',
-        'vendor/angular-bootstrap/ui-bootstrap.js',
-        'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
-        'vendor/ng-breadcrumbs/dist/ng-breadcrumbs.js',
-        'vendor/angular-redactor/angular-redactor.js',
-        'vendor/angular-mocks/angular-mocks.js',
+		'vendor/bower/angular/angular.js',
+		'vendor/bower/angular-route/angular-route.js',
+		'vendor/bower/angular-resource/angular-resource.js',
+		'vendor/bower/angular-sanitize/angular-sanitize.js',
+		'vendor/bower/angular-aria/angular-aria.js',
+		'vendor/bower/angular-cookies/angular-cookies.js',
+		'vendor/bower/angular-sanitize/angular-sanitize.js',
+		'vendor/bower/angular-touch/angular-touch.js',
+		'vendor/bower/angular-messages/angular-messages.js',
+		'vendor/bower/angular-bootstrap/ui-bootstrap.js',
+		'vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js',
+		'vendor/bower/ng-breadcrumbs/dist/ng-breadcrumbs.js',
+		'vendor/bower/angular-redactor/angular-redactor.js',
+        'vendor/bower/angular-mocks/angular-mocks.js',
 
 
         'src/**/*.js',

@@ -5,10 +5,11 @@ describe('NewsDaythemeCtrl', function() {
     describe('NewsDaythemeListCtrl', function () {
         it('should call crudListMethods', inject(function($controller, $rootScope) {
             var locals = {
-                $scope: $rootScope,
-                crudListMethods: jasmine.createSpy('NewsDaythemeListCtrl'),
-                items: {},
-                i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['pushForCurrentRoute', 'pushForNextRoute'])
+				$scope: $rootScope,
+				crudListMethods: jasmine.createSpy('crudListMethods'),
+				items: {},
+				i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['pushForCurrentRoute', 'pushForNextRoute']),
+				$timeout: jasmine.createSpy('$timeout')
             };
             var ctrl = $controller('NewsDaythemeListCtrl', locals);
 
@@ -59,7 +60,7 @@ describe('NewsDaythemeCtrl', function() {
             locals.$scope.onError();
 
             expect(locals.i18nNotifications.pushForCurrentRoute).toHaveBeenCalled();
-            expect(locals.i18nNotifications.pushForCurrentRoute.calls.mostRecent().args[1]).toBe('danger');
+            expect(locals.i18nNotifications.pushForCurrentRoute.calls.mostRecent().args[1]).toBe('error');
         });
 
     });

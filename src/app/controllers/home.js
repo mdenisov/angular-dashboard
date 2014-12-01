@@ -121,6 +121,7 @@ angular.module('home', [
 
 			// Items logic
 			$scope.toggleActiv = function(item, $index, $event) {
+				console.log(item);
 				item.active = !(item.active);
 			};
 

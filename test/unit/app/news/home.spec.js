@@ -1,23 +1,24 @@
 describe('NewsCtrl', function() {
 
-    beforeEach(module('news'));
+    beforeEach(module('home'));
 
-    describe('AllNewsListCtrl', function () {
+    describe('NewsHomeListCtrl', function () {
         it('should call crudListMethods', inject(function($controller, $rootScope) {
             var locals = {
-                $scope: $rootScope,
-                crudListMethods: jasmine.createSpy('crudListMethods'),
-                items: {},
-                i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['pushForCurrentRoute', 'pushForNextRoute'])
+				$scope: $rootScope,
+				crudListMethods: jasmine.createSpy('crudListMethods'),
+				items: {},
+				i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['pushForCurrentRoute', 'pushForNextRoute']),
+				$timeout: jasmine.createSpy('$timeout')
             };
-            var ctrl = $controller('AllNewsListCtrl', locals);
+            var ctrl = $controller('NewsHomeListCtrl', locals);
 
             expect($rootScope.items).toBe(locals.items);
             expect(locals.crudListMethods).toHaveBeenCalled();
         }));
     });
 
-    describe('AllNewsEditCtrl', function () {
+    describe('NewsHomeEditCtrl', function () {
 
         function createLocals() {
             return {
@@ -30,7 +31,7 @@ describe('NewsCtrl', function() {
 
         function runController(locals) {
             inject(function($controller) {
-                $controller('AllNewsEditCtrl', locals);
+                $controller('NewsHomeEditCtrl', locals);
             });
         }
 
@@ -59,7 +60,7 @@ describe('NewsCtrl', function() {
             locals.$scope.onError();
 
             expect(locals.i18nNotifications.pushForCurrentRoute).toHaveBeenCalled();
-            expect(locals.i18nNotifications.pushForCurrentRoute.calls.mostRecent().args[1]).toBe('danger');
+            expect(locals.i18nNotifications.pushForCurrentRoute.calls.mostRecent().args[1]).toBe('error');
         });
 
     });
