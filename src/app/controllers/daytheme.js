@@ -127,14 +127,23 @@ angular.module('daytheme', [
 			// Items logic
 			$scope.toggleActiv = function(item, $index, $event) {
 				item.active = !(item.active);
+				item.$update(function() {
+
+				});
 			};
 
 			$scope.toggleBlock = function(item, $index, $event) {
 				item.block = !(item.block);
+				item.$update(function() {
+
+				});
 			};
 
 			$scope.toggleCorrection = function(item, $index, $event) {
 				item.correction = !(item.correction);
+				item.$update(function() {
+
+				});
 			};
 
 			$scope.changeStatus = function(item, $index, $event) {

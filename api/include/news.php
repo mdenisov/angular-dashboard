@@ -15,9 +15,9 @@ function getNews($id) {
         $stmt = $db->prepare($sql);
         $stmt->bindParam("id", $id);
         $stmt->execute();
-        $user = $stmt->fetchObject();
+        $news = $stmt->fetchObject();
         $db = null;
-        echo json_encode($user);
+        echo json_encode($news);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
@@ -26,24 +26,24 @@ function getNews($id) {
 function updateNews($id) {
     $request = \Slim\Slim::getInstance()->request();
     $body = $request->getBody();
-    $user = json_decode($body);
+    $news = json_decode($body);
     $sql = "UPDATE news SET title=:title, active=:active, mainnews=:mainnews, correction=:correction, status=:status, date_start=DATE_FORMAT(:date_start, '%Y-%m-%d'), date_finish=DATE_FORMAT(:date_finish, '%Y-%m-%d'), preview_text=:preview_text, text=:text WHERE id=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("title", $user->title);
-        $stmt->bindParam("active", $user->active);
-        $stmt->bindParam("mainnews", $user->mainnews);
-        $stmt->bindParam("correction", $user->correction);
-        $stmt->bindParam("status", $user->status);
-        $stmt->bindParam("date_start", $user->date_start);
-        $stmt->bindParam("date_finish", $user->date_finish);
-        $stmt->bindParam("preview_text", $user->preview_text);
-        $stmt->bindParam("text", $user->text);
+        $stmt->bindParam("title", $news->title);
+        $stmt->bindParam("active", $news->active);
+        $stmt->bindParam("mainnews", $news->mainnews);
+        $stmt->bindParam("correction", $news->correction);
+        $stmt->bindParam("status", $news->status);
+        $stmt->bindParam("date_start", $news->date_start);
+        $stmt->bindParam("date_finish", $news->date_finish);
+        $stmt->bindParam("preview_text", $news->preview_text);
+        $stmt->bindParam("text", $news->text);
         $stmt->bindParam("id", $id);
         $stmt->execute();
         $db = null;
-        echo json_encode($user);
+        echo json_encode($news);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
@@ -64,40 +64,42 @@ function deleteNews($id) {
 
 function addNews() {
     $request = \Slim\Slim::getInstance()->request();
-    $user = json_decode($request->getBody());
+    $news = json_decode($request->getBody());
     $sql = "INSERT INTO news (title, active, mainnews, correction, status, date_start, date_finish, preview_text, text) VALUES (:title, :active, :mainnews, :correction, :status, STR_TO_DATE(:date_start, '%Y/%m/%d'), STR_TO_DATE(:date_finish, '%Y/%m/%d'), :preview_text, :text)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("title", $user->title);
-        $stmt->bindParam("active", $user->active);
-        $stmt->bindParam("mainnews", $user->mainnews);
-        $stmt->bindParam("correction", $user->correction);
-        $stmt->bindParam("status", $user->status);
-        $stmt->bindParam("date_start", $user->date_start);
-        $stmt->bindParam("date_finish", $user->date_finish);
-        $stmt->bindParam("preview_text", $user->preview_text);
-        $stmt->bindParam("text", $user->text);
+        $stmt->bindParam("title", $news->title);
+        $stmt->bindParam("active", $news->active);
+        $stmt->bindParam("mainnews", $news->mainnews);
+        $stmt->bindParam("correction", $news->correction);
+        $stmt->bindParam("status", $news->status);
+        $stmt->bindParam("date_start", $news->date_start);
+        $stmt->bindParam("date_finish", $news->date_finish);
+        $stmt->bindParam("preview_text", $news->preview_text);
+        $stmt->bindParam("text", $news->text);
         $stmt->execute();
-        $user->id = $db->lastInsertId();
+        $news->id = $db->lastInsertId();
         $db = null;
-        echo json_encode($user);
+        echo json_encode($news);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
 function getNewsList($page = 1) {
-    $sql = "select * FROM news ORDER BY id";
+//    $sql = "SELECT * FROM news ORDER BY id DESC";
+    $sql = "SELECT * FROM users ORDER BY id DESC";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);
-        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $news = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        echo json_encode($users);
+        echo json_encode($news);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
 
 ?>
