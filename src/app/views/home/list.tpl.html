@@ -84,10 +84,10 @@
                                 <div class="col-md-8">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text" name="date_start_from" datepicker-popup="dd.MM.yyyy" ng-model="search.date_start_from" is-open="datepickers.date_start_from_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_start_from_opened')" show-button-bar="false" />
+                                            <input class="form-control" type="text" name="date_start_from" datepicker-popup="dd.MM.yyyy" ng-model="date.date_start" is-open="datepickers.date_start_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_start_opened')" show-button-bar="false" />
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text" name="date_start_to" datepicker-popup="dd.MM.yyyy" ng-model="search.date_start_to" is-open="datepickers.date_start_to_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_start_to_opened')" show-button-bar="false" />
+                                            <input class="form-control" type="text" name="date_finish" datepicker-popup="dd.MM.yyyy" ng-model="date.date_finish" is-open="datepickers.date_finish_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_finish_opened')" show-button-bar="false" />
                                         </div>
                                     </div>
                                 </div>
@@ -97,10 +97,10 @@
                                 <div class="col-md-8">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text" name="date_finish_from" ng-model="search.date_finish_from" data-toggle="datepicker"/>
+                                            <input class="form-control" type="text" name="date_finish_from" ng-model="date.date_finish_from" data-toggle="datepicker"/>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text" name="date_finish_to" ng-model="search.date_finish_to" data-toggle="datepicker"/>
+                                            <input class="form-control" type="text" name="date_finish_to" ng-model="date.date_finish_to" data-toggle="datepicker"/>
                                         </div>
                                     </div>
                                 </div>
@@ -110,10 +110,10 @@
                                 <div class="col-md-8">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text" name="id_from" ng-model="search.id_from" />
+                                            <input class="form-control" type="text" name="id_from" ng-model="ids.id_from" />
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text" name="id_to" ng-model="search.id_to" />
+                                            <input class="form-control" type="text" name="id_to" ng-model="ids.id_to" />
                                         </div>
                                     </div>
                                 </div>
@@ -123,10 +123,10 @@
                                 <div class="col-md-8">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text" name="date_update_from" ng-model="search.date_update_from" data-toggle="datepicker"/>
+                                            <input class="form-control" type="text" name="date_update_from" ng-model="date.search.date_update_from" data-toggle="datepicker"/>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text" name="date_update_to" ng-model="search.date_update_to" data-toggle="datepicker"/>
+                                            <input class="form-control" type="text" name="date_update_to" ng-model="date.search.date_update_to" data-toggle="datepicker"/>
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@
                             </tr>
                         </thead>
                         <tbody align="center">
-                            <tr ng-repeat="item in filtered = (items | filter:search | orderBy:orderBy:reverse) | newsFilter:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                            <tr ng-repeat="item in filtered = (items | filter:search | dateStartRangeFilter:date.date_start:date.date_finish | idRangeFilter:ids.id_from:ids.id_to | orderBy:orderBy:reverse) | newsFilter:(currentPage-1)*entryLimit | limitTo:entryLimit">
                                 <td>{{item.id}}</td>
                                 <td class="text-left">
                                     <!--<a ng-click="edit(item.$id())" ng-show="canCreateNew">{{item.title}}</a>-->
@@ -271,8 +271,8 @@
                     <div class="col-lg-6 text-left align-xs-center">
                         <div class="grid__info">Показано: {{ filtered.length }} из {{ totalItems}}</div>
                     </div>
-                    <div class="col-lg-6  text-right align-xs-center" ng-show="filteredItems > entryLimit">
-                        <pagination direction-links="true" previous-text="«" next-text="»" ng-model="currentPage" ng-change="setPage()" total-items="filteredItems" items-per-page="entryLimit"></pagination>
+                    <div class="col-lg-6  text-right align-xs-center" ng-show="filtered.length > entryLimit">
+                        <pagination direction-links="true" previous-text="«" next-text="»" ng-model="currentPage" ng-change="setPage()" total-items="filtered.length" items-per-page="entryLimit"></pagination>
                     </div>
                 </div>
 
