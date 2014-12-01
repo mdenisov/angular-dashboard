@@ -94,7 +94,7 @@ angular.module('app', [
 			};
 
 			$scope.hasPendingRequests = function () {
-//                return httpRequestTracker.hasPendingRequests();
+                return httpRequestTracker.hasPendingRequests();
 			};
 
             $scope.removeNotification = function (notification) {

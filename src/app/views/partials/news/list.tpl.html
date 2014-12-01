@@ -54,9 +54,10 @@
                 </tr>
             </thead>
             <tbody align="center">
-                <tr ng-repeat="item in filtered = (items | filter:search | orderBy : orderBy :reverse) | newsFilter:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                <tr ng-repeat="item in filtered = (items | filter:search | orderBy:orderBy:reverse) | newsFilter:(currentPage-1)*entryLimit | limitTo:entryLimit">
                     <td>{{item.id}}</td>
                     <td class="text-left">
+                        <!--<a ng-click="edit(item.$id())" ng-show="canCreateNew">{{item.title}}</a>-->
                         <a href="#/news/edit/{{item.$id()}}">{{item.title}}</a>
                     </td>
                     <td>
@@ -97,7 +98,7 @@
 
     <div class="row">
         <div class="col-lg-6 text-left align-xs-center">
-            <div class="grid__info">Всего {{ filtered.length }} из {{ totalItems}}</div>
+            <div class="grid__info">Показано: {{ filtered.length }} из {{ totalItems}}</div>
         </div>
         <div class="col-lg-6  text-right align-xs-center" ng-show="filteredItems > entryLimit">
             <pagination direction-links="true" previous-text="«" next-text="»" ng-model="currentPage" ng-change="setPage()" total-items="filteredItems" items-per-page="entryLimit"></pagination>
