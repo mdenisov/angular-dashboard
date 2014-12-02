@@ -7,7 +7,7 @@ angular.module('app', [
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-		'ngSwitcher',
+		'NgSwitchery',
 		'ng-breadcrumbs',
 		'angular-redactor',
 

@@ -71,25 +71,25 @@ function deleteNews($id) {
 function addNews() {
     $request = \Slim\Slim::getInstance()->request();
     $news = json_decode($request->getBody());
-    $sql = "INSERT INTO news (title, active, block, mainnews, correction, status, date_start, date_finish, preview_text, text) VALUES (:title, :active, :block, :mainnews, :correction, :status, STR_TO_DATE(:date_start, '%Y/%m/%d'), STR_TO_DATE(:date_finish, '%Y/%m/%d'), :preview_text, :text)";
+    $sql = "INSERT INTO news (title, active, mainnews, correction, status, date_start, date_finish, preview_text, text) VALUES (:title, :active, :mainnews, :correction, :status, STR_TO_DATE(:date_start, '%Y/%m/%d'), STR_TO_DATE(:date_finish, '%Y/%m/%d'), :preview_text, :text)";
     try {
         $active = $news->active ? 1 : 0;
-        $block = $news->block ? 1 : 0;
+//        $block = $news->block ? 1 : 0;
         $mainnews = $news->mainnews ? 1 : 0;
         $correction = $news->correction ? 1 : 0;
 
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("title", $news->title);
-        $stmt->bindParam("active", $active);
-        $stmt->bindParam("block", $block);
-        $stmt->bindParam("mainnews", $mainnews);
-        $stmt->bindParam("correction", $correction);
+        $stmt->bindParam("active", $news->active);
+//        $stmt->bindParam("block", $news->block);
+        $stmt->bindParam("mainnews", $news->mainnews);
+        $stmt->bindParam("correction", $news->correction);
         $stmt->bindParam("status", $news->status);
         $stmt->bindParam("date_start", $news->date_start);
         $stmt->bindParam("date_finish", $news->date_finish);
-        $stmt->bindParam("preview_text", htmlspecialchars($news->preview_text, ENT_QUOTES));
-        $stmt->bindParam("text", htmlspecialchars($news->text, ENT_QUOTES));
+        $stmt->bindParam("preview_text", $news->preview_text);
+        $stmt->bindParam("text", $news->text);
         $stmt->execute();
         $news->id = $db->lastInsertId();
         $db = null;
@@ -100,7 +100,7 @@ function addNews() {
 }
 
 function getNewsList($page = 1) {
-    $sql = "select * FROM news ORDER BY id";
+    $sql = "select * FROM news ORDER BY id DESC";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);

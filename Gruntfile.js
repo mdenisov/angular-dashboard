@@ -109,6 +109,7 @@ module.exports = function(grunt) {
 					'vendor/bower/jquery/dist/jquery.js',
 					'vendor/redactor/redactor.js',
 					'vendor/redactor/lang/ru.js',
+					'vendor/bower/switchery/dist/switchery.js',
 
 					'vendor/bower/angular/angular.js',
 					'vendor/bower/angular-route/angular-route.js',
@@ -122,7 +123,8 @@ module.exports = function(grunt) {
 					'vendor/bower/angular-bootstrap/ui-bootstrap.js',
 					'vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js',
 					'vendor/bower/ng-breadcrumbs/dist/ng-breadcrumbs.js',
-					'vendor/bower/angular-redactor/angular-redactor.js'
+					'vendor/bower/angular-redactor/angular-redactor.js',
+					'vendor/bower/ng-switchery/src/ng-switchery.js'
 				],
                 dest: '<%= distdir %>/js/vendor.js'
             }
