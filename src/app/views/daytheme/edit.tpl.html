@@ -49,8 +49,8 @@
                         <div class="form-group">
                             <label class="control-label col-md-1">Статус</label>
                             <div class="col-md-8">
-                                <select class="form-control" name="status">
-                                    <option value="1" selected="selected">[1] Опубликован</option>
+                                <select class="form-control" name="status"  ng-model="item.status">
+                                    <option value="1">[1] Опубликован</option>
                                     <option value="3">[3] Готов к публикации</option>
                                     <option value="2">[2] Черновик</option>
                                 </select>
