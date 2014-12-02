@@ -159,13 +159,15 @@ angular.module('home', [
 		function ($scope, crudListMethods, items, i18nNotifications, $timeout) {
             $scope.items = items;
 
-			angular.extend($scope, crudListMethods('/news'));
+			angular.extend($scope, crudListMethods('/news/edit'));
 
             // pagination controls
             $scope.currentPage = 1;
             $scope.filteredItems = $scope.items.length;
             $scope.entryLimit = 5;
             $scope.totalItems = $scope.items.length;
+
+			$scope.canCreateNew = false;
 
 			// Filter logics
 			$scope.showFilter = false;
@@ -189,6 +191,12 @@ angular.module('home', [
 
 			$scope.searchByFilter = function() {
 				i18nNotifications.pushForCurrentRoute('errors.system.general', 'error', {});
+			};
+
+			$scope.resetFilter = function() {
+				$scope.search = {};
+				$scope.date = {};
+				$scope.ids = {};
 			};
 
 			$scope.toggleFilter = function() {

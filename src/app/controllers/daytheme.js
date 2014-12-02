@@ -68,6 +68,8 @@ angular.module('daytheme', [
 			$scope.entryLimit = 5;
 			$scope.totalItems = $scope.items.length;
 
+			$scope.canCreateNew = true;
+
 			// Filter logics
 			$scope.showFilter = false;
 
@@ -90,6 +92,12 @@ angular.module('daytheme', [
 
 			$scope.searchByFilter = function() {
 				i18nNotifications.pushForCurrentRoute('errors.system.general', 'error', {});
+			};
+
+			$scope.resetFilter = function() {
+				$scope.search = {};
+				$scope.date = {};
+				$scope.ids = {};
 			};
 
 			$scope.toggleFilter = function() {

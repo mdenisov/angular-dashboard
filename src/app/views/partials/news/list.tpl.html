@@ -54,32 +54,36 @@
                 </tr>
             </thead>
             <tbody align="center">
-                <tr ng-repeat="item in filtered = (items | filter:search | orderBy:orderBy:reverse) | newsFilter:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                <tr ng-repeat="item in filtered = (items | filter:search | dateStartRangeFilter:date.date_start:date.date_finish | idRangeFilter:ids.id_from:ids.id_to | orderBy:orderBy:reverse) | newsFilter:(currentPage-1)*entryLimit | limitTo:entryLimit">
                     <td>{{item.id}}</td>
                     <td class="text-left">
-                        <!--<a ng-click="edit(item.$id())" ng-show="canCreateNew">{{item.title}}</a>-->
-                        <a href="#/news/edit/{{item.$id()}}">{{item.title}}</a>
+                        <a ng-click="edit(item.$id())">{{item.title}}</a>
+                        <!--<a href="#/news/edit/{{item.$id()}}">{{item.title}}</a>-->
                     </td>
                     <td>
-                        <a class="action" tooltip="{{!item.active ? 'Активировать' : 'Деактивировать'}}" ng-click="toggleActiv(item, $index, $event)">
-                            <i ng-class="item.active ? 'fa fa-check-circle-o text-success' : 'fa fa-times-circle text-danger'"></i>
+                        <a class="action" tooltip="{{item.active == 1 ? 'Деактивировать' : 'Активировать'}}" ng-click="toggleActiv(item, $index, $event)">
+                            <i ng-class="item.active == 1 ? 'fa fa-check-circle-o text-success' : 'fa fa-times-circle text-danger'"></i>
                         </a>
                     </td>
                     <td>
-                        <a class="action" tooltip="{{!item.block ? 'Заблокировать' : 'Разблокировать'}}" ng-click="toggleBlock(item, $index, $event)">
-                            <i ng-class="!item.block ? 'fa fa-circle-o text-success' : 'fa fa-circle text-danger'"></i>
+                        <a class="action" tooltip="{{item.block == 1 ? 'Разблокировать' : 'Заблокировать'}}" ng-click="toggleBlock(item, $index, $event)">
+                            <i ng-class="item.block == 1 ? 'fa fa-circle text-danger' : 'fa fa-circle-o text-success'"></i>
                         </a>
                     </td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td>
-                        <a class="action" tooltip="{{!item.correction ? 'Корректура не требуется' : 'Требуется корректура'}}" ng-click="toggleCorrection(item, $index, $event)">
-                            <i ng-class="!item.correction ? 'fa fa-circle-o text-success' : 'fa fa-circle text-danger'"></i>
+                        <a class="action" tooltip="{{item.correction == 1 ? 'Требуется корректура' : 'Корректура не требуется'}}" ng-click="toggleCorrection(item, $index, $event)">
+                            <i ng-class="item.correction == 1 ? 'fa fa-circle text-danger' : 'fa fa-circle-o text-success'"></i>
                         </a>
                     </td>
                     <td>
-                        <a class="action" ng-click="changeStatus(item, $index, $event)">[1] Опубликован</a>
+                        <a class="action" ng-click="changeStatus(item, $index, $event)" ng-switch="item.status">
+                            <span ng-switch-when="1">[1] Опубликован</span>
+                            <span ng-switch-when="2">[2] Черновик</span>
+                            <span ng-switch-when="3">[3] Готов к публикации</span>
+                        </a>
                     </td>
                     <td>02.10.2014 00:00</td>
                     <td> </td>
@@ -100,8 +104,8 @@
         <div class="col-lg-6 text-left align-xs-center">
             <div class="grid__info">Показано: {{ filtered.length }} из {{ totalItems}}</div>
         </div>
-        <div class="col-lg-6  text-right align-xs-center" ng-show="filteredItems > entryLimit">
-            <pagination direction-links="true" previous-text="«" next-text="»" ng-model="currentPage" ng-change="setPage()" total-items="filteredItems" items-per-page="entryLimit"></pagination>
+        <div class="col-lg-6  text-right align-xs-center" ng-show="filtered.length > entryLimit">
+            <pagination direction-links="true" previous-text="«" next-text="»" ng-model="currentPage" ng-change="setPage()" total-items="filtered.length" items-per-page="entryLimit"></pagination>
         </div>
     </div>
 

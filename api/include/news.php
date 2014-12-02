@@ -100,7 +100,7 @@ function addNews() {
 }
 
 function getNewsList($page = 1) {
-    $sql = "SELECT * FROM news ORDER BY id DESC";
+    $sql = "select * FROM news ORDER BY id";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);
@@ -111,19 +111,5 @@ function getNewsList($page = 1) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
-
-function getNewsList1() {
-    $sql = 'SELECT * FROM news ORDER BY id';
-    try {
-        $db = getConnection();
-        $record = $db->prepare($sql);
-        $row = $record->execute();
-        $rs = $record->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($rs);
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-
 
 ?>
