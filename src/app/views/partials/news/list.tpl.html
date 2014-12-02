@@ -55,10 +55,9 @@
             </thead>
             <tbody align="center">
                 <tr ng-repeat="item in filtered = (items | filter:search | dateStartRangeFilter:date.date_start:date.date_finish | idRangeFilter:ids.id_from:ids.id_to | orderBy:orderBy:reverse) | newsFilter:(currentPage-1)*entryLimit | limitTo:entryLimit">
-                    <td>{{item.id}}</td>
+                    <td>{{item.id | number}}</td>
                     <td class="text-left">
                         <a ng-click="edit(item.$id())">{{item.title}}</a>
-                        <!--<a href="#/news/edit/{{item.$id()}}">{{item.title}}</a>-->
                     </td>
                     <td>
                         <a class="action" tooltip="{{item.active == 1 ? 'Деактивировать' : 'Активировать'}}" ng-click="toggleActiv(item, $index, $event)">
@@ -85,9 +84,9 @@
                             <span ng-switch-when="3">[3] Готов к публикации</span>
                         </a>
                     </td>
-                    <td>02.10.2014 00:00</td>
-                    <td> </td>
-                    <td>02.10.2014 00:15</td>
+                    <td>{{item.date_start | date : format : timezone}}</td>
+                    <td>{{item.date_finish | date : format : timezone}}</td>
+                    <td>{{item.last_update | date : format : timezone}}</td>
                     <td style="white-space: nowrap;">
                         <a class="btn btn-sm btn-info btn-transparent action" tooltip="Копировать" ng-click="copy(item, $index, $event)"><i class="fa fa-copy"></i></a>
                         <a class="btn btn-sm btn-info btn-transparent action" tooltip="Посмотреть историю" ng-click="history(item, $index, $event)"><i class="fa fa-stack-overflow"></i></a>
