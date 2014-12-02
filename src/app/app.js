@@ -8,6 +8,7 @@ angular.module('app', [
         'ngSanitize',
         'ngTouch',
 		'NgSwitchery',
+		'cgNotify',
 		'ng-breadcrumbs',
 		'angular-redactor',
 
@@ -38,6 +39,7 @@ angular.module('app', [
         'crud.news.remove.error':"При удалении элемента с номером '{{id}} произошла ошибка'.",
         'crud.news.save.error':"При удалении элемента произошла ошибка"
     })
+
 
     .constant('CONFIG', {
         baseUrl: '/api/index.php'
@@ -83,11 +85,16 @@ angular.module('app', [
 		};
 	})
 
-    .controller('AppCtrl', ['$scope', '$location', 'i18nNotifications', 'breadcrumbs',
-        function($scope, $location, i18nNotifications, breadcrumbs) {
+    .controller('AppCtrl', ['$scope', '$location', 'i18nNotifications', 'breadcrumbs', 'notify',
+        function($scope, $location, i18nNotifications, breadcrumbs, $notify) {
 
             $scope.notifications = i18nNotifications;
 			$scope.breadcrumbs = breadcrumbs;
+
+            $notify.config({
+                startTop: 10,
+                templateUrl: 'views/notify.tpl.html'
+            });
 
 			$scope.isNavbarActive = function (navBarPath) {
 				return navBarPath === breadcrumbs.getFirst().name;

@@ -56,8 +56,8 @@ angular.module('daytheme', [
 		};
 	})
 
-    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
-		function ($scope, crudListMethods, items, i18nNotifications, $timeout) {
+    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', 'items', 'notify', '$timeout',
+		function ($scope, crudListMethods, items, $notify, $timeout) {
 			$scope.items = items;
 
 			angular.extend($scope, crudListMethods('/news/daytheme'));
@@ -136,7 +136,10 @@ angular.module('daytheme', [
 			$scope.toggleActiv = function(item, $index, $event) {
 				item.active = !(item.active);
 				item.$update(function() {
-
+                    $notify({
+                        message: '1234567',
+                        classes: 'success'
+                    });
 				});
 			};
 
