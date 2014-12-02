@@ -29,18 +29,13 @@ function updateNews($id) {
     $news = json_decode($body);
     $sql = "UPDATE news SET title=:title, active=:active, block=:block, mainnews=:mainnews, correction=:correction, status=:status, date_start=DATE_FORMAT(:date_start, '%Y-%m-%d'), date_finish=DATE_FORMAT(:date_finish, '%Y-%m-%d'), preview_text=:preview_text, text=:text WHERE id=:id";
     try {
-        $active = $news->active ? 1 : 0;
-        $block = $news->block ? 1 : 0;
-        $mainnews = $news->mainnews ? 1 : 0;
-        $correction = $news->correction ? 1 : 0;
-
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("title", $news->title);
-        $stmt->bindParam("active", $active);
-        $stmt->bindParam("block", $block);
-        $stmt->bindParam("mainnews", $mainnews);
-        $stmt->bindParam("correction", $correction);
+        $stmt->bindParam("active", $news->active);
+        $stmt->bindParam("block", $news->active);
+        $stmt->bindParam("mainnews", $news->mainnews);
+        $stmt->bindParam("correction", $news->correction);
         $stmt->bindParam("status", $news->status);
         $stmt->bindParam("date_start", $news->date_start);
         $stmt->bindParam("date_finish", $news->date_finish);
@@ -73,18 +68,13 @@ function addNews() {
     $news = json_decode($request->getBody());
     $sql = "INSERT INTO news (title, active, block, mainnews, correction, status, date_start, date_finish, preview_text, text) VALUES (:title, :active, :block, :mainnews, :correction, :status, STR_TO_DATE(:date_start, '%Y/%m/%d'), STR_TO_DATE(:date_finish, '%Y/%m/%d'), :preview_text, :text)";
     try {
-        $active = isset($news->active) && $news->active ? 1 : 0;
-        $block = 0;
-        $mainnews = isset($news->mainnews) && $news->mainnews ? 1 : 0;
-        $correction = isset($news->correction) && $news->correction ? 1 : 0;
-
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("title", $news->title);
-        $stmt->bindParam("active", $active);
-        $stmt->bindParam("block", $block);
-        $stmt->bindParam("mainnews", $mainnews);
-        $stmt->bindParam("correction", $correction);
+        $stmt->bindParam("active", $news->active);
+        $stmt->bindParam("block", $news->block);
+        $stmt->bindParam("mainnews", $news->mainnews);
+        $stmt->bindParam("correction", $news->correction);
         $stmt->bindParam("status", $news->status);
         $stmt->bindParam("date_start", $news->date_start);
         $stmt->bindParam("date_finish", $news->date_finish);
