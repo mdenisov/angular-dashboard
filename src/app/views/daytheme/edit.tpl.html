@@ -23,7 +23,7 @@
                             <div class="col-md-8">
                                 <textarea class="form-control" name="title" ng-model="item.title" required></textarea>
                                 <div ng-messages="form.title.$error">
-                                    <div ng-message="required" class="help-block text-danger">Обязательно для заполнения</div>
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                             <div class="col-md-8">
                                 <input class="form-control" type="url" name="source_url" ng-model="item.source_url"/>
                                 <div ng-messages="form.source_url.$error">
-                                    <div ng-message="url" class="help-block text-danger">Неверная ссылка</div>
+                                    <div ng-message="url" class="help-block text-danger">{{messages.validation.invalidUrl}}</div>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                             <div class="col-md-8">
                                 <textarea class="form-control" name="preview_text" ng-model="item.preview_text" redactor required></textarea>
                                 <div ng-messages="form.preview_text.$error">
-                                    <div ng-message="required" class="help-block text-danger">Обязательно для заполнения</div>
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                             <div class="col-md-8">
                                 <textarea class="form-control" name="text" ng-model="item.text" redactor required></textarea>
                                 <div ng-messages="form.text.$error">
-                                    <div ng-message="required" class="help-block text-danger">Обязательно для заполнения</div>
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
                                 </div>
                             </div>
                         </div>

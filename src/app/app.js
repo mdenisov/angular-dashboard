@@ -35,8 +35,8 @@ angular.module('app', [
 
         'crud.news.save.success':"Элемент с номером '{{id}}' успешно сохранен.",
         'crud.news.remove.success':"Элемент с номером '{{id}}' успешно удален.",
-        'crud.news.remove.error':"При удалении элемента с номером '{{id}} произошла ошибка'.",
-        'crud.news.save.error':"При удалении элемента произошла ошибка"
+        'crud.news.remove.error':"При удалении элемента с номером '{{id}}' произошла ошибка'.",
+        'crud.news.save.error':"При сохранении элемента с номером '{{id}}' произошла ошибка"
     })
 
     .constant('CONFIG', {
@@ -83,11 +83,19 @@ angular.module('app', [
 		};
 	})
 
-    .controller('AppCtrl', ['$scope', '$location', 'i18nNotifications', 'breadcrumbs',
-        function($scope, $location, i18nNotifications, breadcrumbs) {
+    .controller('AppCtrl', ['$scope', '$location', 'i18nNotifications', 'breadcrumbs', 'localizedMessages',
+        function($scope, $location, i18nNotifications, breadcrumbs, localizedMessages) {
 
             $scope.notifications = i18nNotifications;
 			$scope.breadcrumbs = breadcrumbs;
+
+			$scope.messages = {
+				validation: {
+					required: localizedMessages.get('errors.validation.required'),
+					invalidEmail: localizedMessages.get('errors.validation.invalid.email'),
+					invalidUrl: localizedMessages.get('errors.validation.invalid.url')
+				}
+			};
 
 			$scope.isNavbarActive = function (navBarPath) {
 				return navBarPath === breadcrumbs.getFirst().name;
