@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 //    grunt.registerTask('default', ['jshint', 'build', 'karma:unit']);
     grunt.registerTask('default', [/*'jshint',*/ 'build']);
     grunt.registerTask('build', ['clean', 'html2js', 'concat', 'less:build', 'autoprefixer', 'copy:assets']);
-    grunt.registerTask('release', ['clean', 'html2js', 'uglify', /*'jshint', 'karma:unit', 'concat:index',*/ 'less:min', 'copy:assets']);
+    grunt.registerTask('release', ['clean', 'html2js', 'uglify', /*'jshint', 'karma:unit', 'concat:index',*/ 'less:min', 'autoprefixer', 'copy:assets']);
     grunt.registerTask('test-watch', ['karma:watch']);
 
     // Print a timestamp (useful for when watching)
@@ -95,21 +95,19 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 options: {
-                    banner: "<%= banner %>",
-                    sourceMap: true
+
                 },
                 src: ['<%= src.js %>', '<%= src.jsTpl %>'],
                 dest: '<%= distdir %>/js/<%= pkg.name %>.js'
             },
             vendor: {
 				options: {
-                    sourceMap: true
+
 				},
                 src: [
 					'vendor/bower/jquery/dist/jquery.js',
 					'vendor/redactor/redactor.js',
 					'vendor/redactor/lang/ru.js',
-					'vendor/bower/switchery/dist/switchery.js',
 
 					'vendor/bower/angular/angular.js',
 					'vendor/bower/angular-route/angular-route.js',
@@ -124,7 +122,9 @@ module.exports = function(grunt) {
 					'vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js',
 					'vendor/bower/ng-breadcrumbs/dist/ng-breadcrumbs.js',
 					'vendor/bower/angular-redactor/angular-redactor.js',
-					'vendor/bower/ng-switchery/src/ng-switchery.js'
+					'vendor/bower/ng-switchery/src/ng-switchery.js',
+                    'vendor/bower/switchery/dist/switchery.js',
+					'vendor/bower/angular-notify/angular-notify.js'
 				],
                 dest: '<%= distdir %>/js/vendor.js'
             }

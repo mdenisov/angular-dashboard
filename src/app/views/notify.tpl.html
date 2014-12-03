@@ -1,0 +1,5 @@
+<div ng-class="['notifications__item', 'animated1', 'fast1', 'fadeInRight1', $classes]">
+    <span class="notifications__close" ng-click="$close()">закрыть x</span>
+    <span ng-show="!$messageTemplate">{{$message}}</span>
+    <span ng-show="$messageTemplate" class="cg-notify-message-template"></span>
+</div>
