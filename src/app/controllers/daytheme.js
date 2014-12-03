@@ -56,9 +56,13 @@ angular.module('daytheme', [
 		};
 	})
 
-    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
-		function ($scope, crudListMethods, items, i18nNotifications, $timeout) {
+    .controller('NewsDaythemeListCtrl', ['$scope', '$location', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
+		function ($scope, $location, crudListMethods, items, i18nNotifications, $timeout) {
 			$scope.items = items;
+
+			angular.forEach($scope.items, function (item) {
+				item.id = parseFloat(item.id);
+			});
 
 			angular.extend($scope, crudListMethods('/news/daytheme'));
 
@@ -139,6 +143,28 @@ angular.module('daytheme', [
 				item.correction = !(item.correction);
 				item.$update(function() {
 					i18nNotifications.push('crud.news.update.success', 'success', {id : item.$id()});
+				});
+			};
+
+			$scope.copy = function(item, $index, $event) {
+				var newItem = angular.copy(item);
+				newItem.id = undefined;
+
+				newItem.$save(function(item) {
+//					$scope.items.push(item);
+					$location.path('/news/daytheme/' + item.$id());
+					i18nNotifications.push('crud.news.save.success', 'success', {id : item.$id()});
+				});
+			};
+
+			$scope.remove = function(item, $index, $event) {
+				item.$delete(function() {
+					angular.forEach($scope.items, function(scopeItem, index) {
+						if (scopeItem.$id() === item.$id()) {
+							$scope.items.splice(index,1);
+						}
+					});
+					i18nNotifications.push('crud.news.remove.success', 'success', {id : item.$id()});
 				});
 			};
 

@@ -241,6 +241,28 @@ angular.module('home', [
 				});
 			};
 
+			$scope.copy = function(item, $index, $event) {
+				var newItem = angular.copy(item);
+				newItem.id = undefined;
+
+				newItem.$save(function(item) {
+//					$scope.items.push(item);
+					$location.path('/news/daytheme/' + item.$id());
+					i18nNotifications.push('crud.news.save.success', 'success', {id : item.$id()});
+				});
+			};
+
+			$scope.remove = function(item, $index, $event) {
+				item.$delete(function() {
+					angular.forEach($scope.items, function(scopeItem, index) {
+						if (scopeItem.$id() === item.$id()) {
+							$scope.items.splice(index,1);
+						}
+					});
+					i18nNotifications.push('crud.news.remove.success', 'success', {id : item.$id()});
+				});
+			};
+
 			$scope.changeStatus = function(item, $index, $event) {
 
 			};

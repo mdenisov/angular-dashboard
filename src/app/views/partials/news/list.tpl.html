@@ -101,7 +101,7 @@
 
     <div class="row">
         <div class="col-lg-6 text-left align-xs-center">
-            <div class="grid__info">Показано: {{ filtered.length }} из {{ totalItems}}</div>
+            <div class="grid__info">Показано: {{ filtered.length }} из {{ items.length }}</div>
         </div>
         <div class="col-lg-6  text-right align-xs-center" ng-show="filtered.length > entryLimit">
             <pagination direction-links="true" previous-text="«" next-text="»" ng-model="currentPage" ng-change="setPage()" total-items="filtered.length" items-per-page="entryLimit"></pagination>
