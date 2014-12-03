@@ -56,8 +56,8 @@ angular.module('daytheme', [
 		};
 	})
 
-    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', 'items', 'notify', '$timeout',
-		function ($scope, crudListMethods, items, $notify, $timeout) {
+    .controller('NewsDaythemeListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
+		function ($scope, crudListMethods, items, i18nNotifications, $timeout) {
 			$scope.items = items;
 
 			angular.extend($scope, crudListMethods('/news/daytheme'));
@@ -80,18 +80,6 @@ angular.module('daytheme', [
 					$scope.filteredItems = $scope.filtered.length;
 
 				}, 10);
-			};
-
-			$scope.setPage = function() {
-				//$timeout(function() {
-
-
-
-				//}, 10);
-			};
-
-			$scope.searchByFilter = function() {
-				i18nNotifications.pushForCurrentRoute('errors.system.general', 'error', {});
 			};
 
 			$scope.resetFilter = function() {
@@ -136,24 +124,21 @@ angular.module('daytheme', [
 			$scope.toggleActiv = function(item, $index, $event) {
 				item.active = !(item.active);
 				item.$update(function() {
-                    $notify({
-                        message: '1234567',
-                        classes: 'success'
-                    });
+					i18nNotifications.push('crud.news.update.success', 'success', {id : item.$id()});
 				});
 			};
 
 			$scope.toggleBlock = function(item, $index, $event) {
 				item.block = !(item.block);
 				item.$update(function() {
-
+					i18nNotifications.push('crud.news.update.success', 'success', {id : item.$id()});
 				});
 			};
 
 			$scope.toggleCorrection = function(item, $index, $event) {
 				item.correction = !(item.correction);
 				item.$update(function() {
-
+					i18nNotifications.push('crud.news.update.success', 'success', {id : item.$id()});
 				});
 			};
 
@@ -174,16 +159,16 @@ angular.module('daytheme', [
 			};
 
 			$scope.onSave = function (item) {
-				i18nNotifications.pushForNextRoute('crud.news.save.success', 'success', {id : item.$id()});
+				i18nNotifications.push('crud.news.save.success', 'success', {id : item.$id()});
 				$location.path('/news/daytheme');
 			};
 
 			$scope.onError = function() {
-				i18nNotifications.pushForCurrentRoute('crud.news.save.error', 'error');
+				i18nNotifications.push('crud.news.save.error', 'error');
 			};
 
 			$scope.onRemove = function(item) {
-				i18nNotifications.pushForNextRoute('crud.news.remove.success', 'success', {id : item.$id()});
+				i18nNotifications.push('crud.news.remove.success', 'success', {id : item.$id()});
 				$location.path('/news/daytheme');
 			};
 

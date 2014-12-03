@@ -4,22 +4,14 @@ angular.module('services.i18nNotifications').factory('i18nNotifications', ['loca
     var prepareNotification = function(msgKey, type, interpolateParams, otherProperties) {
         return angular.extend({
             message: localizedMessages.get(msgKey, interpolateParams),
-            type: type
+            type: type,
+            classes: type
         }, otherProperties);
     };
 
     var I18nNotifications = {
-        pushSticky:function (msgKey, type, interpolateParams, otherProperties) {
-            return notifications.pushSticky(prepareNotification(msgKey, type, interpolateParams, otherProperties));
-        },
-        pushForCurrentRoute:function (msgKey, type, interpolateParams, otherProperties) {
-            return notifications.pushForCurrentRoute(prepareNotification(msgKey, type, interpolateParams, otherProperties));
-        },
-        pushForNextRoute:function (msgKey, type, interpolateParams, otherProperties) {
-            return notifications.pushForNextRoute(prepareNotification(msgKey, type, interpolateParams, otherProperties));
-        },
-        getCurrent:function () {
-            return notifications.getCurrent();
+        push:function (msgKey, type, interpolateParams, otherProperties) {
+            return notifications.push(prepareNotification(msgKey, type, interpolateParams, otherProperties));
         },
         remove:function (notification) {
             return notifications.remove(notification);

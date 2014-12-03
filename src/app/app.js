@@ -35,6 +35,7 @@ angular.module('app', [
         'errors.route.changeError':'Ошибка роутинга.',
 
         'crud.news.save.success':"Элемент с номером '{{id}}' успешно сохранен.",
+        'crud.news.update.success':"Элемент с номером '{{id}}' успешно обновлен.",
         'crud.news.remove.success':"Элемент с номером '{{id}}' успешно удален.",
         'crud.news.remove.error':"При удалении элемента с номером '{{id}}' произошла ошибка'.",
         'crud.news.save.error':"При сохранении элемента с номером '{{id}}' произошла ошибка"
@@ -48,7 +49,6 @@ angular.module('app', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo:'/news'});
     }])
-
 
 	.config(function(redactorOptions) {
 		redactorOptions.lang = 'ru';
@@ -90,6 +90,7 @@ angular.module('app', [
 
             $scope.notifications = i18nNotifications;
 			$scope.breadcrumbs = breadcrumbs;
+			$scope.$notify = $notify;
 
 
 			$scope.messages = {
@@ -100,8 +101,9 @@ angular.module('app', [
 				}
 			};
 
-            $notify.config({
-                startTop: 10,
+			$scope.$notify.config({
+                startTop: 15,
+				container: $('.page'),
                 templateUrl: 'views/notify.tpl.html'
             });
 
