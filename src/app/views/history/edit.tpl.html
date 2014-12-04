@@ -1,0 +1,201 @@
+<section class="panel animated fadeInDown">
+
+    <header id="page-header">
+        <div class="panel-heading">
+            <h2>{{item.id ? 'Редактирование новости' : 'Добавление новости'}}</h2>
+            <!--<label class="color">{{{this.subtitle}}}</label>-->
+        </div>
+    </header>
+
+    <div id="page-tools"></div>
+
+    <div id="page-content" class="panel-body">
+
+        <form class="form-horizontal" crud-edit="item" name="form">
+
+            <tabset>
+
+                <tab heading="Основные">
+
+                    <div class="padding--vertical">
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Заголовок</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="title" ng-model="item.title" required></textarea>
+                                <div ng-messages="form.title.$error">
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Активность</label>
+                            <div class="col-md-8">
+                                <input type="checkbox" name="active" ng-model="item.active" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Начало публикации</label>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" name="date_start" datepicker-popup="dd.MM.yyyy" ng-model="item.date_start" is-open="datepickers.date_start_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_start_opened')" show-button-bar="false" />
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Статус</label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="status"  ng-model="item.status">
+                                    <option value="1">[1] Опубликован</option>
+                                    <option value="3">[3] Готов к публикации</option>
+                                    <option value="2">[2] Черновик</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Окончание публикации</label>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" name="date_finish" datepicker-popup="dd.MM.yyyy" ng-model="item.date_finish" is-open="datepickers.date_finish_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_finish_opened')" show-button-bar="false" />
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Корректура</label>
+                            <div class="col-md-8">
+                                <input type="checkbox" name="correction" ng-model="item.correction" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Банковские продукты</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="products" ng-model="item.products" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Рубрика</label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="sub_category" ng-model="item.sub_category">
+                                    <option value="">(не установлено)</option>
+                                    <option value="lenta_banks">Банки</option>
+                                    <option value="lenta_products_and_services">Продукты и услуги</option>
+                                    <option value="lenta_buisness">Бизнес</option>
+                                    <option value="lenta_market">Рынки</option>
+                                    <option value="lenta_macroeconomic">Макроэкономика</option>
+                                    <option value="lenta_in_world">В мире</option>
+                                    <option value="lenta_accidents" selected="selected">Происшествия</option>
+                                    <option value="lenta_projects_bankiru">Проекты Банки.ру</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Источник</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="source_name" ng-model="item.source_name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Ссылка на источник</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="url" name="source_url" ng-model="item.source_url"/>
+                                <div ng-messages="form.source_url.$error">
+                                    <div ng-message="url" class="help-block text-danger">{{messages.validation.invalidUrl}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Главная новость</label>
+                            <div class="col-md-8">
+                                <input type="checkbox" name="mainnews" ng-model="item.mainnews" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Банки</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="banks" ng-model="item.banks"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Анонс</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="preview_text" ng-model="item.preview_text" redactor required></textarea>
+                                <div ng-messages="form.preview_text.$error">
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Текст</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="text" ng-model="item.text" redactor required></textarea>
+                                <div ng-messages="form.text.$error">
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </tab>
+                <tab heading="Иллюстрации">
+
+                    <div class="panel">
+                        <div class="panel-tools" align="left">
+                            <ul class="tooltip-area">
+                                <li>
+                                    <div class="file-input-wrapper" title="Добавиить" data-toggle="tooltip" data-placement="top">
+                                        <a href="" class="btn btn-primary"><i class="fa fa-upload"></i></a>
+                                        <input type="file" name="image" value="Добавиить" accept="image/*" multiple="multiple" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <label class="btn btn-default disabled" title="Выбрать все" data-toggle="tooltip" data-placement="top">
+                                        <input type="checkbox" class="default" disabled="disabled">
+                                    </label>
+                                </li>
+                                <li>
+                                    <button class="btn btn-default" disabled data-target="reload" title="Редактировать" data-toggle="tooltip" data-placement="top"><i class="fa fa-pencil"></i></button>
+                                </li>
+                                <li>
+                                    <button class="btn btn-default" disabled data-target="reload" title="Удалить" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i></button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="padding--vertical">
+
+                            <div class="illustrations__block">
+                                <img class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA0Njg3NSIgeT0iNzAiIHN0eWxlPSJmaWxsOiNBQUFBQUE7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTBwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj4xNDB4MTQwPC90ZXh0PjwvZz48L3N2Zz4=" style="width: 140px; height: 140px;">
+                                <img class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA0Njg3NSIgeT0iNzAiIHN0eWxlPSJmaWxsOiNBQUFBQUE7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTBwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj4xNDB4MTQwPC90ZXh0PjwvZz48L3N2Zz4=" style="width: 140px; height: 140px;">
+                                <img class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA0Njg3NSIgeT0iNzAiIHN0eWxlPSJmaWxsOiNBQUFBQUE7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTBwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj4xNDB4MTQwPC90ZXh0PjwvZz48L3N2Zz4=" style="width: 140px; height: 140px;">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </tab>
+
+            </tabset>
+
+            <footer class="panel-footer">
+
+                <crud-buttons></crud-buttons>
+
+            </footer>
+
+        </form>
+
+    </div>
+
+    <div id="page-footer"></div>
+
+    <div class="page__flip"></div>
+
+</section>

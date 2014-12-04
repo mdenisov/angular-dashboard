@@ -19,6 +19,7 @@ angular.module('app', [
 
         'home',
 		'daytheme',
+		'history',
 		'settings',
 
 		'templates.app',

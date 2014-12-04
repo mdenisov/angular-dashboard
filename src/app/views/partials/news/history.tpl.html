@@ -1,0 +1,80 @@
+<div class="grid">
+
+    <div class="row form-group">
+        <div class="col-lg-12  text-right align-xs-center">
+            <div class="row text-right">
+                <div class="col-md-2 pull-right">
+                    <select ng-model="$parent.entryLimit" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-big">
+
+        <table class="table table-striped">
+            <thead>
+
+            <tr>
+                <tr>
+                    <th class="text-center">
+                        <a ng-click="$parent.sort('id')">
+                            # <i ng-class="{'fa fa-angle-up' : isSortUp('id'), 'fa fa-angle-down' : isSortDown('id')}"></i>
+                        </a>
+                    </th>
+                    <th class="text-left">Заголовок</th>
+                    <th class="text-center">
+                        <a ng-click="$parent.sort('date_create')">
+                            Дата создания <i ng-class="{'fa fa-angle-up' : isSortUp('date_create'), 'fa fa-angle-down' : isSortDown('date_create')}"></i>
+                        </a>
+                    </th>
+                    <th class="text-center">Модератор</th>
+                    <th class="text-center">
+                        <a ng-click="$parent.sort('action')">
+                            Действие <i ng-class="{'fa fa-angle-up' : isSortUp('action'), 'fa fa-angle-down' : isSortDown('action')}"></i>
+                        </a>
+                    </th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody align="center">
+                <tr ng-repeat="item in $parent.items | orderBy:$parent.orderBy:$parent.reverse | newsFilter:($parent.currentPage-1)*$parent.entryLimit | limitTo:$parent.entryLimit">
+                    <td>{{item.id}}</td>
+                    <td class="text-left">
+                        <a ng-click="$parent.revert(item.$id())">{{item.title}}</a>
+                    </td>
+                    <td>{{item.date_create | date : format : timezone}}</td>
+                    <td>{{item.moderator}}</td>
+                    <td>{{item.action}}</td>
+                    <td style="white-space: nowrap;">
+                        <a ng-click="$parent.show(item, $index, $event)">Показать изменения</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 text-left align-xs-center">
+            <div class="grid__info">
+                Показаны
+                {{ $parent.currentPage === 1 ? 1 : ($parent.currentPage * $parent.entryLimit) - $parent.entryLimit + 1 }}
+                -
+                {{ $parent.currentPage === 1 ? $parent.entryLimit : ($parent.currentPage * $parent.entryLimit) < $parent.filtered.length ? ($parent.currentPage * $parent.entryLimit) : $parent.filtered.length }} из {{ $parent.items.length }}
+            </div>
+
+            <!--<div class="grid__info">Показано: {{ filtered.length }} из {{ items.length }}</div>-->
+        </div>
+        <div class="col-lg-6  text-right align-xs-center" ng-show="$parent.filtered.length > $parent.entryLimit">
+            <pagination direction-links="true" previous-text="«" next-text="»" ng-model="$parent.currentPage" ng-change="$parent.setPage()" total-items="$parent.filtered.length" items-per-page="$parent.entryLimit"></pagination>
+        </div>
+    </div>
+
+</div>

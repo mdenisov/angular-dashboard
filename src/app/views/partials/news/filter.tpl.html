@@ -6,7 +6,7 @@
             <input type="text" class="form-control" placeholder="Поиск..." name="title" ng-model="$parent.search.title">
         </div>
         <!--<a class="btn btn-primary" ng-click="searchByFilter()">Искать</a>-->
-        <a class="btn btn-default" ng-click="toggleFilter()">Фильтр</a>
+        <a class="btn btn-default" ng-click="$parent.toggleFilter()">Фильтр</a>
     </div>
 
     <div class="col-lg-6 text-right">
@@ -108,10 +108,10 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-6">
-                                <input class="form-control" type="text" name="date_update_from" ng-model="date.search.date_update_from" data-toggle="datepicker"/>
+                                <input class="form-control" type="text" name="date_update_from" ng-model="$parent.date.search.date_update_from" data-toggle="datepicker"/>
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" name="date_update_to" ng-model="date.search.date_update_to" data-toggle="datepicker"/>
+                                <input class="form-control" type="text" name="date_update_to" ng-model="$parent.date.search.date_update_to" data-toggle="datepicker"/>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                     <label class="control-label col-md-3"></label>
                     <div class="col-md-8">
                         <!--<button class="btn btn-primary" ng-click="searchByFilter()">Искать</button>-->
-                        <button class="btn btn-warning" ng-click="resetFilter()">Сбросить</button>
+                        <button class="btn btn-warning" ng-click="$parent.resetFilter()">Сбросить</button>
                     </div>
                 </div>
             </div>
