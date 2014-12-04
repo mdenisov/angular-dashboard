@@ -31,7 +31,7 @@ angular.module('history', [
 				}
 			})
 			.when('/news/history/:itemId/revert/:commitId', {
-				label: 'Просмотр истории',
+				label: 'Редактирование новости',
 				templateUrl:'views/history/edit.tpl.html',
 				controller:'NewsHistoryEditCtrl',
 				resolve:{
