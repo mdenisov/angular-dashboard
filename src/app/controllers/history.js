@@ -20,6 +20,16 @@ angular.module('history', [
 					}]
 				}
 			})
+			.when('/news/:category/history/:itemId', {
+				label: 'Просмотр истории',
+				templateUrl:'views/history/list.tpl.html',
+				controller:'NewsHistoryListCtrl',
+				resolve:{
+					items: ['$route', 'History', function ($route, History) {
+						return History.all();
+					}]
+				}
+			})
 			.when('/news/history/:itemId/revert/:commitId', {
 				label: 'Просмотр истории',
 				templateUrl:'views/history/edit.tpl.html',
@@ -141,8 +151,8 @@ angular.module('history', [
 
 			$scope.item = item;
 
-			$scope.ok = function () {
-				$modalInstance.close();
+			$scope.close = function () {
+				$modalInstance.dismiss('cancel');
 			};
 
 		}

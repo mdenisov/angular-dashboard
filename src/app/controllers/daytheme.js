@@ -36,28 +36,122 @@ angular.module('daytheme', [
 		}
 	])
 
-	.filter('startsWithLetter', function () {
-		return function (items, search) {
-			var filtered = [];
-
-			if (items) {
-				var searchMatch = new RegExp(search, 'i');
-
-				for (var i = 0; i < items.length; i++) {
-					var item = items[i];
-
-					if (searchMatch.test(item.name) || searchMatch.test(item.email) ) {
-						filtered.push(item);
-					}
-				}
-				return filtered;
+	.filter('newsFilter', function () {
+		return function(input, start) {
+			if (input) {
+				start = +start; //parse to int
+				return input.slice(start);
 			}
-			return filtered;
+			return [];
 		};
 	})
 
-    .controller('NewsDaythemeListCtrl', ['$scope', '$location', 'crudListMethods', 'items', 'i18nNotifications', '$timeout', '$modal',
-		function ($scope, $location, crudListMethods, items, i18nNotifications, $timeout, $modal) {
+	.filter('startsWithA', function () {
+		return function (items) {
+			var filteredResult = [];
+
+			if (query) {
+
+				items.forEach(function(item) {
+					if (/a/i.test(item.name.substring(0, 1))) {
+						filteredResult.push(item);
+					}
+				});
+
+			} {
+				return items;
+			}
+
+			return filteredResult;
+		};
+	})
+
+	.filter('titleFilter', function() {
+		return function(items, query) {
+			var filteredResult = [];
+
+			// Take action if the filter elements are filled
+			if (query) {
+
+				items.forEach(function(item) {
+					if (parseDateFromUtc(item.date_start) >= parsedStartDate && parseDateFromUtc(item.date_finish) <= parsedEndDate) {
+						filteredResult.push(item);
+					}
+				});
+
+			} else {
+				return items; // By default, show the regular table data
+			}
+
+			return filteredResult;
+		}
+	})
+
+	.filter('dateStartRangeFilter', function() {
+		return function(items, startDate, endDate) {
+			var filteredResult = [];
+
+			// Parse from the filter format 'dd/mm/yyyy' (Turkish culture)
+			function parseDateFromFilter(strDate) {
+//				var parts = strDate.split(' ');
+//				return new Date(parts[2], parts[1] - 1, parts[0]);
+				return new Date(strDate);
+			}
+
+			// Parse the UTC time data from JSON source
+			function parseDateFromUtc(utcStr) {
+				return new Date(utcStr);
+			}
+
+			// Defaults
+//			var parsedStartDate = startDate ? parseDateFromFilter(startDate) : new Date(1900, 1, 1);
+//			var parsedEndDate = endDate ? parseDateFromFilter(endDate) : new Date();
+			var parsedStartDate = startDate ? parseDateFromUtc(startDate) : new Date(1900, 1, 1);
+			var parsedEndDate = endDate ? parseDateFromUtc(endDate) : new Date();
+
+			// Take action if the filter elements are filled
+			if (typeof startDate !== "undefined" || typeof endDate !== "undefined") {
+
+				items.forEach(function(item) {
+					if (parseDateFromUtc(item.date_start) >= parsedStartDate && parseDateFromUtc(item.date_finish) <= parsedEndDate) {
+						filteredResult.push(item);
+					}
+				});
+
+			} else {
+				return items; // By default, show the regular table data
+			}
+
+			return filteredResult;
+		}
+	})
+
+	.filter('idRangeFilter', function() {
+		return function(items, startId, endId) {
+			var filteredResult = [];
+
+			var idFrom = startId ? parseInt(startId,10) : 1;
+			var idTo = endId ? parseInt(endId,10) : 4294967296;
+
+			// Take action if the filter elements are filled
+			if (startId || endId) {
+
+				items.forEach(function(item) {
+					if (parseInt(item.id,10) >= idFrom && parseInt(item.id,10) <= idTo) {
+						filteredResult.push(item);
+					}
+				});
+
+			} else {
+				return items; // By default, show the regular table data
+			}
+
+			return filteredResult;
+		}
+	})
+
+    .controller('NewsDaythemeListCtrl', ['$scope', '$location', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
+		function ($scope, $location, crudListMethods, items, i18nNotifications, $timeout) {
 			$scope.items = $scope.filtered = items;
 
 			angular.forEach($scope.items, function (item) {
@@ -76,15 +170,6 @@ angular.module('daytheme', [
 
 			// Filter logics
 			$scope.showFilter = false;
-
-			$scope.filter = function() {
-				$timeout(function() {
-
-					$scope.currentPage = 1;
-					$scope.filteredItems = $scope.filtered.length;
-
-				}, 10);
-			};
 
 			$scope.resetFilter = function() {
 				$scope.search = {};
@@ -158,7 +243,7 @@ angular.module('daytheme', [
 			};
 
 			$scope.history = function(item, $index, $event) {
-				$location.path('/news/history/' + item.$id());
+				$location.path('/news/daytheme/history/' + item.$id());
 			};
 
 			$scope.remove = function(item, $index, $event) {
@@ -213,26 +298,6 @@ angular.module('daytheme', [
 			$scope.closeAll = function() {
 				$scope.datepickers = [];
 			};
-
-		}
-	])
-
-	.controller('NewsDaythemeHistoryCtrl', ['$scope', '$location', 'crudListMethods', 'items', 'i18nNotifications', '$timeout', '$modal',
-		function ($scope, $location, crudListMethods, items, i18nNotifications, $timeout, $modal) {
-
-			$scope.items = items;
-
-
-
-		}
-	])
-
-	.controller('HistoryModalCtrl', ['$scope', '$modalInstance', 'items', 'i18nNotifications',
-		function ($scope, $modalInstance, items, i18nNotifications) {
-
-			$scope.items = items;
-
-
 
 		}
 	]);

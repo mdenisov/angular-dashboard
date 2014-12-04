@@ -155,31 +155,26 @@ angular.module('home', [
 		}
 	})
 
-	.controller('NewsHomeListCtrl', ['$scope', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
-		function ($scope, crudListMethods, items, i18nNotifications, $timeout) {
-            $scope.items = items;
+	.controller('NewsHomeListCtrl', ['$scope', '$location', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
+		function ($scope, $location, crudListMethods, items, i18nNotifications, $timeout) {
+			$scope.items = $scope.filtered = items;
 
-			angular.extend($scope, crudListMethods('/news/edit'));
+			angular.forEach($scope.items, function (item) {
+				item.id = parseFloat(item.id);
+			});
 
-            // pagination controls
-            $scope.currentPage = 1;
-            $scope.filteredItems = $scope.items.length;
-            $scope.entryLimit = 5;
-            $scope.totalItems = $scope.items.length;
+			angular.extend($scope, crudListMethods('/news'));
+
+			// pagination controls
+			$scope.currentPage = 1;
+			$scope.filteredItems = $scope.items.length;
+			$scope.entryLimit = 5;
+			$scope.totalItems = $scope.items.length;
 
 			$scope.canCreateNew = false;
 
 			// Filter logics
 			$scope.showFilter = false;
-
-            $scope.filter = function() {
-                $timeout(function() {
-
-                    $scope.currentPage = 1;
-                    $scope.filteredItems = $scope.filtered.length;
-
-                }, 10);
-            };
 
 			$scope.resetFilter = function() {
 				$scope.search = {};
@@ -206,10 +201,10 @@ angular.module('home', [
 			$scope.orderBy = 'id';
 			$scope.reverse = true;
 
-            $scope.sort = function(orderBy) {
-                $scope.orderBy = orderBy;
-                $scope.reverse = !$scope.reverse;
-            };
+			$scope.sort = function(orderBy) {
+				$scope.orderBy = orderBy;
+				$scope.reverse = !$scope.reverse;
+			};
 
 			$scope.isSortUp = function(fieldName) {
 				return $scope.orderBy === fieldName && !$scope.reverse;
@@ -247,18 +242,23 @@ angular.module('home', [
 
 				newItem.$save(function(item) {
 //					$scope.items.push(item);
-					$location.path('/news/daytheme/' + item.$id());
+					$location.path('/news/' + item.$id());
 					i18nNotifications.push('crud.news.save.success', 'success', {id : item.$id()});
 				});
 			};
 
+			$scope.history = function(item, $index, $event) {
+				$location.path('/news/history/' + item.$id());
+			};
+
 			$scope.remove = function(item, $index, $event) {
 				item.$delete(function() {
-					angular.forEach($scope.items, function(scopeItem, index) {
-						if (scopeItem.$id() === item.$id()) {
-							$scope.items.splice(index,1);
-						}
-					});
+//					angular.forEach($scope.items, function(scopeItem, index) {
+//						if (scopeItem.$id() === item.$id()) {
+//							$scope.items.splice(index,1);
+//						}
+//					});
+					$scope.filtered.splice($index,1);
 					i18nNotifications.push('crud.news.remove.success', 'success', {id : item.$id()});
 				});
 			};
@@ -267,8 +267,8 @@ angular.module('home', [
 
 			};
 
-        }
-    ])
+		}
+	])
 
 	.controller('NewsHomeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
 		function ($scope, $location, item, i18nNotifications) {
