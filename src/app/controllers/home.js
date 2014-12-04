@@ -163,7 +163,7 @@ angular.module('home', [
 				item.id = parseFloat(item.id);
 			});
 
-			angular.extend($scope, crudListMethods('/news'));
+			angular.extend($scope, crudListMethods('/news/edit'));
 
 			// pagination controls
 			$scope.currentPage = 1;
