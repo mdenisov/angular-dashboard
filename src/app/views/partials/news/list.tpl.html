@@ -105,7 +105,7 @@
                 Показаны
                 {{ $parent.currentPage === 1 ? 1 : (($parent.currentPage - 1) * $parent.entryLimit) + 1 }}
                 -
-                {{ $parent.currentPage === 1 ? $parent.entryLimit : ($parent.currentPage * $parent.entryLimit) < $parent.filtered.length ? ($parent.currentPage * $parent.entryLimit) : $parent.filtered.length }} из {{ $parent.items.length }}
+                {{ $parent.filtered.length < $parent.entryLimit ? $parent.filtered.length : ($parent.currentPage * $parent.entryLimit) < $parent.filtered.length ? ($parent.currentPage * $parent.entryLimit) : $parent.filtered.length }} из {{ $parent.items.length }}
             </div>
         </div>
         <div class="col-lg-6  text-right align-xs-center" ng-show="$parent.filtered.length > $parent.entryLimit">
