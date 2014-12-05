@@ -13,6 +13,7 @@ angular.module('app', [
 		'angular-redactor',
 
         'ui.bootstrap',
+        'ui.bankiru',
 
         'services.i18nNotifications',
         'directives.crud',
@@ -137,6 +138,8 @@ angular.module('app', [
 			$scope.home = function () {
 				$location.path('/news');
 			};
+			
+			$scope.otherServices = '<ul class="services"><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li></ul>';
         }
     ])
 

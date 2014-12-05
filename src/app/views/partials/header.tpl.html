@@ -9,14 +9,19 @@
     <div class="header__bar">
         <ul class="nav navbar-nav nav-main-xs navbar-left">
             <li>
-                <a class="icon-toolsbar navbar-toggler js-navbar-nav-toggler" ng-click="toggleMenu()"><i class="fa fa-bars"></i></a>
+                <a class="icon-toolsbar navbar-toggler" ng-click="toggleMenu()"><i class="fa fa-bars"></i></a>
             </li>
         </ul>
         <ul class="nav navbar-nav nav-main-xs navbar-right">
-            <li class=""><a class="h-seperate" ng-click="home()">Новости</a></li>
-            <li class=""><a href="#/feeds" class="h-seperate">Фиды</a></li>
-            <li class=""><a href="#/topics" class="h-seperate">Сюжеты</a></li>
-            <li class=""><a href="#/settings" class="h-seperate">Настройки</a></li>
+            <li>
+                <a class="icon-toolsbar" popover-html="{{otherServices}}" popover-placement="bottom">
+                    <i class="fa fa-th-large"></i>
+                </a>
+            </li>
+            <li><a class="h-seperate" ng-click="home()">Новости</a></li>
+            <li><a href="#/feeds">Фиды</a></li>
+            <li><a href="#/topics">Сюжеты</a></li>
+            <li><a href="#/settings">Настройки</a></li>
         </ul>
     </div>
 
