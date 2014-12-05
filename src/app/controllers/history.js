@@ -60,7 +60,7 @@ angular.module('history', [
 			// pagination controls
 			$scope.currentPage = 1;
 			$scope.filteredItems = $scope.items.length;
-			$scope.entryLimit = 5;
+			$scope.entryLimit = 20;
 			$scope.totalItems = $scope.items.length;
 
 			// Sort logics

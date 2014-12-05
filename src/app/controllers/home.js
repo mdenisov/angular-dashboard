@@ -52,7 +52,7 @@ angular.module('home', [
 			// pagination controls
 			$scope.currentPage = 1;
 			$scope.filteredItems = $scope.items.length;
-			$scope.entryLimit = 5;
+			$scope.entryLimit = 20;
 			$scope.totalItems = $scope.items.length;
 
 			$scope.canCreateNew = false;
@@ -137,11 +137,6 @@ angular.module('home', [
 
 			$scope.remove = function(item, $index, $event) {
 				item.$delete(function() {
-//					angular.forEach($scope.items, function(scopeItem, index) {
-//						if (scopeItem.$id() === item.$id()) {
-//							$scope.items.splice(index,1);
-//						}
-//					});
 					$scope.filtered.splice($index,1);
 					i18nNotifications.push('crud.news.remove.success', 'success', {id : item.$id()});
 				});
