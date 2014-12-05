@@ -16,6 +16,9 @@ function getNews($id) {
         $stmt->bindParam("id", $id);
         $stmt->execute();
         $news = $stmt->fetchObject();
+        $news->title = html_entity_decode($news->title, ENT_QUOTES);
+        $news->text = html_entity_decode($news->text, ENT_QUOTES);
+        $news->preview_text = html_entity_decode($news->preview_text, ENT_QUOTES);
         $db = null;
         echo json_encode($news);
     } catch(PDOException $e) {
@@ -31,7 +34,7 @@ function updateNews($id) {
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("title", $news->title);
+        $stmt->bindParam("title", htmlentities($news->title, ENT_QUOTES));
         $stmt->bindParam("active", $news->active);
         $stmt->bindParam("block", $news->active);
         $stmt->bindParam("mainnews", $news->mainnews);
@@ -39,8 +42,8 @@ function updateNews($id) {
         $stmt->bindParam("status", $news->status);
         $stmt->bindParam("date_start", $news->date_start);
         $stmt->bindParam("date_finish", $news->date_finish);
-        $stmt->bindParam("preview_text", $news->preview_text);
-        $stmt->bindParam("text", $news->text);
+        $stmt->bindParam("preview_text", htmlentities($news->preview_text, ENT_QUOTES));
+        $stmt->bindParam("text", htmlentities($news->text, ENT_QUOTES));
         $stmt->bindParam("id", $id);
         $stmt->execute();
         $db = null;
@@ -70,16 +73,16 @@ function addNews() {
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("title", $news->title);
+        $stmt->bindParam("title", htmlentities($news->title, ENT_QUOTES));
         $stmt->bindParam("active", $news->active);
-        $stmt->bindParam("block", $news->block);
+        $stmt->bindParam("block", $news->active);
         $stmt->bindParam("mainnews", $news->mainnews);
         $stmt->bindParam("correction", $news->correction);
         $stmt->bindParam("status", $news->status);
         $stmt->bindParam("date_start", $news->date_start);
         $stmt->bindParam("date_finish", $news->date_finish);
-        $stmt->bindParam("preview_text", $news->preview_text);
-        $stmt->bindParam("text", $news->text);
+        $stmt->bindParam("preview_text", htmlentities($news->preview_text, ENT_QUOTES));
+        $stmt->bindParam("text", htmlentities($news->text, ENT_QUOTES));
         $stmt->execute();
         $news->id = $db->lastInsertId();
         $db = null;
@@ -96,6 +99,13 @@ function getNewsList($page = 1) {
         $stmt = $db->query($sql);
         $news = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
+
+        foreach($news as $item) {
+            $item->title = html_entity_decode($item->title, ENT_QUOTES);
+            $item->text = html_entity_decode($item->text, ENT_QUOTES);
+            $item->preview_text = html_entity_decode($item->preview_text, ENT_QUOTES);
+        }
+
         echo json_encode($news);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';

@@ -104,7 +104,7 @@ angular.module('app', [
 			};
 
 			$scope.$notify.config({
-                startTop: 15,
+                startTop: 110,
 				container: $('.page'),
                 templateUrl: 'views/notify.tpl.html'
             });
