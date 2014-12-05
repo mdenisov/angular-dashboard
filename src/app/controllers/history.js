@@ -3,7 +3,11 @@ angular.module('history', [
         'services.crud',
         'dataResource',
 
-        'services.i18nNotifications'
+        'services.i18nNotifications',
+
+		'resources.history',
+
+		'filters.pagination'
     ])
 
 	.config(['crudRouteProvider', function (crudRouteProvider) {
@@ -42,15 +46,6 @@ angular.module('history', [
 			});
 
 	}])
-
-	.factory('History', ['dataResource',
-		function ($dataResource) {
-
-			var History = $dataResource('news');
-
-			return History;
-		}
-	])
 
     .controller('NewsHistoryListCtrl', ['$scope', '$route', '$location', 'crudListMethods', 'items', 'i18nNotifications', '$timeout', '$modal',
 		function ($scope, $route, $location, crudListMethods, items, i18nNotifications, $timeout, $modal) {

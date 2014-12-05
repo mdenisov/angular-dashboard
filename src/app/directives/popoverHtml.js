@@ -5,7 +5,7 @@ angular.module("ui.bankiru", [])
 			restrict: 'EA',
 			replace: true,
 			scope: { title: '@', content: '@', placement: '@', animation: '&', isOpen: '&' },
-			templateUrl: 'views/directives/popover-html.tpl.html'
+			templateUrl: 'views/directives/popover/popover-html.tpl.html'
 		};
 	}])
 

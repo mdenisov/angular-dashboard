@@ -1,22 +1,14 @@
 
 function crudRouteProvider($routeProvider) {
 
-    // This $get noop is because at the moment in AngularJS "providers" must provide something
-    // via a $get method.
-    // When AngularJS has "provider helpers" then this will go away!
     this.$get = angular.noop;
 
-    // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
-    // crudRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
-    // like:
     //
     // ```
     // myMod.config(function(crudRouteProvider) {
     //   var routeProvider = crudRouteProvider.routesFor('MyBook', '/myApp');
     // });
     // ```
-    //
-    // but instead have something like:
     //
     //
     // ```
@@ -124,8 +116,7 @@ function crudRouteProvider($routeProvider) {
         return routeBuilder;
     };
 }
-// Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
-// we add our injection dependencies using the $inject form
+
 crudRouteProvider.$inject = ['$routeProvider'];
 
 // Create our provider - it would be nice to be able to do something like this instead:

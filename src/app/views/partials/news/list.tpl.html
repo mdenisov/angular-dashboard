@@ -54,7 +54,7 @@
                 </tr>
             </thead>
             <tbody align="center">
-                <tr ng-repeat="item in $parent.filtered = ($parent.items | filter:$parent.search | dateStartRangeFilter:date.date_start:date.date_finish | idRangeFilter:ids.id_from:ids.id_to | orderBy:$parent.orderBy:$parent.reverse) | newsFilter:($parent.currentPage-1)*$parent.entryLimit | limitTo:$parent.entryLimit">
+                <tr ng-repeat="item in $parent.filtered = ($parent.items | filter:$parent.search | dateStartRangeFilter:date.date_start:date.date_finish | idRangeFilter:ids.id_from:ids.id_to | orderBy:$parent.orderBy:$parent.reverse) | paginationFilter:($parent.currentPage-1)*$parent.entryLimit | limitTo:$parent.entryLimit">
                     <td>{{item.id | number}}</td>
                     <td class="text-left">
                         <a ng-click="edit(item.$id())">{{item.title}}</a>
@@ -103,12 +103,10 @@
         <div class="col-lg-6 text-left align-xs-center">
             <div class="grid__info">
                 Показаны
-                {{ $parent.currentPage === 1 ? 1 : ($parent.currentPage * $parent.entryLimit) - $parent.entryLimit + 1 }}
+                {{ $parent.currentPage === 1 ? 1 : (($parent.currentPage - 1) * $parent.entryLimit) + 1 }}
                 -
                 {{ $parent.currentPage === 1 ? $parent.entryLimit : ($parent.currentPage * $parent.entryLimit) < $parent.filtered.length ? ($parent.currentPage * $parent.entryLimit) : $parent.filtered.length }} из {{ $parent.items.length }}
             </div>
-
-            <!--<div class="grid__info">Показано: {{ filtered.length }} из {{ items.length }}</div>-->
         </div>
         <div class="col-lg-6  text-right align-xs-center" ng-show="$parent.filtered.length > $parent.entryLimit">
             <pagination direction-links="true" previous-text="«" next-text="»" ng-model="$parent.currentPage" ng-change="$parent.setPage()" total-items="$parent.filtered.length" items-per-page="$parent.entryLimit"></pagination>
