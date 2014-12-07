@@ -30,7 +30,7 @@ function updateNews($id) {
     $request = \Slim\Slim::getInstance()->request();
     $body = $request->getBody();
     $news = json_decode($body);
-    $sql = "UPDATE news SET title=:title, active=:active, block=:block, mainnews=:mainnews, correction=:correction, status=:status, date_start=DATE_FORMAT(:date_start, '%Y-%m-%d'), date_finish=DATE_FORMAT(:date_finish, '%Y-%m-%d'), preview_text=:preview_text, text=:text WHERE id=:id";
+    $sql = "UPDATE news SET title=:title, active=:active, block=:block, mainnews=:mainnews, correction=:correction, status=:status, date_start=DATE_FORMAT(:date_start, '%Y-%m-%d'), date_finish=DATE_FORMAT(:date_finish, '%Y-%m-%d'), preview_text=:preview_text, text=:text, image=:image WHERE id=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -44,6 +44,7 @@ function updateNews($id) {
         $stmt->bindParam("date_finish", $news->date_finish);
         $stmt->bindParam("preview_text", htmlentities($news->preview_text, ENT_QUOTES));
         $stmt->bindParam("text", htmlentities($news->text, ENT_QUOTES));
+        $stmt->bindParam("image", $news->image);
         $stmt->bindParam("id", $id);
         $stmt->execute();
         $db = null;
@@ -69,7 +70,7 @@ function deleteNews($id) {
 function addNews() {
     $request = \Slim\Slim::getInstance()->request();
     $news = json_decode($request->getBody());
-    $sql = "INSERT INTO news (title, active, block, mainnews, correction, status, date_start, date_finish, preview_text, text) VALUES (:title, :active, :block, :mainnews, :correction, :status, STR_TO_DATE(:date_start, '%Y/%m/%d'), STR_TO_DATE(:date_finish, '%Y/%m/%d'), :preview_text, :text)";
+    $sql = "INSERT INTO news (title, active, block, mainnews, correction, status, date_start, date_finish, preview_text, text, image) VALUES (:title, :active, :block, :mainnews, :correction, :status, STR_TO_DATE(:date_start, '%Y/%m/%d'), STR_TO_DATE(:date_finish, '%Y/%m/%d'), :preview_text, :text, :image)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -83,6 +84,7 @@ function addNews() {
         $stmt->bindParam("date_finish", $news->date_finish);
         $stmt->bindParam("preview_text", htmlentities($news->preview_text, ENT_QUOTES));
         $stmt->bindParam("text", htmlentities($news->text, ENT_QUOTES));
+        $stmt->bindParam("image", $news->image);
         $stmt->execute();
         $news->id = $db->lastInsertId();
         $db = null;

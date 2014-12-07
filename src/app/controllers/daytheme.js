@@ -145,8 +145,8 @@ angular.module('daytheme', [
 		}
 	])
 
-	.controller('NewsDaythemeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
-		function ($scope, $location, item, i18nNotifications) {
+	.controller('NewsDaythemeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications', 'upload',
+		function ($scope, $location, item, i18nNotifications, upload) {
 
 			$scope.item = item;
 
@@ -178,6 +178,19 @@ angular.module('daytheme', [
 			$scope.closeAll = function() {
 				$scope.datepickers = [];
 			};
+
+            // File uploader
+            $scope.acceptTypes = 'image/*';
+            $scope.removeImage = function() {
+                $scope.item.image = undefined;
+            };
+            $scope.onError = function (response) {
+                i18nNotifications.push('errors.upload.save.error', 'error');
+            };
+            $scope.onComplete = function (response) {
+                i18nNotifications.push('errors.upload.save.success', 'success');
+                $scope.item.image = response.data.file;
+            };
 
 		}
 	]);

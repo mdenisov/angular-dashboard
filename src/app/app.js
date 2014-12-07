@@ -8,7 +8,6 @@ angular.module('app', [
         'ngSanitize',
         'ngTouch',
 		'ngSwitcher',
-        'ngThumb',
 		'cgNotify',
 		'ng-breadcrumbs',
 		'angular-redactor',
@@ -34,6 +33,10 @@ angular.module('app', [
         'errors.validation.invalid.email': 'Обязательно для заполнения.',
         'errors.validation.invalid.url': 'Неверная ссылка.',
 
+        'errors.upload.save.error':"При загрузке файла произошла ошибка.",
+        'errors.upload.save.success':"Файла успешно загружен.",
+        'errors.upload.remove.error':"При удалении файла произошла ошибка.",
+
         'errors.system.general': 'Произошла системная ошибка.',
 
         'errors.route.changeError':'Ошибка роутинга.',
@@ -41,8 +44,8 @@ angular.module('app', [
         'crud.news.save.success':"Элемент с номером '{{id}}' успешно сохранен.",
         'crud.news.update.success':"Элемент с номером '{{id}}' успешно обновлен.",
         'crud.news.remove.success':"Элемент с номером '{{id}}' успешно удален.",
-        'crud.news.remove.error':"При удалении элемента с номером '{{id}}' произошла ошибка'.",
-        'crud.news.save.error':"При сохранении элемента с номером '{{id}}' произошла ошибка"
+        'crud.news.remove.error':"При удалении элемента с номером '{{id}}' произошла ошибка",
+        'crud.news.save.error':"При сохранении элемента с номером '{{id}}' произошла ошибка."
     })
 
 

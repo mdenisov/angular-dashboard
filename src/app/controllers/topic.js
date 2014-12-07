@@ -119,18 +119,16 @@ angular.module('topic', [
                 $scope.datepickers = [];
             };
 
-
+            // File uploader
             $scope.acceptTypes = 'image/*';
             $scope.removeImage = function() {
                 $scope.item.image = undefined;
             };
-            $scope.onUpload = function (files) {
-
-            };
             $scope.onError = function (response) {
-
+                i18nNotifications.push('errors.upload.save.error', 'error');
             };
             $scope.onComplete = function (response) {
+                i18nNotifications.push('errors.upload.save.success', 'success');
                 $scope.item.image = response.data.file;
             };
 
