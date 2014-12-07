@@ -28,7 +28,7 @@ function updateSettings($id) {
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("host_id", $settings->user_id);
+        $stmt->bindParam("host_id", $settings->host_id);
         $stmt->bindParam("id", $id);
         $stmt->execute();
         $db = null;
