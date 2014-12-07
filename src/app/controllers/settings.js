@@ -3,36 +3,39 @@ angular.module('settings', [
         'services.crud',
         'dataResource',
 
-        'services.i18nNotifications'
+        'services.i18nNotifications',
+
+        'resources.settings'
     ])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/settings', {
-			name: 'Настройки',
-            templateUrl:'js/app/settings/index.tpl.html',
-            controller:'SettingsViewCtrl',
-            resolve:{
-				settings: ['Settings', function (Settings) {
-                    return Settings.all();
-                }]
-            }
-        });
+    .config(['crudRouteProvider', function (crudRouteProvider) {
+
+        crudRouteProvider.routesFor('Settings', 'Settings', '', ['Настройки', 'Настроек'])
+            .when('/settings', {
+                label: 'Редактирование настроек',
+                templateUrl:'views/settings/edit.tpl.html',
+                controller:'SettingsEditCtrl',
+                resolve:{
+                    item: ['$route', 'Settings', function ($route, Settings) {
+                        return Settings.getById(1);
+                    }]
+                }
+            })
+
     }])
 
-	.factory('Settings', ['dataResource',
-		function ($dataResource) {
+    .controller('SettingsEditCtrl', ['$scope', '$location', 'crudListMethods', 'item', 'i18nNotifications',
+        function ($scope, $location, crudListMethods, item, i18nNotifications) {
+            $scope.item = item;
 
-			var Settings = $dataResource('settings');
+            angular.extend($scope, crudListMethods('/settings'));
 
-			return Settings;
-		}
-	])
+            $scope.onSave = function (item) {
+                i18nNotifications.push('crud.news.save.success', 'success', {id : item.$id()});
+            };
 
-    .controller('SettingsViewCtrl', ['$scope', '$location', 'settings',
-        function ($scope, $location, settings) {
-            $scope.settings = settings;
-
-
-
+            $scope.onError = function() {
+                i18nNotifications.push('crud.news.save.error', 'error');
+            };
         }
     ]);

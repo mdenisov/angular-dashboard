@@ -1,0 +1,66 @@
+<section class="panel animated fadeInDown">
+
+    <header id="page-header">
+        <div class="panel-heading">
+            <h2>Редактирование настроек</h2>
+        </div>
+    </header>
+
+    <div id="page-tools"></div>
+
+    <div id="page-content" class="panel-body">
+
+        <form class="form-horizontal" crud-edit="item" name="form">
+
+            <div class="padding--vertical">
+
+                <h4>Яндекс.Вебмастер:</h4>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1">Статус токена</label>
+                    <div class="col-md-8">
+                        Неактивный
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1">Токен истекает</label>
+                    <div class="col-md-8">
+                        -
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1"></label>
+                    <div class="col-md-8">
+                        <a class="btn btn-primary" href="https://oauth.yandex.ru/authorize?response_type=code&amp;client_id=304e683b84ea464c9b55e7280e17ad88">Обновить токен</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1">Id сайта</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="host_id" ng-model="item.host_id" required>
+                        <div ng-messages="form.host_id.$error">
+                            <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="panel-footer">
+
+                <button type="button" class="btn btn-primary save" ng-click="save()" ng-disabled="!canSave()">Сохранить</button>
+
+            </footer>
+
+        </form>
+
+    </div>
+
+    <div id="page-footer"></div>
+
+    <div class="page__flip"></div>
+
+</section>

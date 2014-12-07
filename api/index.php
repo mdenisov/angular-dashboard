@@ -28,6 +28,7 @@ require 'include/db.php';
 require 'include/user.php';
 require 'include/news.php';
 require 'include/topic.php';
+require 'include/settings.php';
 
 
 $app->get('/test', 'test');

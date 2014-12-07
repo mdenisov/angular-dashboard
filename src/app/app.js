@@ -23,6 +23,7 @@ angular.module('app', [
 		'daytheme',
 		'history',
 		'topic',
+		'settings',
 
 		'templates.app',
 		'templates.common'
