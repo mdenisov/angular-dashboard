@@ -25,7 +25,7 @@ function crudRouteProvider($routeProvider) {
         var baseRoute = '/' + resourceName.toLowerCase();
         var baseTplUrl = baseUrl;
         var routeLabels = [];
-        routePrefix = routePrefix || moduleName;
+        //routePrefix = routePrefix || moduleName;
 
         // Prepend the urlPrefix if available.
         //if (angular.isString(urlPrefix) && urlPrefix !== '') {

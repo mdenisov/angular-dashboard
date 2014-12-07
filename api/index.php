@@ -27,6 +27,7 @@ require 'include/db.php';
 // Routes
 require 'include/user.php';
 require 'include/news.php';
+require 'include/topic.php';
 
 
 $app->get('/test', 'test');

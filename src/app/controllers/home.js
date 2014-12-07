@@ -16,20 +16,15 @@ angular.module('home', [
 	.config(['crudRouteProvider', function (crudRouteProvider) {
 
 		crudRouteProvider.routesFor('News', 'Home', '', ['Новости', 'Новости'])
-			.when('/news', {
-				label: 'Новости',
-				templateUrl:'views/home/list.tpl.html',
-				controller:'NewsHomeListCtrl',
-				resolve:{
-					items: ['News', function(News) {
-						return News.all();
-					}]
-				}
+			.whenList({
+                items: ['News', function(News) {
+                    return News.all();
+                }]
 			})
 			.when('/news/edit/:itemId', {
 				label: 'Редактирование новости',
 				templateUrl:'views/home/edit.tpl.html',
-				controller:'NewsHomeEditCtrl',
+				controller:'NewsEditCtrl',
 				resolve:{
 					item: ['$route', 'News', function ($route, News) {
 						return News.getById($route.current.params.itemId);
@@ -39,7 +34,7 @@ angular.module('home', [
 
 	}])
 
-	.controller('NewsHomeListCtrl', ['$scope', '$location', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
+	.controller('NewsListCtrl', ['$scope', '$location', 'crudListMethods', 'items', 'i18nNotifications', '$timeout',
 		function ($scope, $location, crudListMethods, items, i18nNotifications, $timeout) {
 			$scope.items = $scope.filtered = items;
 
@@ -126,7 +121,7 @@ angular.module('home', [
 
 				newItem.$save(function(item) {
 //					$scope.items.push(item);
-					$location.path('/news/' + item.$id());
+					$location.path('/news/edit/' + item.$id());
 					i18nNotifications.push('crud.news.save.success', 'success', {id : item.$id()});
 				});
 			};
@@ -149,7 +144,7 @@ angular.module('home', [
 		}
 	])
 
-	.controller('NewsHomeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
+	.controller('NewsEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications',
 		function ($scope, $location, item, i18nNotifications) {
 
 			$scope.item = item;

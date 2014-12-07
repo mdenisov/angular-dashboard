@@ -1,0 +1,116 @@
+<section class="panel animated fadeInDown">
+
+    <header id="page-header">
+        <div class="panel-heading">
+            <h2>{{item.id ? 'Редактирование сюжета' : 'Добавление сюжета'}}</h2>
+        </div>
+    </header>
+
+    <div id="page-tools"></div>
+
+    <div id="page-content" class="panel-body">
+
+        <form class="form-horizontal" crud-edit="item" name="form">
+
+            <div class="padding--vertical">
+                <div class="form-group">
+                    <label class="control-label col-md-1">Заголовок</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control" name="title" ng-model="item.title" required></textarea>
+                        <div ng-messages="form.title.$error">
+                            <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1">Активность</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" name="active" ng-model="item.active" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1">Показывать в блоке</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" name="show_in_block" ng-model="item.show_in_block" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1">Изображение</label>
+                    <div class="col-md-8">
+
+                        <div class="row">
+
+                            <div class="col-md-12" ng-show="item.image">
+
+                                <div class="img-thumbnail img-preview" style="margin-bottom: 10px;">
+                                    <img ng-attr-src="{{item.image}}" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-12">
+
+                                <div class="file-input-wrapper">
+                                    <upload-button
+                                            class="btn btn-primary btn-upload"
+                                            url="/upload.php"
+                                            param="file"
+                                            accept="acceptTypes"
+                                            multiple="allowMultiple"
+                                            force-iframe-upload="forceIframeUpload"
+                                            data="uploadData"
+                                            on-upload="onUpload(files)"
+                                            on-success="onSuccess(response)"
+                                            on-error="onError(response)"
+                                            on-complete="onComplete(response)">
+                                        {{ item.image ? 'Заменить' : 'Выбрать' }}
+                                    </upload-button>
+                                </div>
+                                <button type="button" class="btn btn-danger" ng-show="item.image" ng-click="removeImage()">Удалить</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group" ng-show="item.image">
+                    <label class="control-label col-md-1">Источник</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" name="source_name" ng-model="item.source_name"/>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="item.image">
+                    <label class="control-label col-md-1">Ссылка на источник</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="url" name="source_url" ng-model="item.source_url"/>
+                        <div ng-messages="form.source_url.$error">
+                            <div ng-message="url" class="help-block text-danger">{{messages.validation.invalidUrl}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1">Описание</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control" name="text" ng-model="item.text" redactor required></textarea>
+                        <div ng-messages="form.text.$error">
+                            <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="panel-footer">
+
+                <crud-buttons></crud-buttons>
+
+            </footer>
+
+        </form>
+
+    </div>
+
+    <div id="page-footer"></div>
+
+    <div class="page__flip"></div>
+
+</section>

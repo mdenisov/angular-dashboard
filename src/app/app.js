@@ -7,10 +7,12 @@ angular.module('app', [
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-		'NgSwitchery',
+		'ngSwitcher',
+        'ngThumb',
 		'cgNotify',
 		'ng-breadcrumbs',
 		'angular-redactor',
+        'lr.upload',
 
         'ui.bootstrap',
         'ui.bankiru',
@@ -21,7 +23,7 @@ angular.module('app', [
         'home',
 		'daytheme',
 		'history',
-		'settings',
+		'topic',
 
 		'templates.app',
 		'templates.common'
@@ -49,7 +51,7 @@ angular.module('app', [
     })
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.otherwise({redirectTo:'/news'});
+        //$routeProvider.otherwise({redirectTo:'/news'});
     }])
 
 	.config(function(redactorOptions) {
@@ -126,7 +128,7 @@ angular.module('app', [
 			});
 
             $scope.$on('$routeChangeError', function(event, current, previous, rejection) {
-                i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
+                i18nNotifications.push('errors.route.changeError', 'error', {}, {rejection: rejection});
             });
 
 			// Toggle Sidebar

@@ -15,7 +15,8 @@ angular.module('daytheme', [
 
 	.config(['crudRouteProvider', function (crudRouteProvider) {
 
-		crudRouteProvider.routesFor('News', 'Daytheme', '', ['Тема дня', 'новости'])
+		crudRouteProvider.routesFor('News', 'Daytheme', 'Daytheme', ['Тема дня', 'новости'])
+
 			.whenList({
 				items: ['News', function(News) {
 					return News.all();

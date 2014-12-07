@@ -1,0 +1,108 @@
+<section class="panel animated fadeInDown">
+
+    <header id="page-header">
+        <div class="panel-heading">
+            <h2>Сюжеты</h2>
+        </div>
+    </header>
+
+    <div id="page-tools"></div>
+
+    <div id="page-content" class="panel-body">
+
+        <form role="form">
+
+            <div class="row form-group" ng-show="canCreateNew">
+                <div class="col-md-12">
+                    <button class="btn btn-danger" ng-click="new()">Добавить</button>
+                </div>
+            </div>
+
+            <div class="grid">
+
+                <div class="table-big">
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center sorting_asc">
+                                    <a ng-click="sort('id')">
+                                        # <i ng-class="{'fa fa-angle-up' : isSortUp('id'), 'fa fa-angle-down' : isSortDown('id')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-left sorting_asc">
+                                    <a ng-click="sort('title')">
+                                        Заголовок <i ng-class="{'fa fa-angle-up' : isSortUp('title'), 'fa fa-angle-down' : isSortDown('title')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('active')">
+                                        Запись активна <i ng-class="{'fa fa-angle-up' : isSortUp('active'), 'fa fa-angle-down' : isSortDown('active')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('show_in_block')">
+                                        Показывать в блоке <i ng-class="{'fa fa-angle-up' : isSortUp('show_in_block'), 'fa fa-angle-down' : isSortDown('show_in_block')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('date_create')">
+                                        Дата создания <i ng-class="{'fa fa-angle-up' : isSortUp('date_create'), 'fa fa-angle-down' : isSortDown('date_create')}"></i>
+                                    </a>
+                                </th>
+                                <th class="text-center sorting">
+                                    <a ng-click="sort('date_update')">
+                                        Дата редактирования <i ng-class="{'fa fa-angle-up' : isSortUp('date_update'), 'fa fa-angle-down' : isSortDown('date_update')}"></i>
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody align="center">
+                            <tr ng-repeat="item in filtered = items | orderBy:orderBy:reverse | paginationFilter:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td>{{item.id}}</td>
+                                <td class="text-left">
+                                    <a ng-click="edit(item.$id())">{{item.title}}</a>
+                                </td>
+                                <td>
+                                    <a class="action" tooltip="{{item.active == 1 ? 'Деактивировать' : 'Активировать'}}" ng-click="toggleActive(item, $index, $event)">
+                                        <i ng-class="item.active == 1 ? 'fa fa-check-circle-o text-success' : 'fa fa-times-circle text-danger'"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="action" tooltip="{{item.show_in_block == 1 ? 'Деактивировать' : 'Активировать'}}" ng-click="toggleShowInBlock(item, $index, $event)">
+                                        <i ng-class="item.show_in_block == 1 ? 'fa fa-check-circle-o text-success' : 'fa fa-times-circle text-danger'"></i>
+                                    </a>
+                                </td>
+                                <td>{{item.date_create | date : format : timezone}}</td>
+                                <td>{{item.date_update | date : format : timezone}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 text-left align-xs-center">
+                        <div class="grid__info">
+                            Показаны
+                            {{ currentPage === 1 ? 1 : ((currentPage - 1) * entryLimit) + 1 }}
+                            -
+                            {{ filtered.length < entryLimit ? filtered.length : (currentPage * entryLimit) < filtered.length ? (currentPage * entryLimit) : filtered.length }} из {{ items.length }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6  text-right align-xs-center" ng-show="filtered.length > entryLimit">
+                        <pagination direction-links="true" previous-text="«" next-text="»" ng-model="currentPage" ng-change="setPage()" total-items="filtered.length" items-per-page="entryLimit"></pagination>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div id="page-footer"></div>
+
+    <div class="page__flip"></div>
+
+</section>

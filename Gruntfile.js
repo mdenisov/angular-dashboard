@@ -122,9 +122,9 @@ module.exports = function(grunt) {
 					'vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js',
 					'vendor/bower/ng-breadcrumbs/dist/ng-breadcrumbs.js',
 					'vendor/bower/angular-redactor/angular-redactor.js',
-					'vendor/bower/ng-switchery/src/ng-switchery.js',
+					'vendor/bower/angular-notify/angular-notify.js',
                     'vendor/bower/switchery/dist/switchery.js',
-					'vendor/bower/angular-notify/angular-notify.js'
+                    'vendor/bower/angular-upload/angular-upload.js'
 				],
                 dest: '<%= distdir %>/js/vendor.js'
             }
