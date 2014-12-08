@@ -60,21 +60,21 @@
                         <a ng-click="edit(item.$id())">{{item.title}}</a>
                     </td>
                     <td>
-                        <a class="action" tooltip="{{item.active == 1 ? 'Деактивировать' : 'Активировать'}}" ng-click="$parent.toggleActiv(item, $index, $event)">
-                            <i ng-class="item.active == 1 ? 'fa fa-check-circle-o text-success' : 'fa fa-times-circle text-danger'"></i>
+                        <a class="action" tooltip="{{item.isActive() ? 'Деактивировать' : 'Активировать'}}" ng-click="$parent.toggleActiv(item, $index, $event)">
+                            <i ng-class="item.isActive() ? 'fa fa-check-circle-o text-success' : 'fa fa-times-circle text-danger'"></i>
                         </a>
                     </td>
                     <td>
-                        <a class="action" tooltip="{{item.block == 1 ? 'Разблокировать' : 'Заблокировать'}}" ng-click="$parent.toggleBlock(item, $index, $event)">
-                            <i ng-class="item.block == 1 ? 'fa fa-circle text-danger' : 'fa fa-circle-o text-success'"></i>
+                        <a class="action" tooltip="{{item.isBlocked() ? 'Разблокировать' : 'Заблокировать'}}" ng-click="$parent.toggleBlock(item, $index, $event)">
+                            <i ng-class="item.isBlocked() ? 'fa fa-circle text-danger' : 'fa fa-circle-o text-success'"></i>
                         </a>
                     </td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td>
-                        <a class="action" tooltip="{{item.correction == 1 ? 'Требуется корректура' : 'Корректура не требуется'}}" ng-click="$parent.toggleCorrection(item, $index, $event)">
-                            <i ng-class="item.correction == 1 ? 'fa fa-circle text-danger' : 'fa fa-circle-o text-success'"></i>
+                        <a class="action" tooltip="{{item.isNeedCorrection() ? 'Требуется корректура' : 'Корректура не требуется'}}" ng-click="$parent.toggleCorrection(item, $index, $event)">
+                            <i ng-class="item.isNeedCorrection() ? 'fa fa-circle text-danger' : 'fa fa-circle-o text-success'"></i>
                         </a>
                     </td>
                     <td>

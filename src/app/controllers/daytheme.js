@@ -96,21 +96,21 @@ angular.module('daytheme', [
 
 			// Items logic
 			$scope.toggleActiv = function(item, $index, $event) {
-				item.active = !(item.active);
+				item.active = !(item.isActive());
 				item.$update(function() {
 					i18nNotifications.push('crud.news.update.success', 'success', {id : item.$id()});
 				});
 			};
 
 			$scope.toggleBlock = function(item, $index, $event) {
-				item.block = !(item.block);
+				item.block = !(item.isBlocked());
 				item.$update(function() {
 					i18nNotifications.push('crud.news.update.success', 'success', {id : item.$id()});
 				});
 			};
 
 			$scope.toggleCorrection = function(item, $index, $event) {
-				item.correction = !(item.correction);
+				item.correction = !(item.isNeedCorrection());
 				item.$update(function() {
 					i18nNotifications.push('crud.news.update.success', 'success', {id : item.$id()});
 				});

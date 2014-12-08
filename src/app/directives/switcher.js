@@ -44,6 +44,8 @@ angular.module('ngSwitcher', [])
                     var element = switcher.element,
                         checked = !!(scope.initValue == 1 || scope.initValue == true);
 
+					console.log(scope.initValue);
+
                     switcher.setPosition(checked);
 
                     element.addEventListener('change',function(evt) {
