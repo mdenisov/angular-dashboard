@@ -137,8 +137,14 @@ angular.module('home', [
 				});
 			};
 
+			$scope.showStatusChanger = function(item, $index, $event) {
+				item.showStatusChanger = !(item.showStatusChanger);
+			};
 			$scope.changeStatus = function(item, $index, $event) {
-
+				$scope.showStatusChanger(item, $index, $event);
+				item.$update(function() {
+					i18nNotifications.push('crud.news.update.success', 'success', {id : item.$id()});
+				});
 			};
 
 		}

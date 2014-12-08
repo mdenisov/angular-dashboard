@@ -49,7 +49,6 @@ angular.module('app', [
         'crud.news.save.error':"При сохранении элемента с номером '{{id}}' произошла ошибка."
     })
 
-
     .constant('CONFIG', {
         baseUrl: '/api/index.php'
     })

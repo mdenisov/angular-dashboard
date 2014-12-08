@@ -55,7 +55,7 @@
             </thead>
             <tbody align="center">
                 <tr ng-repeat="item in $parent.filtered = ($parent.items | filter:$parent.search | dateStartRangeFilter:date.date_start:date.date_finish | idRangeFilter:ids.id_from:ids.id_to | orderBy:$parent.orderBy:$parent.reverse) | paginationFilter:($parent.currentPage-1)*$parent.entryLimit | limitTo:$parent.entryLimit">
-                    <td>{{item.id | number}}</td>
+                    <td>{{item.id}}</td>
                     <td class="text-left">
                         <a ng-click="edit(item.$id())">{{item.title}}</a>
                     </td>
@@ -78,11 +78,17 @@
                         </a>
                     </td>
                     <td>
-                        <a class="action" ng-click="$parent.changeStatus(item, $index, $event)" ng-switch="item.status">
+                        <a class="action" ng-switch="item.status" ng-show="!item.showStatusChanger" ng-click="$parent.showStatusChanger(item, $index, $event)">
                             <span ng-switch-when="1">[1] Опубликован</span>
                             <span ng-switch-when="2">[2] Черновик</span>
                             <span ng-switch-when="3">[3] Готов к публикации</span>
                         </a>
+                        <select class="form-control" name="status" ng-model="item.status" ng-show="item.showStatusChanger" ng-change="$parent.changeStatus(item, $index, $event)">
+                            <option value="">Любой</option>
+                            <option value="1">[1] Опубликован</option>
+                            <option value="3">[3] Готов к публикации</option>
+                            <option value="2">[2] Черновик</option>
+                        </select>
                     </td>
                     <td>{{item.date_start | date : format : timezone}}</td>
                     <td>{{item.date_finish | date : format : timezone}}</td>
