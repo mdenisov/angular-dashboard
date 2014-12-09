@@ -19,8 +19,8 @@
 
                     <div class="padding--vertical">
                         <div class="form-group">
-                            <label class="control-label col-md-1">Заголовок</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-2 col-lg-1">Заголовок</label>
+                            <div class="col-md-10 col-lg-11">
                                 <textarea class="form-control" name="title" ng-model="item.title" required></textarea>
                                 <div ng-messages="form.title.$error">
                                     <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
@@ -28,62 +28,44 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Активность</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-2 col-lg-1">Активность</label>
+                            <div class="col-md-4 col-lg-5">
                                 <input type="checkbox" name="active" ng-model="item.active" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-1">Начало публикации</label>
-                            <div class="col-md-8">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" name="date_start" datepicker-popup="dd.MM.yyyy" ng-model="item.date_start" is-open="datepickers.date_start_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_start_opened')" show-button-bar="false" />
-                                    </div>
-                                    <div class="col-md-6">
-
-                                    </div>
-                                </div>
+                            <label class="control-label col-md-2 col-lg-1">Начало публикации</label>
+                            <div class="col-md-4 col-lg-5">
+                                <input class="form-control" type="text" name="date_start" datepicker-popup="dd.MM.yyyy" ng-model="item.date_start" is-open="datepickers.date_start_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_start_opened')" show-button-bar="false" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Статус</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-2 col-lg-1">Статус</label>
+                            <div class="col-md-4 col-lg-5">
                                 <select class="form-control" name="status"  ng-model="item.status">
                                     <option value="1">[1] Опубликован</option>
                                     <option value="3">[3] Готов к публикации</option>
                                     <option value="2">[2] Черновик</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-1">Окончание публикации</label>
-                            <div class="col-md-8">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" name="date_finish" datepicker-popup="dd.MM.yyyy" ng-model="item.date_finish" is-open="datepickers.date_finish_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_finish_opened')" show-button-bar="false" />
-                                    </div>
-                                    <div class="col-md-6">
-
-                                    </div>
-                                </div>
+                            <label class="control-label col-md-2 col-lg-1">Окончание публикации</label>
+                            <div class="col-md-4 col-lg-5">
+                                <input class="form-control" type="text" name="date_finish" datepicker-popup="dd.MM.yyyy" ng-model="item.date_finish" is-open="datepickers.date_finish_opened" date-disabled="disabled(date, mode)" ng-click="open($event, 'date_finish_opened')" show-button-bar="false" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Корректура</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-2 col-lg-1">Корректура</label>
+                            <div class="col-md-10 col-lg-11">
                                 <input type="checkbox" name="correction" ng-model="item.correction" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Банковские продукты</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-2 col-lg-1">Банковские продукты</label>
+                            <div class="col-md-10 col-lg-11">
                                 <input class="form-control" type="text" name="products" ng-model="item.products" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Рубрика</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-2 col-lg-1">Рубрика</label>
+                            <div class="col-md-10 col-lg-11">
                                 <select class="form-control" name="sub_category" ng-model="item.sub_category">
                                     <option value="">(не установлено)</option>
                                     <option value="lenta_banks">Банки</option>
@@ -98,19 +80,90 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Изображение</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-2 col-lg-1">Источник</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="text" name="source_name" ng-model="item.source_name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Ссылка на источник</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="url" name="source_url" ng-model="item.source_url"/>
+                                <div ng-messages="form.source_url.$error">
+                                    <div ng-message="url" class="help-block text-danger">{{messages.validation.invalidUrl}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Банки</label>
+                            <div class="col-md-2 col-lg-3">
+                                <input class="form-control" type="text" name="banks" ng-model="item.banks"/>
+                            </div>
+                            <label class="control-label col-md-2 col-lg-1">Информация о банках</label>
+                            <div class="col-md-2 col-lg-3">
+                                <input class="form-control" type="text" name="banks_info" ng-model="item.banks_info"/>
+                            </div>
+                            <label class="control-label col-md-2 col-lg-1">Микрофинансовые организации</label>
+                            <div class="col-md-2 col-lg-3">
+                                <input class="form-control" type="text" name="mfo" ng-model="item.mfo"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Страховые компании</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="text" name="insurance" ng-model="item.insurance"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Регионы</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="text" name="regions" ng-model="item.regions"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">RSS</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="text" name="rss" ng-model="item.rss"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Анонс</label>
+                            <div class="col-md-10 col-lg-11">
+                                <textarea class="form-control" name="preview_text" ng-model="item.preview_text" redactor required></textarea>
+                                <div ng-messages="form.preview_text.$error">
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Текст</label>
+                            <div class="col-md-10 col-lg-11">
+                                <textarea class="form-control" name="text" ng-model="item.text" redactor required></textarea>
+                                <div ng-messages="form.text.$error">
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Сюжеты</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="text" name="topic" ng-model="item.topic"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Изображение</label>
+                            <div class="col-md-10 col-lg-11">
 
                                 <div class="row">
 
-                                    <div class="col-md-12" ng-show="item.image">
+                                    <div class="col-md-2 col-lg-1" ng-show="item.image">
 
                                         <div class="img-thumbnail img-preview" style="margin-bottom: 10px;">
                                             <img ng-attr-src="{{item.image}}" />
                                         </div>
 
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-2 col-lg-1">
 
                                         <div class="file-input-wrapper">
                                             <upload-button
@@ -133,52 +186,61 @@
                                     </div>
 
                                 </div>
+                                <div class="row" ng-show="item.image">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2 col-lg-1">Источник</label>
+                                        <div class="col-md-10 col-lg-11">
+                                            <input class="form-control" type="text" name="image.source" ng-model="item.image.source"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2 col-lg-1">Ссылка</label>
+                                        <div class="col-md-10 col-lg-11">
+                                            <input class="form-control" type="text" name="image.source_url" ng-model="item.image.source_url"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2 col-lg-1">Подпись</label>
+                                        <div class="col-md-10 col-lg-11">
+                                            <input class="form-control" type="text" name="image.sign" ng-model="item.image.sign"/>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
-                        <div class="form-group" ng-show="item.image">
-                            <label class="control-label col-md-1">Источник</label>
-                            <div class="col-md-8">
-                                <input class="form-control" type="text" name="source_name" ng-model="item.source_name"/>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-show="item.image">
-                            <label class="control-label col-md-1">Ссылка на источник</label>
-                            <div class="col-md-8">
-                                <input class="form-control" type="url" name="source_url" ng-model="item.source_url"/>
-                                <div ng-messages="form.source_url.$error">
-                                    <div ng-message="url" class="help-block text-danger">{{messages.validation.invalidUrl}}</div>
-                                </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Внутреннее название</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="text" name="inside" ng-model="item.inside"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Главная новость</label>
-                            <div class="col-md-8">
-                                <input type="checkbox" name="mainnews" ng-model="item.mainnews" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
+                            <label class="control-label col-md-2 col-lg-1">Подзаголовок</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="text" name="subtitle" ng-model="item.subtitle"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Банки</label>
-                            <div class="col-md-8">
-                                <input class="form-control" type="text" name="banks" ng-model="item.banks"/>
+                            <label class="control-label col-md-2 col-lg-1">Лизинг</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="text" name="leasing" ng-model="item.leasing"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Анонс</label>
-                            <div class="col-md-8">
-                                <textarea class="form-control" name="preview_text" ng-model="item.preview_text" redactor required></textarea>
-                                <div ng-messages="form.preview_text.$error">
-                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
-                                </div>
+                            <label class="control-label col-md-2 col-lg-1">Показывать только в тематическом разделе</label>
+                            <div class="col-md-4 col-lg-5">
+                                <input type="checkbox" name="razdel_only" ng-model="item.razdel_only" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
+                            </div>
+                            <label class="control-label col-md-2 col-lg-1">Не показывать в карточке банка</label>
+                            <div class="col-md-4 col-lg-5">
+                                <input type="checkbox" name="noshowinbankcard" ng-model="item.noshowinbankcard" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-1">Текст</label>
-                            <div class="col-md-8">
-                                <textarea class="form-control" name="text" ng-model="item.text" redactor required></textarea>
-                                <div ng-messages="form.text.$error">
-                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
-                                </div>
+                            <label class="control-label col-md-2 col-lg-1">Видеоновости</label>
+                            <div class="col-md-10 col-lg-11">
+                                <input class="form-control" type="text" name="video" ng-model="item.video"/>
                             </div>
                         </div>
                     </div>
