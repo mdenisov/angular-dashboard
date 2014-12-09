@@ -80,10 +80,10 @@ apache:
         - rewrite
     vhosts:
         qSbfoM7Wyga5:
-            servername: dashboard.dev
+            servername: awesome.dev
             serveraliases:
-                - www.dashboard.dev
-            docroot: /var/www
+                - www.awesome.dev
+            docroot: /var/www/awesome
             port: '80'
             setenv:
                 - 'APP_ENV dev'
@@ -113,7 +113,7 @@ nginx:
             server_name: dashboard.dev
             server_aliases:
                 - www.dashboard.dev
-            www_root: /var/www
+            www_root: /var/www/dashboard
             listen_port: '80'
             location: \.php$
             index_files:
