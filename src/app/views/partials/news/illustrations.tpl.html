@@ -1,0 +1,45 @@
+<div class="panel">
+    <div class="panel-tools" align="left">
+        <ul class="tooltip-area">
+            <li>
+                <div class="file-input-wrapper">
+                    <upload-button
+                            class="btn btn-primary btn-upload"
+                            url="/upload.php"
+                            param="file"
+                            accept="image/*"
+                            multiple="true"
+                            force-iframe-upload="forceIframeUpload"
+                            data="uploadData"
+                            on-upload="onIllustrationsUpload(files)"
+                            on-success="onIllustrationsSuccess(response)"
+                            on-error="onIllustrationsError(response)"
+                            on-complete="onIllustrationsComplete(response)">
+                        <i class="fa fa-upload"></i>
+                    </upload-button>
+                </div>
+            </li>
+            <li>
+                {{$parent.selectAll}}
+                <label class="btn btn-default" tooltip="Выбрать все" ng-class="{'disabled' : !item.illustrations.length}">
+                    <input type="checkbox" class="default" ng-disabled="!item.illustrations.length" ng-click="selectIllustrationItems()" ng-true-value="true" ng-false-value="false" ng-checked="$parent.isSelectedAllIllustrationItems()">
+                </label>
+            </li>
+            <li>
+                <button class="btn btn-default" tooltip="Редактировать" ng-disabled="!item.illustrations.length || !selectedAny"><i class="fa fa-pencil"></i></button>
+            </li>
+            <li>
+                <button class="btn btn-default" tooltip="Удалить" ng-disabled="!item.illustrations.length || !selectedAny"><i class="fa fa-trash-o"></i></button>
+            </li>
+        </ul>
+    </div>
+    <div class="padding--vertical">
+
+        <div class="illustrations__block" ng-show="item.illustrations">
+            <div class="img-thumbnail" ng-repeat="image in item.illustrations" ng-click="$parent.selectIllustrationItem(image, $index, $event)" ng-class="{'img-thumbnail--selected' : image.selected}" style="width: 140px; height: 140px; float: left; overflow: hidden;">
+                <img ng-attr-src="{{image.src}}">
+            </div>
+        </div>
+
+    </div>
+</div>

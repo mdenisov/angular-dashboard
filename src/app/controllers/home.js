@@ -154,6 +154,7 @@ angular.module('home', [
 		function ($scope, $location, item, i18nNotifications, upload) {
 
 			$scope.item = item;
+			$scope.item.illustrations = [];
 
 			$scope.redactorOptions = {
 				buttons: ['formatting', '|', 'bold', 'italic']
@@ -197,5 +198,44 @@ angular.module('home', [
                 $scope.item.image = response.data.file;
             };
 
+			// llIllustrations
+			$scope.removeIllustrationsImage = function() {
+                //$scope.item.illustrations = undefined;
+            };
+            $scope.onIllustrationsError = function (response) {
+                i18nNotifications.push('errors.upload.save.error', 'error');
+            };
+            $scope.onIllustrationsComplete = function (response) {
+                i18nNotifications.push('errors.upload.save.success', 'success');
+				var image = {};
+				image.src = response.data.file;
+				$scope.item.illustrations.push(image);
+            };
+
+			$scope.selectedAll = false;
+			$scope.selectedAny = false;
+			$scope.isSelectedAllIllustrationItems = function() {
+				var selectedAll = true;
+				$scope.selectedAny = false;
+				angular.forEach($scope.item.illustrations, function (item) {
+					if (!(item.selected)) {
+						selectedAll = false;
+					} else {
+						$scope.selectedAny = true;
+					}
+				});
+				$scope.selectedAll = selectedAll;
+				return selectedAll;
+			};
+			$scope.selectIllustrationItem = function(item, $index, $event) {
+				item.selected = !(item.selected);
+				$scope.isSelectedAllIllustrationItems();
+			};
+			$scope.selectIllustrationItems = function() {
+				$scope.selectedAll = $scope.selectedAny = !($scope.selectedAll);
+				angular.forEach($scope.item.illustrations, function (item) {
+					item.selected = $scope.selectedAll;
+				});
+			};
 		}
 	]);

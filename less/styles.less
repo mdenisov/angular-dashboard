@@ -771,6 +771,11 @@ body {
 //					color: darken(#6f7b8a, 10%);
 				}
 			}
+
+			.file-input-wrapper {
+				display: block;
+			}
+
 		}
 	}
 }
@@ -825,7 +830,23 @@ label {
 	}
 }
 
+.illustrations__block {
+	.clearfix();
 
+	.img-thumbnail {
+		margin: 5px;
+		cursor: pointer;
+
+		&--selected {
+			background: @brand-primary;
+			border-color: darken(@btn-primary-bg, 5%);
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+}
 
 
 @yellow: rgb(255, 204, 51);
