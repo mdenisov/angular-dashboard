@@ -806,30 +806,6 @@ label {
 //    overflow-x: auto;
 }
 
-
-
-.file-input-wrapper {
-	overflow: hidden;
-	position: relative;
-	cursor: pointer;
-	z-index: 1;
-
-	input[type=file],
-	input[type=file]:focus,
-	input[type=file]:hover {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		cursor: pointer;
-		opacity: 0;
-		z-index: 99;
-		outline: 0;
-		font-size: 100px;
-	}
-}
-
 .illustrations__block {
 	.clearfix();
 
@@ -848,113 +824,6 @@ label {
 	}
 }
 
-
-@yellow: rgb(255, 204, 51);
-@green: rgb(10, 166, 153);
-@red: rgb(243, 89, 88);
-@inverse: rgb(98, 112, 125);
-
-.notifications {
-	position: absolute;
-	right: 0px;
-	top: 50px;
-	width: 450px;
-	z-index: 1100;
-	max-height: 100%;
-	overflow: hidden;
-	padding: 15px;
-
-	&__close {
-		background-color: darken(@inverse, 5%);
-		cursor: pointer;
-		position: absolute;
-		text-align: center;
-		text-transform: uppercase;
-		right: -5px;
-		top: -5px;
-		display: inline-block;
-		font-size: 0.625em;
-		padding: 2px 12px;
-	}
-
-	&__item {
-        position: fixed;
-        top: 110px;
-        right: 15px;
-        z-index: 1100;
-
-		margin-bottom: 10px;
-		color: rgb(255, 255, 255);
-		background-color: @inverse;
-		padding: 10px 15px;
-		padding-right: 2.0625em;
-		border-radius: 1px;
-		display: block;
-        transition: top 0.3s ease-out, opacity 0.2s ease-out;
-        width: 290px;
-        visibility:hidden;
-
-		&.warning {
-			background-color: @yellow;
-
-			.notifications__close {
-				background-color: darken(@yellow, 5%);
-			}
-		}
-
-		&.success {
-			background-color: @green;
-
-			.notifications__close {
-				background-color: darken(@green, 5%);
-			}
-		}
-
-		&.danger, &.error {
-			background-color: @red;
-
-			.notifications__close {
-				background-color: darken(@red, 5%);
-			}
-		}
-
-		&.inverse {
-			background-color: @inverse;
-
-			.notifications__close {
-				background-color: darken(@inverse, 5%);
-			}
-		}
-
-		&.sticky {
-			.notifications__close {
-				display: none;
-			}
-		}
-	}
-}
-
-.file-input-wrapper {
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    z-index: 1;
-    display: inline-block;
-
-    input[type=file],
-    input[type=file]:focus,
-    input[type=file]:hover {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        cursor: pointer;
-        opacity: 0;
-        z-index: 99;
-        outline: 0;
-    }
-}
-
 .img-preview {
     width: 350px;
     height: auto;
@@ -963,32 +832,6 @@ label {
         width: 100%;
         height: auto;
     }
-}
-
-.switchery {
-	background-color: #fff;
-	border: 1px solid #dfdfdf;
-	border-radius: 20px;
-	cursor: pointer;
-	display: inline-block;
-	height: 30px;
-	position: relative;
-	vertical-align: middle;
-	width: 50px;
-
-	user-select: none;
-	box-sizing: content-box;
-	background-clip: content-box;
-
-	& > small {
-		background: #fff;
-		border-radius: 100%;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-		height: 30px;
-		position: absolute;
-		top: 0;
-		width: 30px;
-	}
 }
 
 .splash {

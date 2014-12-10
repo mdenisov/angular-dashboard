@@ -12,6 +12,7 @@ angular.module('app', [
 		'ng-breadcrumbs',
 		'angular-redactor',
         'lr.upload',
+		'ngTagsInput',
 
         'ui.bootstrap',
         'ui.bankiru',
@@ -53,6 +54,11 @@ angular.module('app', [
         baseUrl: '/api/index.php'
     })
 
+	.config(['$resourceProvider', function($resourceProvider) {
+		// Don't strip trailing slashes from calculated URLs
+		$resourceProvider.defaults.stripTrailingSlashes = false;
+	}])
+
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo:'/news'});
     }])
@@ -90,6 +96,24 @@ angular.module('app', [
 
 			return html;
 		};
+	})
+
+	.config(function(tagsInputConfigProvider) {
+		tagsInputConfigProvider
+			.setDefaults('tagsInput', {
+				placeholder: 'New tag',
+				addOnEnter: false
+			})
+			.setDefaults('autoComplete', {
+				maxResultsToShow: 10,
+				debounceDelay: 1000
+			})
+			.setActiveInterpolation('tagsInput', {
+				placeholder: true,
+				addOnEnter: true,
+				removeTagSymbol: true
+			})
+			.setTextAutosizeThreshold(15);
 	})
 
     .controller('AppCtrl', ['$scope', '$location', 'i18nNotifications', 'breadcrumbs', 'localizedMessages', 'notify',

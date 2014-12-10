@@ -151,8 +151,79 @@ angular.module('daytheme', [
 		}
 	])
 
-	.controller('NewsDaythemeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications', 'upload',
-		function ($scope, $location, item, i18nNotifications, upload) {
+	.service('Products', function($q) {
+		var tags = [
+			{id: 1, name: 'Вклады'},
+			{id: 2, name: 'Ипотечные кредиты'},
+			{id: 3, name: 'Потребительские кредиты'},
+			{id: 4, name: 'Кредитные карты'},
+			{id: 5, name: 'Дебетовые карты'},
+			{id: 6, name: 'Автокредиты'},
+			{id: 7, name: 'Кредитование малого и среднего бизнеса'},
+			{id: 8, name: 'Обслуживание юрлиц'},
+			{id: 9, name: 'Лизинг'},
+			{id: 10, name: 'Дистанционное обслуживание'},
+			{id: 11, name: 'Финансовая грамотность'},
+			{id: 12, name: 'Реструктуризация кредитов'},
+			{id: 13, name: 'БКИ'},
+			{id: 14, name: 'Микрозаймы'},
+			{id: 15, name: 'Страхование'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.service('Banks', function($q) {
+		var tags = [
+			{id: 1, name: 'АльфаБанк'},
+			{id: 2, name: 'Сбербанк'},
+			{id: 3, name: 'Промсвязь банк'},
+			{id: 4, name: 'УралСиб банк'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.service('BanksInfo', function($q) {
+		var tags = [
+			{id: 1, name: 'Укрэксимбанк(Киев) (ID: 289539)'},
+			{id: 2, name: 'Фидобанк(Киев) (ID: 289529)'},
+			{id: 3, name: 'АзияУниверсалБанк(Бишкек) (ID: 1334114)'},
+			{id: 4, name: 'Легбанк(Киев) (ID: 284663)'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.service('Mfo', function($q) {
+		var tags = [
+			{id: 1, name: 'Домашние деньги (ID: 1)'},
+			{id: 2, name: 'Нано-Финанс (ID: 2)'},
+			{id: 3, name: 'Pay P. S. (ID: 3)'},
+			{id: 4, name: 'Быстроденьги (ID: 4)'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.controller('NewsDaythemeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications', 'upload', 'Products', 'Banks', 'BanksInfo', 'Mfo',
+		function ($scope, $location, item, i18nNotifications, upload, Products, Banks, BanksInfo, Mfo) {
 
 			$scope.item = item;
 			$scope.item.illustrations = [];
@@ -238,6 +309,21 @@ angular.module('daytheme', [
 					item.selected = $scope.selectedAll;
 				});
 			};
+
+			// Autocomplete
+			$scope.getProducts = function(query) {
+				return Products.load();
+			};
+			$scope.getBanks = function(query) {
+				return Banks.load();
+			};
+			$scope.getBanksInfo = function(query) {
+				return BanksInfo.load();
+			};
+			$scope.getMfo = function(query) {
+				return Mfo.load();
+			};
+
 
 		}
 	]);

@@ -60,7 +60,9 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Банковские продукты</label>
                             <div class="col-md-10 col-lg-11">
-                                <input class="form-control" type="text" name="products" ng-model="item.products" />
+                                <tags-input ng-model="item.products" display-property="name">
+                                    <auto-complete source="getProducts($query)"></auto-complete>
+                                </tags-input>
                             </div>
                         </div>
                         <div class="form-group">
@@ -97,33 +99,45 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Банки</label>
                             <div class="col-md-2 col-lg-3">
-                                <input class="form-control" type="text" name="banks" ng-model="item.banks"/>
+                                <tags-input ng-model="item.banks" display-property="name">
+                                    <auto-complete source="getBanks($query)"></auto-complete>
+                                </tags-input>
                             </div>
                             <label class="control-label col-md-2 col-lg-1">Информация о банках</label>
                             <div class="col-md-2 col-lg-3">
-                                <input class="form-control" type="text" name="banks_info" ng-model="item.banks_info"/>
+                                <tags-input ng-model="item.banks_info" display-property="name">
+                                    <auto-complete source="getBanksInfo($query)"></auto-complete>
+                                </tags-input>
                             </div>
                             <label class="control-label col-md-2 col-lg-1">Микрофинансовые организации</label>
                             <div class="col-md-2 col-lg-3">
-                                <input class="form-control" type="text" name="mfo" ng-model="item.mfo"/>
+                                <tags-input ng-model="item.mfo" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Страховые компании</label>
                             <div class="col-md-10 col-lg-11">
-                                <input class="form-control" type="text" name="insurance" ng-model="item.insurance"/>
+                                <tags-input ng-model="item.insurance" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Регионы</label>
                             <div class="col-md-10 col-lg-11">
-                                <input class="form-control" type="text" name="regions" ng-model="item.regions"/>
+                                <tags-input ng-model="item.regions" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">RSS</label>
                             <div class="col-md-10 col-lg-11">
-                                <input class="form-control" type="text" name="rss" ng-model="item.rss"/>
+                                <tags-input ng-model="item.rss" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
                             </div>
                         </div>
                         <div class="form-group">
@@ -147,7 +161,9 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Сюжеты</label>
                             <div class="col-md-10 col-lg-11">
-                                <input class="form-control" type="text" name="topic" ng-model="item.topic"/>
+                                <tags-input ng-model="item.topic" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
                             </div>
                         </div>
                         <div class="form-group">
@@ -224,7 +240,9 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Лизинг</label>
                             <div class="col-md-10 col-lg-11">
-                                <input class="form-control" type="text" name="leasing" ng-model="item.leasing"/>
+                                <tags-input ng-model="item.leasing" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
                             </div>
                         </div>
                         <div class="form-group">
@@ -240,7 +258,9 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Видеоновости</label>
                             <div class="col-md-10 col-lg-11">
-                                <input class="form-control" type="text" name="video" ng-model="item.video"/>
+                                <tags-input ng-model="item.video" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
                             </div>
                         </div>
                     </div>

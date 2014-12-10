@@ -124,7 +124,8 @@ module.exports = function(grunt) {
 					'vendor/bower/angular-redactor/angular-redactor.js',
 					'vendor/bower/angular-notify/angular-notify.js',
                     'vendor/bower/switchery/dist/switchery.js',
-                    'vendor/bower/angular-upload/angular-upload.js'
+                    'vendor/bower/angular-upload/angular-upload.js',
+                    'vendor/bower/ng-tags-input/ng-tags-input.js'
 				],
                 dest: '<%= distdir %>/js/vendor.js'
             }
