@@ -13,6 +13,9 @@ vagrantfile-local:
                 t0084SL18Xzb:
                     host: '5745'
                     guest: '22'
+                t0084SL18Xzf:
+                    host: '5730'
+                    guest: '3306'
         post_up_message: ''
         provider:
             virtualbox:
