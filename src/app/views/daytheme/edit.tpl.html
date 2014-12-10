@@ -168,61 +168,49 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Изображение</label>
-                            <div class="col-md-10 col-lg-11">
-
-                                <div class="row">
-
-                                    <div class="col-md-2 col-lg-1" ng-show="item.image">
-
-                                        <div class="img-thumbnail img-preview" style="margin-bottom: 10px;">
-                                            <img ng-attr-src="{{item.image}}" />
+                            <div class="col-md-5 col-lg-3">
+                                <fieldset>
+                                    <div class="form-group" ng-show="item.image">
+                                        <div class="col-md-12 col-lg-12">
+                                            <img class="img-thumbnail img-responsive" ng-attr-src="{{item.image}}" />
                                         </div>
-
                                     </div>
-                                    <div class="col-md-2 col-lg-1">
-
-                                        <div class="file-input-wrapper">
-                                            <upload-button
-                                                    class="btn btn-primary btn-upload"
-                                                    url="/upload.php"
-                                                    param="file"
-                                                    accept="acceptTypes"
-                                                    multiple="allowMultiple"
-                                                    force-iframe-upload="forceIframeUpload"
-                                                    data="uploadData"
-                                                    on-upload="onUpload(files)"
-                                                    on-success="onSuccess(response)"
-                                                    on-error="onError(response)"
-                                                    on-complete="onComplete(response)">
-                                                {{ item.image ? 'Заменить' : 'Выбрать' }}
-                                            </upload-button>
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="file-input-wrapper">
+                                                <upload-button
+                                                        class="btn btn-primary btn-upload"
+                                                        url="/upload.php"
+                                                        param="file"
+                                                        accept="acceptTypes"
+                                                        multiple="allowMultiple"
+                                                        force-iframe-upload="forceIframeUpload"
+                                                        data="uploadData"
+                                                        on-upload="onUpload(files)"
+                                                        on-success="onSuccess(response)"
+                                                        on-error="onError(response)"
+                                                        on-complete="onComplete(response)">
+                                                    {{ item.image ? 'Заменить' : 'Выбрать' }}
+                                                </upload-button>
+                                            </div>
+                                            <button type="button" class="btn btn-danger" ng-show="item.image" ng-click="removeImage()">Удалить</button>
                                         </div>
-                                        <button type="button" class="btn btn-danger" ng-show="item.image" ng-click="removeImage()">Удалить</button>
-
                                     </div>
-
-                                </div>
-                                <div class="row" ng-show="item.image">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-2 col-lg-1">Источник</label>
-                                        <div class="col-md-10 col-lg-11">
+                                    <div class="form-horizontal col-md-12 col-lg-12" ng-show="item.image" style="margin-top: 15px;">
+                                        <div class="form-group">
+                                            <label class="control-label">Источник</label>
                                             <input class="form-control" type="text" name="image.source" ng-model="item.image.source"/>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-2 col-lg-1">Ссылка</label>
-                                        <div class="col-md-10 col-lg-11">
+                                        <div class="form-group">
+                                            <label class="control-label">Ссылка</label>
                                             <input class="form-control" type="text" name="image.source_url" ng-model="item.image.source_url"/>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-2 col-lg-1">Подпись</label>
-                                        <div class="col-md-10 col-lg-11">
+                                        <div class="form-group" style="margin-bottom: 0;">
+                                            <label class="control-label">Подпись</label>
                                             <input class="form-control" type="text" name="image.sign" ng-model="item.image.sign"/>
                                         </div>
                                     </div>
-                                </div>
-
+                                </fieldset>
                             </div>
                         </div>
                         <div class="form-group">
