@@ -53,13 +53,13 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Корректура</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <input type="checkbox" name="correction" ng-model="item.correction" ui-switch="{color: '#64BD63', secondaryColor: '#DB5455'}" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Банковские продукты</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.products" display-property="name">
                                     <auto-complete source="getProducts($query)"></auto-complete>
                                 </tags-input>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Рубрика</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <select class="form-control" name="sub_category" ng-model="item.sub_category">
                                     <option value="">(не установлено)</option>
                                     <option value="lenta_banks">Банки</option>
@@ -83,13 +83,13 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Источник</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <input class="form-control" type="text" name="source_name" ng-model="item.source_name"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Ссылка на источник</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <input class="form-control" type="url" name="source_url" ng-model="item.source_url"/>
                                 <div ng-messages="form.source_url.$error">
                                     <div ng-message="url" class="help-block text-danger">{{messages.validation.invalidUrl}}</div>
@@ -118,7 +118,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Страховые компании</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.insurance" display-property="name">
                                     <auto-complete source="getMfo($query)"></auto-complete>
                                 </tags-input>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Регионы</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.regions" display-property="name">
                                     <auto-complete source="getMfo($query)"></auto-complete>
                                 </tags-input>
@@ -134,7 +134,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">RSS</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.rss" display-property="name">
                                     <auto-complete source="getMfo($query)"></auto-complete>
                                 </tags-input>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Сюжеты</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.topic" display-property="name">
                                     <auto-complete source="getMfo($query)"></auto-complete>
                                 </tags-input>
@@ -215,19 +215,19 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Внутреннее название</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <input class="form-control" type="text" name="inside" ng-model="item.inside"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Подзаголовок</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <input class="form-control" type="text" name="subtitle" ng-model="item.subtitle"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Лизинг</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.leasing" display-property="name">
                                     <auto-complete source="getMfo($query)"></auto-complete>
                                 </tags-input>
@@ -245,7 +245,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Видеоновости</label>
-                            <div class="col-md-10 col-lg-11">
+                            <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.video" display-property="name">
                                     <auto-complete source="getMfo($query)"></auto-complete>
                                 </tags-input>

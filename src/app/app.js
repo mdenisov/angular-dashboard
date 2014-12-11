@@ -69,6 +69,7 @@ angular.module('app', [
 		redactorOptions.convertVideoLinks = true;
 		redactorOptions.buttonSource = true;
 		redactorOptions.emoveEmpty = ['strong', 'em', 'span', 'p'];
+		redactorOptions.toolbarFixed = false;
 		//redactorOptions.toolbarFixedTarget = '.page';
 		//redactorOptions.toolbarFixedTopOffset = 195;
 		//redactorOptions.scrollTarget = '.page';
