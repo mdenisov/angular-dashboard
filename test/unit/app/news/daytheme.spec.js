@@ -8,7 +8,7 @@ describe('NewsDaythemeCtrl', function() {
 				$scope: $rootScope,
 				crudListMethods: jasmine.createSpy('crudListMethods'),
 				items: {},
-				i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['pushForCurrentRoute', 'pushForNextRoute']),
+				i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['push']),
 				$timeout: jasmine.createSpy('$timeout')
             };
             var ctrl = $controller('NewsDaythemeListCtrl', locals);
@@ -22,10 +22,15 @@ describe('NewsDaythemeCtrl', function() {
 
         function createLocals() {
             return {
-                $scope: {},
-                $location: jasmine.createSpyObj('$location', ['path']),
-                i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['pushForCurrentRoute', 'pushForNextRoute']),
-                item: { $id: function() { return 'X'; } }
+				$scope: {},
+				$location: jasmine.createSpyObj('$location', ['path']),
+				item: { $id: function() { return 'X'; } },
+				i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['push']),
+				upload: {},
+				Products: {},
+				Banks: {},
+				BanksInfo: {},
+				Mfo: {}
             };
         }
 
@@ -48,8 +53,8 @@ describe('NewsDaythemeCtrl', function() {
 
             locals.$scope.onSave(locals.item);
 
-            expect(locals.i18nNotifications.pushForNextRoute).toHaveBeenCalled();
-            expect(locals.i18nNotifications.pushForNextRoute.calls.mostRecent().args[1]).toBe('success');
+            expect(locals.i18nNotifications.push).toHaveBeenCalled();
+            expect(locals.i18nNotifications.push.calls.mostRecent().args[1]).toBe('success');
             expect(locals.$location.path).toHaveBeenCalled();
         });
 
@@ -59,8 +64,8 @@ describe('NewsDaythemeCtrl', function() {
 
             locals.$scope.onError();
 
-            expect(locals.i18nNotifications.pushForCurrentRoute).toHaveBeenCalled();
-            expect(locals.i18nNotifications.pushForCurrentRoute.calls.mostRecent().args[1]).toBe('error');
+            expect(locals.i18nNotifications.push).toHaveBeenCalled();
+            expect(locals.i18nNotifications.push.calls.mostRecent().args[1]).toBe('error');
         });
 
     });

@@ -2,36 +2,38 @@ describe('NewsCtrl', function() {
 
     beforeEach(module('home'));
 
-    describe('NewsHomeListCtrl', function () {
+    describe('NewsListCtrl', function () {
         it('should call crudListMethods', inject(function($controller, $rootScope) {
             var locals = {
 				$scope: $rootScope,
+				$location: jasmine.createSpyObj('$location', ['path']),
 				crudListMethods: jasmine.createSpy('crudListMethods'),
 				items: {},
-				i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['pushForCurrentRoute', 'pushForNextRoute']),
+				i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['push']),
 				$timeout: jasmine.createSpy('$timeout')
             };
-            var ctrl = $controller('NewsHomeListCtrl', locals);
+            var ctrl = $controller('NewsListCtrl', locals);
 
             expect($rootScope.items).toBe(locals.items);
             expect(locals.crudListMethods).toHaveBeenCalled();
         }));
     });
 
-    describe('NewsHomeEditCtrl', function () {
+    describe('NewsEditCtrl', function () {
 
         function createLocals() {
             return {
-                $scope: {},
-                $location: jasmine.createSpyObj('$location', ['path']),
-                i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['pushForCurrentRoute', 'pushForNextRoute']),
-                item: { $id: function() { return 'X'; } }
+				$scope: {},
+				$location: jasmine.createSpyObj('$location', ['path']),
+				item: { $id: function() { return 'X'; } },
+				i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['push']),
+				upload: {}
             };
         }
 
         function runController(locals) {
             inject(function($controller) {
-                $controller('NewsHomeEditCtrl', locals);
+                $controller('NewsEditCtrl', locals);
             });
         }
 
@@ -48,8 +50,8 @@ describe('NewsCtrl', function() {
 
             locals.$scope.onSave(locals.item);
 
-            expect(locals.i18nNotifications.pushForNextRoute).toHaveBeenCalled();
-            expect(locals.i18nNotifications.pushForNextRoute.calls.mostRecent().args[1]).toBe('success');
+            expect(locals.i18nNotifications.push).toHaveBeenCalled();
+            expect(locals.i18nNotifications.push.calls.mostRecent().args[1]).toBe('success');
             expect(locals.$location.path).toHaveBeenCalled();
         });
 
@@ -59,8 +61,8 @@ describe('NewsCtrl', function() {
 
             locals.$scope.onError();
 
-            expect(locals.i18nNotifications.pushForCurrentRoute).toHaveBeenCalled();
-            expect(locals.i18nNotifications.pushForCurrentRoute.calls.mostRecent().args[1]).toBe('error');
+            expect(locals.i18nNotifications.push).toHaveBeenCalled();
+            expect(locals.i18nNotifications.push.calls.mostRecent().args[1]).toBe('error');
         });
 
     });

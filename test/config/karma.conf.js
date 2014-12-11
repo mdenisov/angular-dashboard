@@ -18,6 +18,10 @@ module.exports = function(config) {
 		'vendor/bower/jquery/dist/jquery.js',
 		'vendor/redactor/redactor.js',
 		'vendor/redactor/lang/ru.js',
+		'vendor/redactor/plugins/fullscreen/fullscreen.js',
+		'vendor/redactor/plugins/table/table.js',
+		'vendor/redactor/plugins/clips/clips.js',
+		'vendor/redactor/plugins/placeholders/placeholders.js',
 
 		'vendor/bower/angular/angular.js',
 		'vendor/bower/angular-route/angular-route.js',
@@ -32,8 +36,12 @@ module.exports = function(config) {
 		'vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js',
 		'vendor/bower/ng-breadcrumbs/dist/ng-breadcrumbs.js',
 		'vendor/bower/angular-redactor/angular-redactor.js',
-        'vendor/bower/angular-mocks/angular-mocks.js',
+		'vendor/bower/angular-notify/angular-notify.js',
+		'vendor/bower/switchery/dist/switchery.js',
+		'vendor/bower/angular-upload/angular-upload.js',
+		'vendor/bower/ng-tags-input/ng-tags-input.js',
 
+        'vendor/bower/angular-mocks/angular-mocks.js',
 
         'src/**/*.js',
         'dist/js/templates/**/*.js',
