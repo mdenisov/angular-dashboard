@@ -108,6 +108,10 @@ module.exports = function(grunt) {
 					'vendor/bower/jquery/dist/jquery.js',
 					'vendor/redactor/redactor.js',
 					'vendor/redactor/lang/ru.js',
+					'vendor/redactor/plugins/fullscreen/fullscreen.js',
+					'vendor/redactor/plugins/table/table.js',
+					'vendor/redactor/plugins/clips/clips.js',
+					'vendor/redactor/plugins/placeholders/placeholders.js',
 
 					'vendor/bower/angular/angular.js',
 					'vendor/bower/angular-route/angular-route.js',

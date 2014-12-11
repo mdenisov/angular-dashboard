@@ -9,7 +9,7 @@ RedactorPlugins.placeholders = function()
 		},
 		init: function()
 		{
-			this.placeholders.options.placeholder = this.$element.data('placeholders');
+			this.placeholders.options.placeholder = this.$element.data('placeholders').placeholders;
 
 			var dropdown = {};
 
@@ -27,7 +27,7 @@ RedactorPlugins.placeholders = function()
 			this.placeholders.replacePlaceholders();
 
 			var button = this.button.add('placeholders', 'Иллюстрации');
-			this.button.setAwesome('placeholders', 'fa-tasks');
+			this.button.setAwesome('placeholders', 'fa-image');
 
 			this.button.addDropdown(button, dropdown);
 

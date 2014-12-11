@@ -69,6 +69,11 @@ angular.module('app', [
 		redactorOptions.convertVideoLinks = true;
 		redactorOptions.buttonSource = true;
 		redactorOptions.emoveEmpty = ['strong', 'em', 'span', 'p'];
+		//redactorOptions.toolbarFixedTarget = '.page';
+		//redactorOptions.toolbarFixedTopOffset = 195;
+		//redactorOptions.scrollTarget = '.page';
+		redactorOptions.maxHeight = 800;
+		//redactorOptions.plugins = ['table','fullscreen'];
 		redactorOptions.pasteBeforeCallback = function(html) {
 			html = html.replace(/<br[^>]*>/g, '');
 			html = html.replace(/(<font style=\".+?\">|<font face=\".+?\">|<\/font>)/g, '');

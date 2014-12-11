@@ -50,7 +50,7 @@ RedactorPlugins.clips = function()
 			}
 
 			var button = this.button.add('clips', 'Врезки');
-			this.button.setAwesome('clips', 'fa-tasks');
+			//this.button.setAwesome('clips', 'fa-reorder');
 
 			this.button.addDropdown(button, dropdown);
 

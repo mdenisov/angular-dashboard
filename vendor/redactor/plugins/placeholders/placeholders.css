@@ -33,10 +33,6 @@
     margin-bottom: 10px;
 }
 
-.re-placeholders:before {
-    content: "\e61f";
-}
-
 .placeholder[data-name="placeholder_gallery"]:before {
     content: "\f03e";
 }

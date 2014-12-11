@@ -143,7 +143,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Анонс</label>
                             <div class="col-md-10 col-lg-11">
-                                <textarea class="form-control" name="preview_text" ng-model="item.preview_text" redactor required></textarea>
+                                <textarea class="form-control" name="preview_text" ng-model="item.preview_text" redactor="{'buttons': ['html','|','formatting','|','bold','italic','deleted','|','unorderedlist','orderedlist','outdent','indent','|','alignment']}" required></textarea>
                                 <div ng-messages="form.preview_text.$error">
                                     <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
                                 </div>
@@ -152,7 +152,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-lg-1">Текст</label>
                             <div class="col-md-10 col-lg-11">
-                                <textarea class="form-control" name="text" ng-model="item.text" redactor required></textarea>
+                                <textarea class="form-control" name="text" ng-model="item.text" redactor="{plugins: ['table','placeholders','clips','fullscreen']}" data-placeholders='{"placeholders": [{"name": "placeholder_gallery","value": "Иллюстрации"}]}' required></textarea>
                                 <div ng-messages="form.text.$error">
                                     <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
                                 </div>
