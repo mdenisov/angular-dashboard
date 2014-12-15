@@ -1,0 +1,26 @@
+<main id="main" role="application" ng-class="showSidebar ? 'left-menu--open' : ''">
+
+    <section id="wrapper" class="wrapper">
+
+        <div ng-include="'views/partials/sidebar.tpl.html'"></div>
+
+    </section>
+
+    <div ng-include="'views/partials/header.tpl.html'"></div>
+    <div ng-include="'views/partials/breadcrumb.tpl.html'"></div>
+
+    <section class="page">
+
+        <div id="content" class="content">
+
+            <section ng-view></section>
+
+        </div>
+
+    </section>
+
+    <div ng-include="'views/partials/footer.tpl.html'"></div>
+
+    <div class="splash" ng-cloak></div>
+
+</main>
