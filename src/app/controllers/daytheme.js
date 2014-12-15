@@ -39,9 +39,9 @@ angular.module('daytheme', [
 		function ($scope, $location, crudListMethods, items, i18nNotifications, $timeout) {
 			$scope.items = $scope.filtered = items;
 
-			angular.forEach($scope.items, function (item) {
-				item.id = parseFloat(item.id);
-			});
+			//angular.forEach($scope.items, function (item) {
+			//	item.id = parseFloat(item.id);
+			//});
 
 			angular.extend($scope, crudListMethods('/news/daytheme'));
 
@@ -267,7 +267,7 @@ angular.module('daytheme', [
 			};
 			$scope.onComplete = function (response) {
 				i18nNotifications.push('errors.upload.save.success', 'success');
-				$scope.item.image = response.data.file;
+				$scope.item.image = response.data.files[0].fd;
 			};
 
 			// llIllustrations
@@ -280,7 +280,7 @@ angular.module('daytheme', [
 			$scope.onIllustrationsComplete = function (response) {
 				i18nNotifications.push('errors.upload.save.success', 'success');
 				var image = {};
-				image.src = response.data.file;
+				image.src = response.data.files[0].fd;
 				$scope.item.illustrations.push(image);
 			};
 

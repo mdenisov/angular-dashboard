@@ -51,7 +51,8 @@ angular.module('app', [
     })
 
     .constant('CONFIG', {
-        baseUrl: '/api/index.php'
+        //baseUrl: '/api/index.php'
+        baseUrl: ''
     })
 
 	.config(['$resourceProvider', function($resourceProvider) {

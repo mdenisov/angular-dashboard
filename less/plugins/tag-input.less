@@ -47,6 +47,11 @@ tags-input {
 			float: left;
 			.label-variant(@label-default-bg);
 
+            &.selected {
+                color: white;
+                background: @brand-danger;
+            }
+
 			.remove-button {
 				&:extend(.glyphicon);
 
@@ -61,11 +66,6 @@ tags-input {
 					text-decoration: none;
 				}
 			}
-		}
-		.tag-item.selected {
-			color: white;
-			background: #d9534f;
-			border: 1px solid #d43f3a;
 		}
 	}
 	.autocomplete {
