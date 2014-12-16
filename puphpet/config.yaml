@@ -10,12 +10,9 @@ vagrantfile-local:
         network:
             private_network: 192.168.56.101
             forwarded_port:
-                t0084SL18Xzb:
-                    host: '5745'
+                HmS4TPmZDLmG:
+                    host: '7092'
                     guest: '22'
-                t0084SL18Xzf:
-                    host: '5730'
-                    guest: '3306'
         post_up_message: ''
         provider:
             virtualbox:
@@ -35,12 +32,12 @@ vagrantfile-local:
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
                     - '--parser future'
         synced_folder:
-            VKxn4zJLBm8Z:
+            uPVQxwKmGhKX:
                 owner: www-data
                 group: www-data
                 source: ./
                 target: /var/www
-                sync_type: default
+                sync_type: rsync
                 rsync:
                     args:
                         - '--verbose'
@@ -48,7 +45,7 @@ vagrantfile-local:
                         - '-z'
                     exclude:
                         - .vagrant/
-                    auto: 'false'
+                    auto: 'true'
         usable_port_range:
             start: 10200
             stop: 10500
@@ -71,7 +68,7 @@ firewall:
     install: '1'
     rules: null
 apache:
-    install: '0'
+    install: 0
     settings:
         user: www-data
         group: www-data
@@ -82,7 +79,7 @@ apache:
     modules:
         - rewrite
     vhosts:
-        EaSqsCXnBbCQ:
+        G0VtfgvuSlOc:
             servername: awesome.dev
             serveraliases:
                 - www.awesome.dev
@@ -111,7 +108,9 @@ nginx:
         proxy_buffers: '4 256k'
     upstreams: {  }
     vhosts:
-        HmPNMAkGt7d3:
+        TJt8mVWqXslE:
+#            proxy: 'http://localhost:1337' //for Node js App
+            proxy: ''
             server_name: dashboard.dev
             server_aliases:
                 - www.dashboard.dev
@@ -125,12 +124,13 @@ nginx:
             envvars:
                 - 'APP_ENV dev'
             engine: php
+            client_max_body_size: 1m
             ssl_cert: ''
             ssl_key: ''
 php:
     install: '1'
     version: '56'
-    composer: '0'
+    composer: 1
     composer_home: ''
     modules:
         php:
@@ -178,16 +178,19 @@ drush:
 ruby:
     install: '1'
     versions:
-        o7Ss4jODUGRV:
+        nvISdTMxppBz:
             version: ''
 nodejs:
-    install: '0'
-    npm_packages: {  }
+    install: '1'
+    npm_packages:
+        - sails
+        - sails-mongo
+        - forever
 python:
     install: '1'
     packages: {  }
     versions:
-        ZHguoYifRmOi:
+        BX2DEAvmd9sK:
             version: ''
 mysql:
     install: '1'
@@ -195,14 +198,14 @@ mysql:
     root_password: dashboard
     adminer: 0
     databases:
-        H3Ynnhv7vq4V:
+        6GYZdk9VBVGB:
             grant:
                 - ALL
             name: dashboard
             host: localhost
-            user: dashboard
-            password: dashboard
-            sql_file: /var/www/sql/dashboard.sql
+            user: dbuser
+            password: '123'
+            sql_file: ''
 postgresql:
     install: '0'
     settings:
@@ -224,7 +227,7 @@ sqlite:
     adminer: 0
     databases: {  }
 mongodb:
-    install: '0'
+    install: '1'
     settings:
         auth: 1
         port: '27017'
@@ -261,6 +264,11 @@ rabbitmq:
 elastic_search:
     install: '0'
     settings:
-        version: null
+        version: 1.4.1
         java_install: true
+solr:
+    install: '0'
+    settings:
+        version: 4.10.2
+        port: '8984'
 
