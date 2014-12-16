@@ -13,6 +13,9 @@ vagrantfile-local:
                 HmS4TPmZDLmG:
                     host: '7092'
                     guest: '22'
+                HmS4TPmZDLmY:
+                    host: '3306'
+                    guest: '22'
         post_up_message: ''
         provider:
             virtualbox:
@@ -203,9 +206,9 @@ mysql:
                 - ALL
             name: dashboard
             host: localhost
-            user: dbuser
-            password: '123'
-            sql_file: ''
+            user: dashboard
+            password: 'dashboard'
+            sql_file: '/sql/dashboard.sql'
 postgresql:
     install: '0'
     settings:
