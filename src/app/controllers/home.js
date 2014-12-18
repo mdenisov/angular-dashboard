@@ -150,8 +150,8 @@ angular.module('home', [
 		}
 	])
 
-	.controller('NewsEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications', 'upload',
-		function ($scope, $location, item, i18nNotifications, upload) {
+	.controller('NewsEditCtrl', ['$scope', '$location', '$timeout', 'item', 'i18nNotifications', 'upload',
+		function ($scope, $location, $timeout, item, i18nNotifications, upload) {
 
 			$scope.item = item;
 			$scope.item.illustrations = [];
@@ -183,8 +183,10 @@ angular.module('home', [
 				i18nNotifications.push('errors.upload.save.error', 'error');
 			};
 			$scope.onImageComplete = function (response) {
-				i18nNotifications.push('errors.upload.save.success', 'success');
-				$scope.item.image = response.data.files[0];
+				$timeout(function() {
+					i18nNotifications.push('errors.upload.save.success', 'success');
+					$scope.item.image = CONFIG.uploadUrl + response.data.files[0].localName;
+				}, 1500);
 			};
 
 			// llIllustrations
@@ -195,10 +197,12 @@ angular.module('home', [
 				i18nNotifications.push('errors.upload.save.error', 'error');
 			};
 			$scope.onIllustrationsComplete = function (response) {
-				i18nNotifications.push('errors.upload.save.success', 'success');
-				angular.forEach(response.data.files, function (image) {
-					$scope.item.illustrations.push({src: image});
-				});
+				$timeout(function() {
+					i18nNotifications.push('errors.upload.save.success', 'success');
+					angular.forEach(response.data.files, function (image) {
+						$scope.item.illustrations.push({src: image.localName});
+					});
+				}, 1500);
 			};
 			$scope.selectedAll = false;
 			$scope.selectedAny = false;

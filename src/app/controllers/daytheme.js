@@ -198,10 +198,12 @@ angular.module('daytheme', [
 				i18nNotifications.push('errors.upload.save.error', 'error');
 			};
 			$scope.onIllustrationsComplete = function (response) {
-				i18nNotifications.push('errors.upload.save.success', 'success');
-				angular.forEach(response.data.files, function (image) {
-					$scope.item.illustrations.push({src: image.localName});
-				});
+				$timeout(function() {
+					i18nNotifications.push('errors.upload.save.success', 'success');
+					angular.forEach(response.data.files, function (image) {
+						$scope.item.illustrations.push({src: image.localName});
+					});
+				}, 1500);
 			};
 			$scope.selectedAll = false;
 			$scope.selectedAny = false;
