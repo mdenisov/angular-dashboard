@@ -24,7 +24,9 @@ describe('NewsCtrl', function() {
         function createLocals() {
             return {
 				$scope: {},
+                CONFIG: {},
 				$location: jasmine.createSpyObj('$location', ['path']),
+                $timeout: {},
 				item: { $id: function() { return 'X'; } },
 				i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['push']),
 				upload: {}

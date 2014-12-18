@@ -150,8 +150,8 @@ angular.module('home', [
 		}
 	])
 
-	.controller('NewsEditCtrl', ['$scope', '$location', '$timeout', 'item', 'i18nNotifications', 'upload',
-		function ($scope, $location, $timeout, item, i18nNotifications, upload) {
+	.controller('NewsEditCtrl', ['$scope', 'CONFIG', '$location', '$timeout', 'item', 'i18nNotifications', 'upload',
+		function ($scope, CONFIG, $location, $timeout, item, i18nNotifications, upload) {
 
 			$scope.item = item;
 			$scope.item.illustrations = [];
