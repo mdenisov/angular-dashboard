@@ -112,14 +112,16 @@ nginx:
     upstreams: {  }
     vhosts:
         TJt8mVWqXslE:
-#            proxy: 'http://localhost:1337' //for Node js App
-            proxy: ''
+            proxy: 'http://localhost:1337'
+#            proxy: ''
             server_name: dashboard.dev
             server_aliases:
                 - www.dashboard.dev
-            www_root: /var/www
+#            www_root: /var/www
+            www_root: /var/www/app
             listen_port: '80'
             location: \.php$
+#            location: '[^/]\.php(/|$)'
             index_files:
                 - index.html
                 - index.htm

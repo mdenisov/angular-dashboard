@@ -170,7 +170,7 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                            </div>\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Начало публикации</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
-    "                                <input class=\"form-control\" type=\"text\" name=\"date_start\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_start\" is-open=\"datepickers.date_start_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"open($event, 'date_start_opened')\" show-button-bar=\"false\" />\n" +
+    "                                <input class=\"form-control\" type=\"text\" name=\"date_start\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_start\" is-open=\"datepickers.date_start_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"openDatepicker($event, 'date_start_opened')\" show-button-bar=\"false\" />\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
@@ -184,7 +184,7 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                            </div>\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Окончание публикации</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
-    "                                <input class=\"form-control\" type=\"text\" name=\"date_finish\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_finish\" is-open=\"datepickers.date_finish_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"open($event, 'date_finish_opened')\" show-button-bar=\"false\" />\n" +
+    "                                <input class=\"form-control\" type=\"text\" name=\"date_finish\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_finish\" is-open=\"datepickers.date_finish_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"openDatepicker($event, 'date_finish_opened')\" show-button-bar=\"false\" />\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
@@ -317,14 +317,14 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                                                <upload-button\n" +
     "                                                        class=\"btn btn-primary btn-upload\"\n" +
     "                                                        url=\"/file/upload\"\n" +
-    "                                                        param=\"image\"\n" +
-    "                                                        accept=\"acceptTypes\"\n" +
+    "                                                        param=\"file\"\n" +
+    "                                                        accept=\"acceptImageTypes\"\n" +
     "                                                        force-iframe-upload=\"forceIframeUpload\"\n" +
     "                                                        data=\"uploadData\"\n" +
     "                                                        on-upload=\"onUpload(files)\"\n" +
     "                                                        on-success=\"onSuccess(response)\"\n" +
-    "                                                        on-error=\"onError(response)\"\n" +
-    "                                                        on-complete=\"onComplete(response)\">\n" +
+    "                                                        on-error=\"onImageError(response)\"\n" +
+    "                                                        on-complete=\"onImageComplete(response)\">\n" +
     "                                                    {{ item.image ? 'Заменить' : 'Выбрать' }}\n" +
     "                                                </upload-button>\n" +
     "                                            </div>\n" +
@@ -730,7 +730,7 @@ angular.module("views/home/edit.tpl.html", []).run(["$templateCache", function($
     "                            <div class=\"col-md-8\">\n" +
     "                                <div class=\"row\">\n" +
     "                                    <div class=\"col-md-6\">\n" +
-    "                                        <input class=\"form-control\" type=\"text\" name=\"date_start\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_start\" is-open=\"datepickers.date_start_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"open($event, 'date_start_opened')\" show-button-bar=\"false\" />\n" +
+    "                                        <input class=\"form-control\" type=\"text\" name=\"date_start\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_start\" is-open=\"datepickers.date_start_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"openDatepicker($event, 'date_start_opened')\" show-button-bar=\"false\" />\n" +
     "                                    </div>\n" +
     "                                    <div class=\"col-md-6\">\n" +
     "\n" +
@@ -753,7 +753,7 @@ angular.module("views/home/edit.tpl.html", []).run(["$templateCache", function($
     "                            <div class=\"col-md-8\">\n" +
     "                                <div class=\"row\">\n" +
     "                                    <div class=\"col-md-6\">\n" +
-    "                                        <input class=\"form-control\" type=\"text\" name=\"date_finish\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_finish\" is-open=\"datepickers.date_finish_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"open($event, 'date_finish_opened')\" show-button-bar=\"false\" />\n" +
+    "                                        <input class=\"form-control\" type=\"text\" name=\"date_finish\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_finish\" is-open=\"datepickers.date_finish_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"openDatepicker($event, 'date_finish_opened')\" show-button-bar=\"false\" />\n" +
     "                                    </div>\n" +
     "                                    <div class=\"col-md-6\">\n" +
     "\n" +
@@ -1078,10 +1078,10 @@ angular.module("views/partials/news/filter.tpl.html", []).run(["$templateCache",
     "                    <div class=\"col-md-8\">\n" +
     "                        <div class=\"row\">\n" +
     "                            <div class=\"col-md-6\">\n" +
-    "                                <input class=\"form-control\" type=\"text\" name=\"date_start_from\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"$parent.date.date_start\" is-open=\"datepickers.date_start_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"open($event, 'date_start_opened')\" show-button-bar=\"false\" />\n" +
+    "                                <input class=\"form-control\" type=\"text\" name=\"date_start_from\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"$parent.date.date_start\" is-open=\"datepickers.date_start_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"openDatepicker($event, 'date_start_opened')\" show-button-bar=\"false\" />\n" +
     "                            </div>\n" +
     "                            <div class=\"col-md-6\">\n" +
-    "                                <input class=\"form-control\" type=\"text\" name=\"date_finish\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"$parent.date.date_finish\" is-open=\"datepickers.date_finish_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"open($event, 'date_finish_opened')\" show-button-bar=\"false\" />\n" +
+    "                                <input class=\"form-control\" type=\"text\" name=\"date_finish\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"$parent.date.date_finish\" is-open=\"datepickers.date_finish_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"openDatepicker($event, 'date_finish_opened')\" show-button-bar=\"false\" />\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -1251,7 +1251,7 @@ angular.module("views/partials/news/illustrations.tpl.html", []).run(["$template
     "                            class=\"btn btn-primary btn-upload\"\n" +
     "                            url=\"/upload.php\"\n" +
     "                            param=\"file\"\n" +
-    "                            accept=\"image/*\"\n" +
+    "                            accept=\"acceptImageTypes\"\n" +
     "                            multiple=\"true\"\n" +
     "                            force-iframe-upload=\"forceIframeUpload\"\n" +
     "                            data=\"uploadData\"\n" +
@@ -1385,7 +1385,7 @@ angular.module("views/partials/news/list.tpl.html", []).run(["$templateCache", f
     "                    </td>\n" +
     "                    <td>{{item.date_start | date : format : timezone}}</td>\n" +
     "                    <td>{{item.date_finish | date : format : timezone}}</td>\n" +
-    "                    <td>{{item.last_update | date : format : timezone}}</td>\n" +
+    "                    <td>{{item.date_update | date : format : timezone}}</td>\n" +
     "                    <td style=\"white-space: nowrap;\">\n" +
     "                        <a class=\"btn btn-sm btn-info btn-transparent action\" tooltip=\"Копировать\" ng-click=\"$parent.copy(item, $index, $event)\"><i class=\"fa fa-copy\"></i></a>\n" +
     "                        <a class=\"btn btn-sm btn-info btn-transparent action\" tooltip=\"Посмотреть историю\" ng-click=\"$parent.history(item, $index, $event)\"><i class=\"fa fa-stack-overflow\"></i></a>\n" +

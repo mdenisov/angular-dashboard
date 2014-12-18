@@ -15,12 +15,26 @@ function getNews($id) {
         $stmt = $db->prepare($sql);
         $stmt->bindParam("id", $id);
         $stmt->execute();
-        $news = $stmt->fetchObject();
-        $news->title = html_entity_decode($news->title, ENT_QUOTES);
-        $news->text = html_entity_decode($news->text, ENT_QUOTES);
-        $news->preview_text = html_entity_decode($news->preview_text, ENT_QUOTES);
+        $item = $stmt->fetchObject();
+
+        $item->banks = unserialize($item->banks);
+        $item->banks_info = unserialize($item->banks_info);
+        $item->illustrations = unserialize($item->illustrations);
+        $item->insurance = unserialize($item->insurance);
+        $item->leasing = unserialize($item->leasing);
+        $item->mfo = unserialize($item->mfo);
+        $item->products = unserialize($item->products);
+        $item->regions = unserialize($item->regions);
+        $item->rss = unserialize($item->rss);
+        $item->topic = unserialize($item->topic);
+        $item->video = unserialize($item->video);
+
+        $item->title = html_entity_decode($item->title, ENT_QUOTES);
+        $item->text = html_entity_decode($item->text, ENT_QUOTES);
+        $item->preview_text = html_entity_decode($item->preview_text, ENT_QUOTES);
+
         $db = null;
-        echo json_encode($news);
+        echo json_encode($item);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
@@ -30,22 +44,40 @@ function updateNews($id) {
     $request = \Slim\Slim::getInstance()->request();
     $body = $request->getBody();
     $news = json_decode($body);
-    $sql = "UPDATE news SET title=:title, active=:active, block=:block, mainnews=:mainnews, correction=:correction, status=:status, date_start=DATE_FORMAT(:date_start, '%Y-%m-%d'), date_finish=DATE_FORMAT(:date_finish, '%Y-%m-%d'), preview_text=:preview_text, text=:text, image=:image WHERE id=:id";
+    $sql = "UPDATE news SET active=:active, banks=:banks, banks_info=:banks_info, block=:block, correction=:correction, date_finish=DATE_FORMAT(:date_finish, '%Y-%m-%d'), date_start=DATE_FORMAT(:date_start, '%Y-%m-%d'), date_update=NOW(), illustrations=:illustrations, image=:image, insurance=:insurance, leasing=:leasing, mainnews=:mainnews, mfo=:mfo, noshowinbankcard=:noshowinbankcard, preview_text=:preview_text, products=:products, razdel_only=:razdel_only, regions=:regions, rss=:rss, source_name=:source_name, source_url=:source_url, status=:status, sub_category=:sub_category, text=:text, title=:title, topic=:topic, video=:video WHERE id=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("title", htmlentities($news->title, ENT_QUOTES));
+
         $stmt->bindParam("active", $news->active);
-        $stmt->bindParam("block", $news->active);
-        $stmt->bindParam("mainnews", $news->mainnews);
+        $stmt->bindParam("banks", serialize($news->banks));
+        $stmt->bindParam("banks_info", serialize($news->banks_info));
+        $stmt->bindParam("block", $news->block);
         $stmt->bindParam("correction", $news->correction);
-        $stmt->bindParam("status", $news->status);
-        $stmt->bindParam("date_start", $news->date_start);
         $stmt->bindParam("date_finish", $news->date_finish);
-        $stmt->bindParam("preview_text", htmlentities($news->preview_text, ENT_QUOTES));
-        $stmt->bindParam("text", htmlentities($news->text, ENT_QUOTES));
+        $stmt->bindParam("date_start", $news->date_start);
+        $stmt->bindParam("illustrations", serialize($news->illustrations));
         $stmt->bindParam("image", $news->image);
+        $stmt->bindParam("insurance", serialize($news->insurance));
+        $stmt->bindParam("leasing", serialize($news->leasing));
+        $stmt->bindParam("mainnews", $news->mainnews);
+        $stmt->bindParam("mfo", serialize($news->mfo));
+        $stmt->bindParam("noshowinbankcard", $news->noshowinbankcard);
+        $stmt->bindParam("preview_text", htmlentities($news->preview_text, ENT_QUOTES));
+        $stmt->bindParam("products", serialize($news->products));
+        $stmt->bindParam("razdel_only", $news->razdel_only);
+        $stmt->bindParam("regions", serialize($news->regions));
+        $stmt->bindParam("rss", serialize($news->rss));
+        $stmt->bindParam("source_name", $news->source_name);
+        $stmt->bindParam("source_url", $news->source_url);
+        $stmt->bindParam("status", $news->status);
+        $stmt->bindParam("sub_category", $news->sub_category);
+        $stmt->bindParam("text", htmlentities($news->text, ENT_QUOTES));
+        $stmt->bindParam("title", htmlentities($news->title, ENT_QUOTES));
+        $stmt->bindParam("topic", serialize($news->topic));
+        $stmt->bindParam("video", serialize($news->video));
         $stmt->bindParam("id", $id);
+
         $stmt->execute();
         $db = null;
         echo json_encode($news);
@@ -70,21 +102,39 @@ function deleteNews($id) {
 function addNews() {
     $request = \Slim\Slim::getInstance()->request();
     $news = json_decode($request->getBody());
-    $sql = "INSERT INTO news (title, active, block, mainnews, correction, status, date_start, date_finish, preview_text, text, image) VALUES (:title, :active, :block, :mainnews, :correction, :status, STR_TO_DATE(:date_start, '%Y/%m/%d'), STR_TO_DATE(:date_finish, '%Y/%m/%d'), :preview_text, :text, :image)";
+    $sql = "INSERT INTO news (active, banks, banks_info, block, correction, date_create, date_finish, date_start, date_update, illustrations, image, insurance, leasing, mainnews, mfo, noshowinbankcard, preview_text, products, razdel_only, regions, rss, source_name, source_url, status, sub_category, text, title, topic, video) VALUES (:active, :banks, :banks_info, :block, :correction, NOW(), DATE_FORMAT(:date_finish, '%Y-%m-%d'), DATE_FORMAT(:date_start, '%Y-%m-%d'), NOW(), :illustrations, :image, :insurance, :leasing, :mainnews, :mfo, :preview_text, :products, :regions, :rss, :source_name, :source_url, :status, :sub_category, :text, :title, :topic, :video)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("title", htmlentities($news->title, ENT_QUOTES));
+
         $stmt->bindParam("active", $news->active);
-        $stmt->bindParam("block", $news->active);
-        $stmt->bindParam("mainnews", $news->mainnews);
+        $stmt->bindParam("banks", serialize($news->banks));
+        $stmt->bindParam("banks_info", serialize($news->banks_info));
+        $stmt->bindParam("block", $news->block);
         $stmt->bindParam("correction", $news->correction);
-        $stmt->bindParam("status", $news->status);
-        $stmt->bindParam("date_start", $news->date_start);
         $stmt->bindParam("date_finish", $news->date_finish);
-        $stmt->bindParam("preview_text", htmlentities($news->preview_text, ENT_QUOTES));
-        $stmt->bindParam("text", htmlentities($news->text, ENT_QUOTES));
+        $stmt->bindParam("date_start", $news->date_start);
+        $stmt->bindParam("illustrations", serialize($news->illustrations));
         $stmt->bindParam("image", $news->image);
+        $stmt->bindParam("insurance", serialize($news->insurance));
+        $stmt->bindParam("leasing", serialize($news->leasing));
+        $stmt->bindParam("mainnews", $news->mainnews);
+        $stmt->bindParam("mfo", serialize($news->mfo));
+        $stmt->bindParam("noshowinbankcard", $news->noshowinbankcard);
+        $stmt->bindParam("preview_text", htmlentities($news->preview_text, ENT_QUOTES));
+        $stmt->bindParam("products", serialize($news->products));
+        $stmt->bindParam("razdel_only", $news->razdel_only);
+        $stmt->bindParam("regions", serialize($news->regions));
+        $stmt->bindParam("rss", serialize($news->rss));
+        $stmt->bindParam("source_name", $news->source_name);
+        $stmt->bindParam("source_url", $news->source_url);
+        $stmt->bindParam("status", $news->status);
+        $stmt->bindParam("sub_category", $news->sub_category);
+        $stmt->bindParam("text", htmlentities($news->text, ENT_QUOTES));
+        $stmt->bindParam("title", htmlentities($news->title, ENT_QUOTES));
+        $stmt->bindParam("topic", serialize($news->topic));
+        $stmt->bindParam("video", serialize($news->video));
+
         $stmt->execute();
         $news->id = $db->lastInsertId();
         $db = null;
@@ -94,8 +144,11 @@ function addNews() {
     }
 }
 
+/**
+ * @param int $page
+ */
 function getNewsList($page = 1) {
-    $sql = "select * FROM news ORDER BY id DESC";
+    $sql = "SELECT * FROM news ORDER BY id DESC";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);
@@ -103,6 +156,18 @@ function getNewsList($page = 1) {
         $db = null;
 
         foreach($news as $item) {
+            $item->banks = unserialize($item->banks);
+            $item->banks_info = unserialize($item->banks_info);
+            $item->illustrations = unserialize($item->illustrations);
+            $item->insurance = unserialize($item->insurance);
+            $item->leasing = unserialize($item->leasing);
+            $item->mfo = unserialize($item->mfo);
+            $item->products = unserialize($item->products);
+            $item->regions = unserialize($item->regions);
+            $item->rss = unserialize($item->rss);
+            $item->topic = unserialize($item->topic);
+            $item->video = unserialize($item->video);
+
             $item->title = html_entity_decode($item->title, ENT_QUOTES);
             $item->text = html_entity_decode($item->text, ENT_QUOTES);
             $item->preview_text = html_entity_decode($item->preview_text, ENT_QUOTES);

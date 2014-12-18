@@ -63,12 +63,20 @@ module.exports = {
         mfo: {
             type: 'array'
         },
+        noshowinbankcard: {
+            type: 'boolean',
+            defaultsTo: false
+        },
         preview_text: {
             type: 'string',
             required: true
         },
         products: {
             type: 'array'
+        },
+        razdel_only: {
+            type: 'boolean',
+            defaultsTo: false
         },
         regions: {
             type: 'array'

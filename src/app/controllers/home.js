@@ -38,9 +38,9 @@ angular.module('home', [
 		function ($scope, $location, crudListMethods, items, i18nNotifications, $timeout) {
 			$scope.items = $scope.filtered = items;
 
-			angular.forEach($scope.items, function (item) {
-				item.id = parseFloat(item.id);
-			});
+			//angular.forEach($scope.items, function (item) {
+			//	item.id = parseFloat(item.id);
+			//});
 
 			angular.extend($scope, crudListMethods('/news/edit'));
 
@@ -174,44 +174,32 @@ angular.module('home', [
 				$location.path('/news');
 			};
 
-			$scope.open = function($event, opened) {
-				$event.preventDefault();
-				$event.stopPropagation();
-
-				$scope.closeAll();
-				$scope.datepickers[opened] = true;
+			// Image uploader
+			$scope.acceptImageTypes = 'image/*';
+			$scope.removeImage = function() {
+				$scope.item.image = undefined;
 			};
-			$scope.closeAll = function() {
-				$scope.datepickers = [];
+			$scope.onImageError = function (response) {
+				i18nNotifications.push('errors.upload.save.error', 'error');
 			};
-
-            // File uploader
-            $scope.acceptTypes = 'image/*';
-            $scope.removeImage = function() {
-                $scope.item.image = undefined;
-            };
-            $scope.onError = function (response) {
-                i18nNotifications.push('errors.upload.save.error', 'error');
-            };
-            $scope.onComplete = function (response) {
-                i18nNotifications.push('errors.upload.save.success', 'success');
-                $scope.item.image = response.data.file;
-            };
+			$scope.onImageComplete = function (response) {
+				i18nNotifications.push('errors.upload.save.success', 'success');
+				$scope.item.image = response.data.files[0];
+			};
 
 			// llIllustrations
 			$scope.removeIllustrationsImage = function() {
-                //$scope.item.illustrations = undefined;
-            };
-            $scope.onIllustrationsError = function (response) {
-                i18nNotifications.push('errors.upload.save.error', 'error');
-            };
-            $scope.onIllustrationsComplete = function (response) {
-                i18nNotifications.push('errors.upload.save.success', 'success');
-				var image = {};
-				image.src = response.data.file;
-				$scope.item.illustrations.push(image);
-            };
-
+				//$scope.item.image = undefined;
+			};
+			$scope.onIllustrationsError = function (response) {
+				i18nNotifications.push('errors.upload.save.error', 'error');
+			};
+			$scope.onIllustrationsComplete = function (response) {
+				i18nNotifications.push('errors.upload.save.success', 'success');
+				angular.forEach(response.data.files, function (image) {
+					$scope.item.illustrations.push({src: image});
+				});
+			};
 			$scope.selectedAll = false;
 			$scope.selectedAny = false;
 			$scope.isSelectedAllIllustrationItems = function() {
@@ -236,6 +224,20 @@ angular.module('home', [
 				angular.forEach($scope.item.illustrations, function (item) {
 					item.selected = $scope.selectedAll;
 				});
+			};
+
+			// Autocomplete
+			$scope.getProducts = function(query) {
+				return Products.load();
+			};
+			$scope.getBanks = function(query) {
+				return Banks.load();
+			};
+			$scope.getBanksInfo = function(query) {
+				return BanksInfo.load();
+			};
+			$scope.getMfo = function(query) {
+				return Mfo.load();
 			};
 		}
 	]);

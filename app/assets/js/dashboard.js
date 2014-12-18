@@ -52,7 +52,8 @@ angular.module('app', [
 
     .constant('CONFIG', {
         //baseUrl: '/api/index.php'
-        baseUrl: ''
+        baseUrl: '',
+		uploadUrl: '/uploads/'
     })
 
 	.config(['$resourceProvider', function($resourceProvider) {
@@ -123,6 +124,77 @@ angular.module('app', [
 			.setTextAutosizeThreshold(15);
 	})
 
+	.service('Products', function($q) {
+		var tags = [
+			{id: 1, name: 'Вклады'},
+			{id: 2, name: 'Ипотечные кредиты'},
+			{id: 3, name: 'Потребительские кредиты'},
+			{id: 4, name: 'Кредитные карты'},
+			{id: 5, name: 'Дебетовые карты'},
+			{id: 6, name: 'Автокредиты'},
+			{id: 7, name: 'Кредитование малого и среднего бизнеса'},
+			{id: 8, name: 'Обслуживание юрлиц'},
+			{id: 9, name: 'Лизинг'},
+			{id: 10, name: 'Дистанционное обслуживание'},
+			{id: 11, name: 'Финансовая грамотность'},
+			{id: 12, name: 'Реструктуризация кредитов'},
+			{id: 13, name: 'БКИ'},
+			{id: 14, name: 'Микрозаймы'},
+			{id: 15, name: 'Страхование'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.service('Banks', function($q) {
+		var tags = [
+			{id: 1, name: 'АльфаБанк'},
+			{id: 2, name: 'Сбербанк'},
+			{id: 3, name: 'Промсвязь банк'},
+			{id: 4, name: 'УралСиб банк'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.service('BanksInfo', function($q) {
+		var tags = [
+			{id: 1, name: 'Укрэксимбанк(Киев) (ID: 289539)'},
+			{id: 2, name: 'Фидобанк(Киев) (ID: 289529)'},
+			{id: 3, name: 'АзияУниверсалБанк(Бишкек) (ID: 1334114)'},
+			{id: 4, name: 'Легбанк(Киев) (ID: 284663)'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.service('Mfo', function($q) {
+		var tags = [
+			{id: 1, name: 'Домашние деньги (ID: 1)'},
+			{id: 2, name: 'Нано-Финанс (ID: 2)'},
+			{id: 3, name: 'Pay P. S. (ID: 3)'},
+			{id: 4, name: 'Быстроденьги (ID: 4)'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
     .controller('AppCtrl', ['$scope', '$location', 'i18nNotifications', 'breadcrumbs', 'localizedMessages', 'notify',
         function($scope, $location, i18nNotifications, breadcrumbs, localizedMessages, $notify) {
 
@@ -173,6 +245,17 @@ angular.module('app', [
 
 			$scope.home = function () {
 				$location.path('/news');
+			};
+
+			$scope.openDatepicker = function($event, opened) {
+				$event.preventDefault();
+				$event.stopPropagation();
+
+				$scope.closeAll();
+				$scope.datepickers[opened] = true;
+			};
+			$scope.closeAll = function() {
+				$scope.datepickers = [];
 			};
 			
 			$scope.otherServices = '<ul class="services"><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li></ul>';
@@ -354,79 +437,8 @@ angular.module('daytheme', [
 		}
 	])
 
-	.service('Products', function($q) {
-		var tags = [
-			{id: 1, name: 'Вклады'},
-			{id: 2, name: 'Ипотечные кредиты'},
-			{id: 3, name: 'Потребительские кредиты'},
-			{id: 4, name: 'Кредитные карты'},
-			{id: 5, name: 'Дебетовые карты'},
-			{id: 6, name: 'Автокредиты'},
-			{id: 7, name: 'Кредитование малого и среднего бизнеса'},
-			{id: 8, name: 'Обслуживание юрлиц'},
-			{id: 9, name: 'Лизинг'},
-			{id: 10, name: 'Дистанционное обслуживание'},
-			{id: 11, name: 'Финансовая грамотность'},
-			{id: 12, name: 'Реструктуризация кредитов'},
-			{id: 13, name: 'БКИ'},
-			{id: 14, name: 'Микрозаймы'},
-			{id: 15, name: 'Страхование'}
-		];
-
-		this.load = function() {
-			var deferred = $q.defer();
-			deferred.resolve(tags);
-			return deferred.promise;
-		};
-	})
-
-	.service('Banks', function($q) {
-		var tags = [
-			{id: 1, name: 'АльфаБанк'},
-			{id: 2, name: 'Сбербанк'},
-			{id: 3, name: 'Промсвязь банк'},
-			{id: 4, name: 'УралСиб банк'}
-		];
-
-		this.load = function() {
-			var deferred = $q.defer();
-			deferred.resolve(tags);
-			return deferred.promise;
-		};
-	})
-
-	.service('BanksInfo', function($q) {
-		var tags = [
-			{id: 1, name: 'Укрэксимбанк(Киев) (ID: 289539)'},
-			{id: 2, name: 'Фидобанк(Киев) (ID: 289529)'},
-			{id: 3, name: 'АзияУниверсалБанк(Бишкек) (ID: 1334114)'},
-			{id: 4, name: 'Легбанк(Киев) (ID: 284663)'}
-		];
-
-		this.load = function() {
-			var deferred = $q.defer();
-			deferred.resolve(tags);
-			return deferred.promise;
-		};
-	})
-
-	.service('Mfo', function($q) {
-		var tags = [
-			{id: 1, name: 'Домашние деньги (ID: 1)'},
-			{id: 2, name: 'Нано-Финанс (ID: 2)'},
-			{id: 3, name: 'Pay P. S. (ID: 3)'},
-			{id: 4, name: 'Быстроденьги (ID: 4)'}
-		];
-
-		this.load = function() {
-			var deferred = $q.defer();
-			deferred.resolve(tags);
-			return deferred.promise;
-		};
-	})
-
-	.controller('NewsDaythemeEditCtrl', ['$scope', '$location', 'item', 'i18nNotifications', 'upload', 'Products', 'Banks', 'BanksInfo', 'Mfo',
-		function ($scope, $location, item, i18nNotifications, upload, Products, Banks, BanksInfo, Mfo) {
+	.controller('NewsDaythemeEditCtrl', ['$scope', 'CONFIG', '$location', '$timeout', 'item', 'i18nNotifications', 'upload', 'Products', 'Banks', 'BanksInfo', 'Mfo',
+		function ($scope, CONFIG, $location, $timeout, item, i18nNotifications, upload, Products, Banks, BanksInfo, Mfo) {
 
 			$scope.item = item;
 			$scope.item.illustrations = [];
@@ -449,44 +461,34 @@ angular.module('daytheme', [
 				$location.path('/news/daytheme');
 			};
 
-			$scope.open = function($event, opened) {
-				$event.preventDefault();
-				$event.stopPropagation();
-
-				$scope.closeAll();
-				$scope.datepickers[opened] = true;
-			};
-			$scope.closeAll = function() {
-				$scope.datepickers = [];
-			};
-
-			// File uploader
-			$scope.acceptTypes = 'image/*';
+			// Image uploader
+			$scope.acceptImageTypes = 'image/*';
 			$scope.removeImage = function() {
 				$scope.item.image = undefined;
 			};
-			$scope.onError = function (response) {
+			$scope.onImageError = function (response) {
 				i18nNotifications.push('errors.upload.save.error', 'error');
 			};
-			$scope.onComplete = function (response) {
-				i18nNotifications.push('errors.upload.save.success', 'success');
-				$scope.item.image = response.data.files[0].fd;
+			$scope.onImageComplete = function (response) {
+				$timeout(function() {
+					i18nNotifications.push('errors.upload.save.success', 'success');
+					$scope.item.image = CONFIG.uploadUrl + response.data.files[0].localName;
+				}, 1500);
 			};
 
 			// llIllustrations
 			$scope.removeIllustrationsImage = function() {
-				//$scope.item.illustrations = undefined;
+				//$scope.item.image = undefined;
 			};
 			$scope.onIllustrationsError = function (response) {
 				i18nNotifications.push('errors.upload.save.error', 'error');
 			};
 			$scope.onIllustrationsComplete = function (response) {
 				i18nNotifications.push('errors.upload.save.success', 'success');
-				var image = {};
-				image.src = response.data.files[0].fd;
-				$scope.item.illustrations.push(image);
+				angular.forEach(response.data.files, function (image) {
+					$scope.item.illustrations.push({src: image.localName});
+				});
 			};
-
 			$scope.selectedAll = false;
 			$scope.selectedAny = false;
 			$scope.isSelectedAllIllustrationItems = function() {
@@ -526,7 +528,6 @@ angular.module('daytheme', [
 			$scope.getMfo = function(query) {
 				return Mfo.load();
 			};
-
 
 		}
 	]);
@@ -724,9 +725,9 @@ angular.module('home', [
 		function ($scope, $location, crudListMethods, items, i18nNotifications, $timeout) {
 			$scope.items = $scope.filtered = items;
 
-			angular.forEach($scope.items, function (item) {
-				item.id = parseFloat(item.id);
-			});
+			//angular.forEach($scope.items, function (item) {
+			//	item.id = parseFloat(item.id);
+			//});
 
 			angular.extend($scope, crudListMethods('/news/edit'));
 
@@ -860,44 +861,32 @@ angular.module('home', [
 				$location.path('/news');
 			};
 
-			$scope.open = function($event, opened) {
-				$event.preventDefault();
-				$event.stopPropagation();
-
-				$scope.closeAll();
-				$scope.datepickers[opened] = true;
+			// Image uploader
+			$scope.acceptImageTypes = 'image/*';
+			$scope.removeImage = function() {
+				$scope.item.image = undefined;
 			};
-			$scope.closeAll = function() {
-				$scope.datepickers = [];
+			$scope.onImageError = function (response) {
+				i18nNotifications.push('errors.upload.save.error', 'error');
 			};
-
-            // File uploader
-            $scope.acceptTypes = 'image/*';
-            $scope.removeImage = function() {
-                $scope.item.image = undefined;
-            };
-            $scope.onError = function (response) {
-                i18nNotifications.push('errors.upload.save.error', 'error');
-            };
-            $scope.onComplete = function (response) {
-                i18nNotifications.push('errors.upload.save.success', 'success');
-                $scope.item.image = response.data.file;
-            };
+			$scope.onImageComplete = function (response) {
+				i18nNotifications.push('errors.upload.save.success', 'success');
+				$scope.item.image = response.data.files[0];
+			};
 
 			// llIllustrations
 			$scope.removeIllustrationsImage = function() {
-                //$scope.item.illustrations = undefined;
-            };
-            $scope.onIllustrationsError = function (response) {
-                i18nNotifications.push('errors.upload.save.error', 'error');
-            };
-            $scope.onIllustrationsComplete = function (response) {
-                i18nNotifications.push('errors.upload.save.success', 'success');
-				var image = {};
-				image.src = response.data.file;
-				$scope.item.illustrations.push(image);
-            };
-
+				//$scope.item.image = undefined;
+			};
+			$scope.onIllustrationsError = function (response) {
+				i18nNotifications.push('errors.upload.save.error', 'error');
+			};
+			$scope.onIllustrationsComplete = function (response) {
+				i18nNotifications.push('errors.upload.save.success', 'success');
+				angular.forEach(response.data.files, function (image) {
+					$scope.item.illustrations.push({src: image});
+				});
+			};
 			$scope.selectedAll = false;
 			$scope.selectedAny = false;
 			$scope.isSelectedAllIllustrationItems = function() {
@@ -922,6 +911,20 @@ angular.module('home', [
 				angular.forEach($scope.item.illustrations, function (item) {
 					item.selected = $scope.selectedAll;
 				});
+			};
+
+			// Autocomplete
+			$scope.getProducts = function(query) {
+				return Products.load();
+			};
+			$scope.getBanks = function(query) {
+				return Banks.load();
+			};
+			$scope.getBanksInfo = function(query) {
+				return BanksInfo.load();
+			};
+			$scope.getMfo = function(query) {
+				return Mfo.load();
 			};
 		}
 	]);

@@ -52,7 +52,8 @@ angular.module('app', [
 
     .constant('CONFIG', {
         //baseUrl: '/api/index.php'
-        baseUrl: ''
+        baseUrl: '',
+		uploadUrl: '/uploads/'
     })
 
 	.config(['$resourceProvider', function($resourceProvider) {
@@ -123,6 +124,77 @@ angular.module('app', [
 			.setTextAutosizeThreshold(15);
 	})
 
+	.service('Products', function($q) {
+		var tags = [
+			{id: 1, name: 'Вклады'},
+			{id: 2, name: 'Ипотечные кредиты'},
+			{id: 3, name: 'Потребительские кредиты'},
+			{id: 4, name: 'Кредитные карты'},
+			{id: 5, name: 'Дебетовые карты'},
+			{id: 6, name: 'Автокредиты'},
+			{id: 7, name: 'Кредитование малого и среднего бизнеса'},
+			{id: 8, name: 'Обслуживание юрлиц'},
+			{id: 9, name: 'Лизинг'},
+			{id: 10, name: 'Дистанционное обслуживание'},
+			{id: 11, name: 'Финансовая грамотность'},
+			{id: 12, name: 'Реструктуризация кредитов'},
+			{id: 13, name: 'БКИ'},
+			{id: 14, name: 'Микрозаймы'},
+			{id: 15, name: 'Страхование'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.service('Banks', function($q) {
+		var tags = [
+			{id: 1, name: 'АльфаБанк'},
+			{id: 2, name: 'Сбербанк'},
+			{id: 3, name: 'Промсвязь банк'},
+			{id: 4, name: 'УралСиб банк'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.service('BanksInfo', function($q) {
+		var tags = [
+			{id: 1, name: 'Укрэксимбанк(Киев) (ID: 289539)'},
+			{id: 2, name: 'Фидобанк(Киев) (ID: 289529)'},
+			{id: 3, name: 'АзияУниверсалБанк(Бишкек) (ID: 1334114)'},
+			{id: 4, name: 'Легбанк(Киев) (ID: 284663)'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
+	.service('Mfo', function($q) {
+		var tags = [
+			{id: 1, name: 'Домашние деньги (ID: 1)'},
+			{id: 2, name: 'Нано-Финанс (ID: 2)'},
+			{id: 3, name: 'Pay P. S. (ID: 3)'},
+			{id: 4, name: 'Быстроденьги (ID: 4)'}
+		];
+
+		this.load = function() {
+			var deferred = $q.defer();
+			deferred.resolve(tags);
+			return deferred.promise;
+		};
+	})
+
     .controller('AppCtrl', ['$scope', '$location', 'i18nNotifications', 'breadcrumbs', 'localizedMessages', 'notify',
         function($scope, $location, i18nNotifications, breadcrumbs, localizedMessages, $notify) {
 
@@ -173,6 +245,17 @@ angular.module('app', [
 
 			$scope.home = function () {
 				$location.path('/news');
+			};
+
+			$scope.openDatepicker = function($event, opened) {
+				$event.preventDefault();
+				$event.stopPropagation();
+
+				$scope.closeAll();
+				$scope.datepickers[opened] = true;
+			};
+			$scope.closeAll = function() {
+				$scope.datepickers = [];
 			};
 			
 			$scope.otherServices = '<ul class="services"><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li></ul>';

@@ -92,7 +92,7 @@
                     </td>
                     <td>{{item.date_start | date : format : timezone}}</td>
                     <td>{{item.date_finish | date : format : timezone}}</td>
-                    <td>{{item.last_update | date : format : timezone}}</td>
+                    <td>{{item.date_update | date : format : timezone}}</td>
                     <td style="white-space: nowrap;">
                         <a class="btn btn-sm btn-info btn-transparent action" tooltip="Копировать" ng-click="$parent.copy(item, $index, $event)"><i class="fa fa-copy"></i></a>
                         <a class="btn btn-sm btn-info btn-transparent action" tooltip="Посмотреть историю" ng-click="$parent.history(item, $index, $event)"><i class="fa fa-stack-overflow"></i></a>
