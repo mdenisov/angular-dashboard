@@ -11,7 +11,7 @@
 
     <div id="page-content" class="panel-body">
 
-        <form class="form-horizontal" crud-edit="item" name="form">
+        <form class="form-horizontal" crud-edit="item" name="form" enctype="multipart/form-data">
 
             <tabset>
 
@@ -172,7 +172,7 @@
                                 <fieldset>
                                     <div class="form-group" ng-show="item.image">
                                         <div class="col-md-12 col-lg-12">
-                                            <img class="img-thumbnail img-responsive" ng-attr-src="{{item.image}}" />
+                                            <img class="img-thumbnail img-responsive" ng-attr-src="{{item.image.src}}" />
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-bottom: 0;">

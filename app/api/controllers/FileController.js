@@ -22,24 +22,31 @@ module.exports = {
                     return newName;
                 },
                 completed: function(fileData, next) {
-
+                    console.log(fileData);
                     results.push(fileData);
-
                     next();
-
-                    //Document.create(fileData).exec(function(err, savedFile){
-                    //    if (err) {
-                    //        next(err);
-                    //    } else {
-                    //        results.push({
-                    //            id: savedFile.id,
-                    //            url: '/files/' + savedFile.localName
-                    //        });
-                    //        next();
-                    //    }
-                    //});
                 }
             };
+
+        //async.map(paramNames, function(file, cb) {
+		//
+        //    req.file(file).upload(function (err, files) {
+		//
+        //        // save the file, and then:
+        //        return cb(err, files);
+		//
+        //    });
+		//
+        //}, function doneUploading(err, files) {
+		//
+        //    // If any errors occurred, show server error
+        //    if (err) {return res.serverError(err);}
+        //    // Otherwise list files that were uploaded
+        //    return res.json(files);
+		//
+        //});
+
+        sails.log.debug(req.file('file'));
 
         req.file('file').upload(Uploader.documentReceiverStream(streamOptions),
             function (err, files) {

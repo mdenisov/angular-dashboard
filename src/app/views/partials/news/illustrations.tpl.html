@@ -5,10 +5,9 @@
                 <div class="file-input-wrapper">
                     <upload-button
                             class="btn btn-primary btn-upload"
-                            url="/upload.php"
+                            url="/file/upload"
                             param="file"
                             accept="acceptImageTypes"
-                            multiple="true"
                             force-iframe-upload="forceIframeUpload"
                             data="uploadData"
                             on-upload="onIllustrationsUpload(files)"
@@ -29,7 +28,7 @@
                 <button class="btn btn-default" tooltip="Редактировать" ng-disabled="!item.illustrations.length || !selectedAny"><i class="fa fa-pencil"></i></button>
             </li>
             <li>
-                <button class="btn btn-default" tooltip="Удалить" ng-disabled="!item.illustrations.length || !selectedAny"><i class="fa fa-trash-o"></i></button>
+                <button class="btn btn-default" tooltip="Удалить" ng-click="removeIllustrationItem()" ng-disabled="!item.illustrations.length || !selectedAny"><i class="fa fa-trash-o"></i></button>
             </li>
         </ul>
     </div>

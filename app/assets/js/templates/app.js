@@ -147,7 +147,7 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "    <div id=\"page-content\" class=\"panel-body\">\n" +
     "\n" +
-    "        <form class=\"form-horizontal\" crud-edit=\"item\" name=\"form\">\n" +
+    "        <form class=\"form-horizontal\" crud-edit=\"item\" name=\"form\" enctype=\"multipart/form-data\">\n" +
     "\n" +
     "            <tabset>\n" +
     "\n" +
@@ -308,7 +308,7 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                                <fieldset>\n" +
     "                                    <div class=\"form-group\" ng-show=\"item.image\">\n" +
     "                                        <div class=\"col-md-12 col-lg-12\">\n" +
-    "                                            <img class=\"img-thumbnail img-responsive\" ng-attr-src=\"{{item.image}}\" />\n" +
+    "                                            <img class=\"img-thumbnail img-responsive\" ng-attr-src=\"{{item.image.src}}\" />\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
     "                                    <div class=\"form-group\" style=\"margin-bottom: 0;\">\n" +
@@ -1249,10 +1249,9 @@ angular.module("views/partials/news/illustrations.tpl.html", []).run(["$template
     "                <div class=\"file-input-wrapper\">\n" +
     "                    <upload-button\n" +
     "                            class=\"btn btn-primary btn-upload\"\n" +
-    "                            url=\"/upload.php\"\n" +
+    "                            url=\"/file/upload\"\n" +
     "                            param=\"file\"\n" +
     "                            accept=\"acceptImageTypes\"\n" +
-    "                            multiple=\"true\"\n" +
     "                            force-iframe-upload=\"forceIframeUpload\"\n" +
     "                            data=\"uploadData\"\n" +
     "                            on-upload=\"onIllustrationsUpload(files)\"\n" +
@@ -1273,7 +1272,7 @@ angular.module("views/partials/news/illustrations.tpl.html", []).run(["$template
     "                <button class=\"btn btn-default\" tooltip=\"Редактировать\" ng-disabled=\"!item.illustrations.length || !selectedAny\"><i class=\"fa fa-pencil\"></i></button>\n" +
     "            </li>\n" +
     "            <li>\n" +
-    "                <button class=\"btn btn-default\" tooltip=\"Удалить\" ng-disabled=\"!item.illustrations.length || !selectedAny\"><i class=\"fa fa-trash-o\"></i></button>\n" +
+    "                <button class=\"btn btn-default\" tooltip=\"Удалить\" ng-click=\"removeIllustrationItem()\" ng-disabled=\"!item.illustrations.length || !selectedAny\"><i class=\"fa fa-trash-o\"></i></button>\n" +
     "            </li>\n" +
     "        </ul>\n" +
     "    </div>\n" +

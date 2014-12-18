@@ -217,6 +217,8 @@ angular.module('app', [
                 templateUrl: 'views/notify.tpl.html'
             });
 
+			$scope.acceptImageTypes = 'image/*';
+
 			$scope.isNavbarActive = function (navBarPath) {
 				return navBarPath === breadcrumbs.getFirst().name;
 			};
@@ -441,7 +443,8 @@ angular.module('daytheme', [
 		function ($scope, CONFIG, $location, $timeout, item, i18nNotifications, upload, Products, Banks, BanksInfo, Mfo) {
 
 			$scope.item = item;
-			$scope.item.illustrations = [];
+			$scope.item.image = $scope.item.image || {};
+			$scope.item.illustrations = $scope.item.illustrations || [];
 
 			$scope.redactorOptions = {
 				buttons: ['formatting', '|', 'bold', 'italic']
@@ -462,7 +465,6 @@ angular.module('daytheme', [
 			};
 
 			// Image uploader
-			$scope.acceptImageTypes = 'image/*';
 			$scope.removeImage = function() {
 				$scope.item.image = undefined;
 			};
@@ -472,7 +474,7 @@ angular.module('daytheme', [
 			$scope.onImageComplete = function (response) {
 				$timeout(function() {
 					i18nNotifications.push('errors.upload.save.success', 'success');
-					$scope.item.image = CONFIG.uploadUrl + response.data.files[0].localName;
+					$scope.item.image.src = CONFIG.uploadUrl + response.data.files[0].localName;
 				}, 1500);
 			};
 
@@ -487,7 +489,7 @@ angular.module('daytheme', [
 				$timeout(function() {
 					i18nNotifications.push('errors.upload.save.success', 'success');
 					angular.forEach(response.data.files, function (image) {
-						$scope.item.illustrations.push({src: image.localName});
+						$scope.item.illustrations.push({src: CONFIG.uploadUrl + image.localName});
 					});
 				}, 1500);
 			};
@@ -514,6 +516,13 @@ angular.module('daytheme', [
 				$scope.selectedAll = $scope.selectedAny = !($scope.selectedAll);
 				angular.forEach($scope.item.illustrations, function (item) {
 					item.selected = $scope.selectedAll;
+				});
+			};
+			$scope.removeIllustrationItem = function() {
+				angular.forEach($scope.item.illustrations, function (item, index) {
+					if (item.selected) {
+						$scope.item.illustrations.splice(index, 1);
+					}
 				});
 			};
 
@@ -839,11 +848,11 @@ angular.module('home', [
 		}
 	])
 
-	.controller('NewsEditCtrl', ['$scope', '$location', '$timeout', 'item', 'i18nNotifications', 'upload',
-		function ($scope, $location, $timeout, item, i18nNotifications, upload) {
+	.controller('NewsEditCtrl', ['$scope', 'CONFIG', '$location', '$timeout', 'item', 'i18nNotifications', 'upload',
+		function ($scope, CONFIG, $location, $timeout, item, i18nNotifications, upload) {
 
 			$scope.item = item;
-			$scope.item.illustrations = [];
+			$scope.item.illustrations = $scope.item.illustrations || [];
 
 			$scope.redactorOptions = {
 				buttons: ['formatting', '|', 'bold', 'italic']
@@ -864,7 +873,6 @@ angular.module('home', [
 			};
 
 			// Image uploader
-			$scope.acceptImageTypes = 'image/*';
 			$scope.removeImage = function() {
 				$scope.item.image = undefined;
 			};
@@ -889,7 +897,7 @@ angular.module('home', [
 				$timeout(function() {
 					i18nNotifications.push('errors.upload.save.success', 'success');
 					angular.forEach(response.data.files, function (image) {
-						$scope.item.illustrations.push({src: image.localName});
+						$scope.item.illustrations.push({src: CONFIG.uploadUrl + image.localName});
 					});
 				}, 1500);
 			};
@@ -916,6 +924,13 @@ angular.module('home', [
 				$scope.selectedAll = $scope.selectedAny = !($scope.selectedAll);
 				angular.forEach($scope.item.illustrations, function (item) {
 					item.selected = $scope.selectedAll;
+				});
+			};
+			$scope.removeIllustrationItem = function() {
+				angular.forEach($scope.item.illustrations, function (item, index) {
+					if (item.selected) {
+						$scope.item.illustrations.splice(index, 1);
+					}
 				});
 			};
 

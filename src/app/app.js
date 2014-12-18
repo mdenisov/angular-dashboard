@@ -217,6 +217,8 @@ angular.module('app', [
                 templateUrl: 'views/notify.tpl.html'
             });
 
+			$scope.acceptImageTypes = 'image/*';
+
 			$scope.isNavbarActive = function (navBarPath) {
 				return navBarPath === breadcrumbs.getFirst().name;
 			};

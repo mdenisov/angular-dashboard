@@ -48,7 +48,7 @@ module.exports = {
             type: 'array'
         },
         image: {
-            type: 'string'
+            type: 'object'
         },
         insurance: {
             type: 'array'
@@ -83,6 +83,9 @@ module.exports = {
         },
         rss: {
             type: 'array'
+        },
+        source_name: {
+            type: 'string'
         },
         status: {
             type: 'integer',
