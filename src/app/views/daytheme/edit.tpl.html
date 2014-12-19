@@ -170,7 +170,7 @@
                             <label class="control-label col-md-2 col-lg-1">Изображение</label>
                             <div class="col-md-5 col-lg-3">
                                 <fieldset>
-                                    <div class="form-group" ng-show="item.image">
+                                    <div class="form-group" ng-show="item.image.src">
                                         <div class="col-md-12 col-lg-12">
                                             <img class="img-thumbnail img-responsive" ng-attr-src="{{item.image.src}}" />
                                         </div>
@@ -189,13 +189,13 @@
                                                         on-success="onSuccess(response)"
                                                         on-error="onImageError(response)"
                                                         on-complete="onImageComplete(response)">
-                                                    {{ item.image ? 'Заменить' : 'Выбрать' }}
+                                                    {{ item.image.src ? 'Заменить' : 'Выбрать' }}
                                                 </upload-button>
                                             </div>
-                                            <button type="button" class="btn btn-danger" ng-show="item.image" ng-click="removeImage()">Удалить</button>
+                                            <button type="button" class="btn btn-danger" ng-show="item.image.src" ng-click="removeImage()">Удалить</button>
                                         </div>
                                     </div>
-                                    <div class="form-horizontal col-md-12 col-lg-12" ng-show="item.image" style="margin-top: 15px;">
+                                    <div class="form-horizontal col-md-12 col-lg-12" ng-show="item.image.src" style="margin-top: 15px;">
                                         <div class="form-group">
                                             <label class="control-label">Источник</label>
                                             <input class="form-control" type="text" name="image.source" ng-model="item.image.source"/>

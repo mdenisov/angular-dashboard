@@ -306,7 +306,7 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                            <label class=\"control-label col-md-2 col-lg-1\">Изображение</label>\n" +
     "                            <div class=\"col-md-5 col-lg-3\">\n" +
     "                                <fieldset>\n" +
-    "                                    <div class=\"form-group\" ng-show=\"item.image\">\n" +
+    "                                    <div class=\"form-group\" ng-show=\"item.image.src\">\n" +
     "                                        <div class=\"col-md-12 col-lg-12\">\n" +
     "                                            <img class=\"img-thumbnail img-responsive\" ng-attr-src=\"{{item.image.src}}\" />\n" +
     "                                        </div>\n" +
@@ -325,13 +325,13 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                                                        on-success=\"onSuccess(response)\"\n" +
     "                                                        on-error=\"onImageError(response)\"\n" +
     "                                                        on-complete=\"onImageComplete(response)\">\n" +
-    "                                                    {{ item.image ? 'Заменить' : 'Выбрать' }}\n" +
+    "                                                    {{ item.image.src ? 'Заменить' : 'Выбрать' }}\n" +
     "                                                </upload-button>\n" +
     "                                            </div>\n" +
-    "                                            <button type=\"button\" class=\"btn btn-danger\" ng-show=\"item.image\" ng-click=\"removeImage()\">Удалить</button>\n" +
+    "                                            <button type=\"button\" class=\"btn btn-danger\" ng-show=\"item.image.src\" ng-click=\"removeImage()\">Удалить</button>\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
-    "                                    <div class=\"form-horizontal col-md-12 col-lg-12\" ng-show=\"item.image\" style=\"margin-top: 15px;\">\n" +
+    "                                    <div class=\"form-horizontal col-md-12 col-lg-12\" ng-show=\"item.image.src\" style=\"margin-top: 15px;\">\n" +
     "                                        <div class=\"form-group\">\n" +
     "                                            <label class=\"control-label\">Источник</label>\n" +
     "                                            <input class=\"form-control\" type=\"text\" name=\"image.source\" ng-model=\"item.image.source\"/>\n" +
@@ -790,42 +790,49 @@ angular.module("views/home/edit.tpl.html", []).run(["$templateCache", function($
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
-    "                            <label class=\"control-label col-md-1\">Изображение</label>\n" +
-    "                            <div class=\"col-md-8\">\n" +
-    "\n" +
-    "                                <div class=\"row\">\n" +
-    "\n" +
-    "                                    <div class=\"col-md-12\" ng-show=\"item.image\">\n" +
-    "\n" +
-    "                                        <div class=\"img-thumbnail img-preview\" style=\"margin-bottom: 10px;\">\n" +
-    "                                            <img ng-attr-src=\"{{item.image}}\" />\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Изображение</label>\n" +
+    "                            <div class=\"col-md-5 col-lg-3\">\n" +
+    "                                <fieldset>\n" +
+    "                                    <div class=\"form-group\" ng-show=\"item.image.src\">\n" +
+    "                                        <div class=\"col-md-12 col-lg-12\">\n" +
+    "                                            <img class=\"img-thumbnail img-responsive\" ng-attr-src=\"{{item.image.src}}\" />\n" +
     "                                        </div>\n" +
-    "\n" +
     "                                    </div>\n" +
-    "                                    <div class=\"col-md-12\">\n" +
-    "\n" +
-    "                                        <div class=\"file-input-wrapper\">\n" +
-    "                                            <upload-button\n" +
-    "                                                    class=\"btn btn-primary btn-upload\"\n" +
-    "                                                    url=\"/upload.php\"\n" +
-    "                                                    param=\"file\"\n" +
-    "                                                    accept=\"acceptTypes\"\n" +
-    "                                                    multiple=\"allowMultiple\"\n" +
-    "                                                    force-iframe-upload=\"forceIframeUpload\"\n" +
-    "                                                    data=\"uploadData\"\n" +
-    "                                                    on-upload=\"onUpload(files)\"\n" +
-    "                                                    on-success=\"onSuccess(response)\"\n" +
-    "                                                    on-error=\"onError(response)\"\n" +
-    "                                                    on-complete=\"onComplete(response)\">\n" +
-    "                                                {{ item.image ? 'Заменить' : 'Выбрать' }}\n" +
-    "                                            </upload-button>\n" +
+    "                                    <div class=\"form-group\" style=\"margin-bottom: 0;\">\n" +
+    "                                        <div class=\"col-md-12 col-lg-12\">\n" +
+    "                                            <div class=\"file-input-wrapper\">\n" +
+    "                                                <upload-button\n" +
+    "                                                        class=\"btn btn-primary btn-upload\"\n" +
+    "                                                        url=\"/file/upload\"\n" +
+    "                                                        param=\"file\"\n" +
+    "                                                        accept=\"acceptImageTypes\"\n" +
+    "                                                        force-iframe-upload=\"forceIframeUpload\"\n" +
+    "                                                        data=\"uploadData\"\n" +
+    "                                                        on-upload=\"onUpload(files)\"\n" +
+    "                                                        on-success=\"onSuccess(response)\"\n" +
+    "                                                        on-error=\"onImageError(response)\"\n" +
+    "                                                        on-complete=\"onImageComplete(response)\">\n" +
+    "                                                    {{ item.image.src ? 'Заменить' : 'Выбрать' }}\n" +
+    "                                                </upload-button>\n" +
+    "                                            </div>\n" +
+    "                                            <button type=\"button\" class=\"btn btn-danger\" ng-show=\"item.image.src\" ng-click=\"removeImage()\">Удалить</button>\n" +
     "                                        </div>\n" +
-    "                                        <button type=\"button\" class=\"btn btn-danger\" ng-show=\"item.image\" ng-click=\"removeImage()\">Удалить</button>\n" +
-    "\n" +
     "                                    </div>\n" +
-    "\n" +
-    "                                </div>\n" +
-    "\n" +
+    "                                    <div class=\"form-horizontal col-md-12 col-lg-12\" ng-show=\"item.image.src\" style=\"margin-top: 15px;\">\n" +
+    "                                        <div class=\"form-group\">\n" +
+    "                                            <label class=\"control-label\">Источник</label>\n" +
+    "                                            <input class=\"form-control\" type=\"text\" name=\"image.source\" ng-model=\"item.image.source\"/>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"form-group\">\n" +
+    "                                            <label class=\"control-label\">Ссылка</label>\n" +
+    "                                            <input class=\"form-control\" type=\"text\" name=\"image.source_url\" ng-model=\"item.image.source_url\"/>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"form-group\" style=\"margin-bottom: 0;\">\n" +
+    "                                            <label class=\"control-label\">Подпись</label>\n" +
+    "                                            <input class=\"form-control\" type=\"text\" name=\"image.sign\" ng-model=\"item.image.sign\"/>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                </fieldset>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\" ng-show=\"item.image\">\n" +
@@ -1107,7 +1114,7 @@ angular.module("views/lenta/edit.tpl.html", []).run(["$templateCache", function(
     "                            <label class=\"control-label col-md-2 col-lg-1\">Изображение</label>\n" +
     "                            <div class=\"col-md-5 col-lg-3\">\n" +
     "                                <fieldset>\n" +
-    "                                    <div class=\"form-group\" ng-show=\"item.image\">\n" +
+    "                                    <div class=\"form-group\" ng-show=\"item.image.src\">\n" +
     "                                        <div class=\"col-md-12 col-lg-12\">\n" +
     "                                            <img class=\"img-thumbnail img-responsive\" ng-attr-src=\"{{item.image.src}}\" />\n" +
     "                                        </div>\n" +
@@ -1126,13 +1133,13 @@ angular.module("views/lenta/edit.tpl.html", []).run(["$templateCache", function(
     "                                                        on-success=\"onSuccess(response)\"\n" +
     "                                                        on-error=\"onImageError(response)\"\n" +
     "                                                        on-complete=\"onImageComplete(response)\">\n" +
-    "                                                    {{ item.image ? 'Заменить' : 'Выбрать' }}\n" +
+    "                                                    {{ item.image.src ? 'Заменить' : 'Выбрать' }}\n" +
     "                                                </upload-button>\n" +
     "                                            </div>\n" +
-    "                                            <button type=\"button\" class=\"btn btn-danger\" ng-show=\"item.image\" ng-click=\"removeImage()\">Удалить</button>\n" +
+    "                                            <button type=\"button\" class=\"btn btn-danger\" ng-show=\"item.image.src\" ng-click=\"removeImage()\">Удалить</button>\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
-    "                                    <div class=\"form-horizontal col-md-12 col-lg-12\" ng-show=\"item.image\" style=\"margin-top: 15px;\">\n" +
+    "                                    <div class=\"form-horizontal col-md-12 col-lg-12\" ng-show=\"item.image.src\" style=\"margin-top: 15px;\">\n" +
     "                                        <div class=\"form-group\">\n" +
     "                                            <label class=\"control-label\">Источник</label>\n" +
     "                                            <input class=\"form-control\" type=\"text\" name=\"image.source\" ng-model=\"item.image.source\"/>\n" +

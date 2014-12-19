@@ -176,7 +176,7 @@ angular.module('home', [
 
 			// Image uploader
 			$scope.removeImage = function() {
-				$scope.item.image = undefined;
+				$scope.item.image = {};
 			};
 			$scope.onImageError = function (response) {
 				i18nNotifications.push('errors.upload.save.error', 'error');
