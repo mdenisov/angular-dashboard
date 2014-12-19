@@ -22,6 +22,7 @@ angular.module('app', [
 
         'home',
 		'daytheme',
+		'lenta',
 		'history',
 		'topic',
 		'settings',
