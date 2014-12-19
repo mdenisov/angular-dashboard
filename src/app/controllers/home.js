@@ -235,19 +235,5 @@ angular.module('home', [
 					}
 				});
 			};
-
-			// Autocomplete
-			$scope.getProducts = function(query) {
-				return Products.load();
-			};
-			$scope.getBanks = function(query) {
-				return Banks.load();
-			};
-			$scope.getBanksInfo = function(query) {
-				return BanksInfo.load();
-			};
-			$scope.getMfo = function(query) {
-				return Mfo.load();
-			};
 		}
 	]);

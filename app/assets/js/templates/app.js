@@ -256,7 +256,7 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                            <label class=\"control-label col-md-2 col-lg-1\">Страховые компании</label>\n" +
     "                            <div class=\"col-md-5 col-lg-5\">\n" +
     "                                <tags-input ng-model=\"item.insurance\" display-property=\"name\">\n" +
-    "                                    <auto-complete source=\"getMfo($query)\"></auto-complete>\n" +
+    "                                    <auto-complete source=\"getInsurance($query)\"></auto-complete>\n" +
     "                                </tags-input>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -264,7 +264,7 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                            <label class=\"control-label col-md-2 col-lg-1\">Регионы</label>\n" +
     "                            <div class=\"col-md-5 col-lg-5\">\n" +
     "                                <tags-input ng-model=\"item.regions\" display-property=\"name\">\n" +
-    "                                    <auto-complete source=\"getMfo($query)\"></auto-complete>\n" +
+    "                                    <auto-complete source=\"getRegions($query)\"></auto-complete>\n" +
     "                                </tags-input>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -272,7 +272,7 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                            <label class=\"control-label col-md-2 col-lg-1\">RSS</label>\n" +
     "                            <div class=\"col-md-5 col-lg-5\">\n" +
     "                                <tags-input ng-model=\"item.rss\" display-property=\"name\">\n" +
-    "                                    <auto-complete source=\"getMfo($query)\"></auto-complete>\n" +
+    "                                    <auto-complete source=\"getRss($query)\"></auto-complete>\n" +
     "                                </tags-input>\n" +
     "                            </div>\n" +
     "                        </div>\n" +

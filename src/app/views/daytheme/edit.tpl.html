@@ -120,7 +120,7 @@
                             <label class="control-label col-md-2 col-lg-1">Страховые компании</label>
                             <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.insurance" display-property="name">
-                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                    <auto-complete source="getInsurance($query)"></auto-complete>
                                 </tags-input>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                             <label class="control-label col-md-2 col-lg-1">Регионы</label>
                             <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.regions" display-property="name">
-                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                    <auto-complete source="getRegions($query)"></auto-complete>
                                 </tags-input>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                             <label class="control-label col-md-2 col-lg-1">RSS</label>
                             <div class="col-md-5 col-lg-5">
                                 <tags-input ng-model="item.rss" display-property="name">
-                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                    <auto-complete source="getRss($query)"></auto-complete>
                                 </tags-input>
                             </div>
                         </div>

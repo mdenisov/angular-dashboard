@@ -151,8 +151,8 @@ angular.module('daytheme', [
 		}
 	])
 
-	.controller('NewsDaythemeEditCtrl', ['$scope', 'CONFIG', '$location', '$timeout', 'item', 'i18nNotifications', 'upload', 'Products', 'Banks', 'BanksInfo', 'Mfo',
-		function ($scope, CONFIG, $location, $timeout, item, i18nNotifications, upload, Products, Banks, BanksInfo, Mfo) {
+	.controller('NewsDaythemeEditCtrl', ['$scope', 'CONFIG', '$location', '$timeout', 'item', 'i18nNotifications', 'upload',
+		function ($scope, CONFIG, $location, $timeout, item, i18nNotifications, upload) {
 
 			$scope.item = item;
 			$scope.item.image = $scope.item.image || {};
@@ -237,20 +237,5 @@ angular.module('daytheme', [
 					}
 				});
 			};
-
-			// Autocomplete
-			$scope.getProducts = function(query) {
-				return Products.load();
-			};
-			$scope.getBanks = function(query) {
-				return Banks.load();
-			};
-			$scope.getBanksInfo = function(query) {
-				return BanksInfo.load();
-			};
-			$scope.getMfo = function(query) {
-				return Mfo.load();
-			};
-
 		}
 	]);
