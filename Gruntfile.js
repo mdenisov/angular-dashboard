@@ -112,6 +112,7 @@ module.exports = function(grunt) {
 					'vendor/redactor/plugins/table/table.js',
 					'vendor/redactor/plugins/clips/clips.js',
 					'vendor/redactor/plugins/placeholders/placeholders.js',
+					'vendor/bower/select2/select2.js',
 
 					'vendor/bower/angular/angular.js',
 					'vendor/bower/angular-route/angular-route.js',
@@ -129,7 +130,9 @@ module.exports = function(grunt) {
 					'vendor/bower/angular-notify/angular-notify.js',
                     'vendor/bower/switchery/dist/switchery.js',
                     'vendor/bower/angular-upload/angular-upload.js',
-                    'vendor/bower/ng-tags-input/ng-tags-input.js'
+                    'vendor/bower/ng-tags-input/ng-tags-input.js',
+                    'vendor/bower/angular-ui-switch/angular-ui-switch.js',
+                    'vendor/bower/angular-ui-select2/src/select2.js'
 				],
                 dest: '<%= distdir %>/js/vendor.js'
             }

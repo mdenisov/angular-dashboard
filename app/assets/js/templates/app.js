@@ -166,7 +166,7 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Активность</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
-    "                                <input type=\"checkbox\" name=\"active\" ng-model=\"item.active\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"active\" ng-model=\"item.active\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Начало публикации</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
@@ -190,7 +190,13 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Корректура</label>\n" +
     "                            <div class=\"col-md-5 col-lg-5\">\n" +
-    "                                <input type=\"checkbox\" name=\"correction\" ng-model=\"item.correction\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"correction\" ng-model=\"item.correction\" class=\"green\"></switch>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Банковские продукты</label>\n" +
+    "                            <div class=\"col-md-5 col-lg-5\">\n" +
+    "                                <input type=\"hidden\" ui-select2=\"select2Options\" ng-model=\"item.products\" />\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
@@ -371,11 +377,11 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Показывать только в тематическом разделе</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
-    "                                <input type=\"checkbox\" name=\"razdel_only\" ng-model=\"item.razdel_only\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"razdel_only\" ng-model=\"item.razdel_only\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Не показывать в карточке банка</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
-    "                                <input type=\"checkbox\" name=\"noshowinbankcard\" ng-model=\"item.noshowinbankcard\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"noshowinbankcard\" ng-model=\"item.noshowinbankcard\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
@@ -722,7 +728,7 @@ angular.module("views/home/edit.tpl.html", []).run(["$templateCache", function($
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-1\">Активность</label>\n" +
     "                            <div class=\"col-md-8\">\n" +
-    "                                <input type=\"checkbox\" name=\"active\" ng-model=\"item.active\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"active\" ng-model=\"item.active\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
@@ -764,7 +770,7 @@ angular.module("views/home/edit.tpl.html", []).run(["$templateCache", function($
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-1\">Корректура</label>\n" +
     "                            <div class=\"col-md-8\">\n" +
-    "                                <input type=\"checkbox\" name=\"correction\" ng-model=\"item.correction\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"correction\" ng-model=\"item.correction\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
@@ -853,7 +859,7 @@ angular.module("views/home/edit.tpl.html", []).run(["$templateCache", function($
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-1\">Главная новость</label>\n" +
     "                            <div class=\"col-md-8\">\n" +
-    "                                <input type=\"checkbox\" name=\"mainnews\" ng-model=\"item.mainnews\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"mainnews\" ng-model=\"item.mainnews\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
@@ -974,7 +980,7 @@ angular.module("views/lenta/edit.tpl.html", []).run(["$templateCache", function(
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Активность</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
-    "                                <input type=\"checkbox\" name=\"active\" ng-model=\"item.active\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"active\" ng-model=\"item.active\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Начало публикации</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
@@ -998,7 +1004,7 @@ angular.module("views/lenta/edit.tpl.html", []).run(["$templateCache", function(
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Корректура</label>\n" +
     "                            <div class=\"col-md-5 col-lg-5\">\n" +
-    "                                <input type=\"checkbox\" name=\"correction\" ng-model=\"item.correction\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"correction\" ng-model=\"item.correction\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
@@ -1179,11 +1185,11 @@ angular.module("views/lenta/edit.tpl.html", []).run(["$templateCache", function(
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Показывать только в тематическом разделе</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
-    "                                <input type=\"checkbox\" name=\"razdel_only\" ng-model=\"item.razdel_only\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"razdel_only\" ng-model=\"item.razdel_only\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Не показывать в карточке банка</label>\n" +
     "                            <div class=\"col-md-4 col-lg-5\">\n" +
-    "                                <input type=\"checkbox\" name=\"noshowinbankcard\" ng-model=\"item.noshowinbankcard\" ui-switch=\"{color: '#64BD63', secondaryColor: '#DB5455'}\" />\n" +
+    "                                <switch name=\"noshowinbankcard\" ng-model=\"item.noshowinbankcard\" class=\"green\"></switch>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +

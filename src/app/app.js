@@ -8,6 +8,7 @@ angular.module('app', [
         'ngSanitize',
         'ngTouch',
 		'ngSwitcher',
+		'uiSwitch',
 		'cgNotify',
 		'ng-breadcrumbs',
 		'angular-redactor',
@@ -15,6 +16,7 @@ angular.module('app', [
 		'ngTagsInput',
 
         'ui.bootstrap',
+		'ui.select2',
         'ui.bankiru',
 
         'services.i18nNotifications',

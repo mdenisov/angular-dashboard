@@ -9,6 +9,8 @@
         "angular-bootstrap": "^0.12.0",
 		"bootstrap": "^3.3.1",
 		"switchery": "^0.6.3",
+        "angular-ui-switch" : "^0.0.6",
+        "angular-ui-select2": "^0.0.5",
 		"font-awesome": "^4.1.0",
 		"ng-tags-input": "^2.1.1",
 		"ng-breadcrumbs": "^0.4.1",

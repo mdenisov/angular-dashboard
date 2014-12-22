@@ -8,6 +8,7 @@ angular.module('app', [
         'ngSanitize',
         'ngTouch',
 		'ngSwitcher',
+		'uiSwitch',
 		'cgNotify',
 		'ng-breadcrumbs',
 		'angular-redactor',
@@ -15,6 +16,7 @@ angular.module('app', [
 		'ngTagsInput',
 
         'ui.bootstrap',
+		'ui.select2',
         'ui.bankiru',
 
         'services.i18nNotifications',
@@ -753,6 +755,14 @@ angular.module('daytheme', [
 						$scope.item.illustrations.splice(index, 1);
 					}
 				});
+			};
+
+
+
+			$scope.select2Options = {
+				'multiple': true,
+				'simple_tags': true,
+				'tags': ['tag1', 'tag2', 'tag3', 'tag4']  // Can be empty list.
 			};
 		}
 	]);
