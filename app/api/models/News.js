@@ -63,7 +63,19 @@ module.exports = {
         mfo: {
             type: 'array'
         },
+        noshowonfrontpage: {
+            type: 'boolean',
+            defaultsTo: true
+        },
         noshowinbankcard: {
+            type: 'boolean',
+            defaultsTo: false
+        },
+        no_show_on_allbanks: {
+            type: 'boolean',
+            defaultsTo: false
+        },
+        onfrontpagedateto: {
             type: 'boolean',
             defaultsTo: false
         },
@@ -73,6 +85,10 @@ module.exports = {
         },
         products: {
             type: 'array'
+        },
+        productsonly: {
+            type: 'boolean',
+            defaultsTo: false
         },
         razdel_only: {
             type: 'boolean',
