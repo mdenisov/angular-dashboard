@@ -113,11 +113,13 @@ angular.module('app', [
 		tagsInputConfigProvider
 			.setDefaults('tagsInput', {
 				placeholder: 'New tag',
-				addOnEnter: false
+				addOnEnter: false,
+				addFromAutocompleteOnly: true
 			})
 			.setDefaults('autoComplete', {
 				maxResultsToShow: 10,
-				debounceDelay: 1000
+				debounceDelay: 1000,
+				addFromAutocompleteOnly: true
 			})
 			.setActiveInterpolation('tagsInput', {
 				placeholder: true,
@@ -470,6 +472,7 @@ angular.module('app', [
 
 			// Autocomplete
 			$scope.getProducts = function(query) {
+				console.log(Products.load());
 				return Products.load();
 			};
 			$scope.getBanks = function(query) {

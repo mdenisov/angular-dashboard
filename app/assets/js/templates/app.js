@@ -196,12 +196,6 @@ angular.module("views/daytheme/edit.tpl.html", []).run(["$templateCache", functi
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Банковские продукты</label>\n" +
     "                            <div class=\"col-md-5 col-lg-5\">\n" +
-    "                                <input type=\"hidden\" ui-select2=\"select2Options\" ng-model=\"item.products\" />\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <label class=\"control-label col-md-2 col-lg-1\">Банковские продукты</label>\n" +
-    "                            <div class=\"col-md-5 col-lg-5\">\n" +
     "                                <tags-input ng-model=\"item.products\" display-property=\"name\">\n" +
     "                                    <auto-complete source=\"getProducts($query)\"></auto-complete>\n" +
     "                                </tags-input>\n" +
