@@ -117,8 +117,9 @@ angular.module('app', [
 				addFromAutocompleteOnly: true
 			})
 			.setDefaults('autoComplete', {
+				minLength: 1,
+				debounceDelay: 0,
 				maxResultsToShow: 10,
-				debounceDelay: 1000,
 				addFromAutocompleteOnly: true
 			})
 			.setActiveInterpolation('tagsInput', {
@@ -147,6 +148,20 @@ angular.module('app', [
 			{id: 14, name: 'Микрозаймы'},
 			{id: 15, name: 'Страхование'}
 		];
+
+		this.search = function(query) {
+			var items, deferred = $q.defer();
+
+			items = _.chain(tags)
+				.filter(function(x) {
+					return x.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+				})
+				.take(10)
+				.value();
+
+			deferred.resolve(items);
+			return deferred.promise;
+		};
 
 		this.load = function() {
 			var deferred = $q.defer();
@@ -209,6 +224,20 @@ angular.module('app', [
 			{"id":95880,"name":"Северная Казна(Екатеринбург) (ID: 95880)"}
 		];
 
+		this.search = function(query) {
+			var items, deferred = $q.defer();
+
+			items = _.chain(tags)
+				.filter(function(x) {
+					return x.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+				})
+				.take(10)
+				.value();
+
+			deferred.resolve(items);
+			return deferred.promise;
+		};
+
 		this.load = function() {
 			var deferred = $q.defer();
 			deferred.resolve(tags);
@@ -270,6 +299,20 @@ angular.module('app', [
 			{"id":95880,"name":"Северная Казна(Екатеринбург) (ID: 95880)"}
 		];
 
+		this.search = function(query) {
+			var items, deferred = $q.defer();
+
+			items = _.chain(tags)
+				.filter(function(x) {
+					return x.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+				})
+				.take(10)
+				.value();
+
+			deferred.resolve(items);
+			return deferred.promise;
+		};
+
 		this.load = function() {
 			var deferred = $q.defer();
 			deferred.resolve(tags);
@@ -301,6 +344,20 @@ angular.module('app', [
 			{"id":20,"name":" Русмикрофинанс (ID: 20)"}
 		];
 
+		this.search = function(query) {
+			var items, deferred = $q.defer();
+
+			items = _.chain(tags)
+				.filter(function(x) {
+					return x.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+				})
+				.take(10)
+				.value();
+
+			deferred.resolve(items);
+			return deferred.promise;
+		};
+
 		this.load = function() {
 			var deferred = $q.defer();
 			deferred.resolve(tags);
@@ -315,6 +372,20 @@ angular.module('app', [
 			{id: 3, name: 'в ленту для @Mail.RU'},
 			{id: 4, name: 'в информер @Mail.RU'}
 		];
+
+		this.search = function(query) {
+			var items, deferred = $q.defer();
+
+			items = _.chain(tags)
+				.filter(function(x) {
+					return x.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+				})
+				.take(10)
+				.value();
+
+			deferred.resolve(items);
+			return deferred.promise;
+		};
 
 		this.load = function() {
 			var deferred = $q.defer();
@@ -336,6 +407,20 @@ angular.module('app', [
 			{"id":"2400", "name":"Абаза"},
 			{"id":"691", "name":"Абакан"}
 		];
+
+		this.search = function(query) {
+			var items, deferred = $q.defer();
+
+			items = _.chain(tags)
+				.filter(function(x) {
+					return x.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+				})
+				.take(10)
+				.value();
+
+			deferred.resolve(items);
+			return deferred.promise;
+		};
 
 		this.load = function() {
 			var deferred = $q.defer();
@@ -397,6 +482,20 @@ angular.module('app', [
 			{"id":49,"name":"Чрезвычайная страховая компания (ID: 49)"},
 			{"id":50,"name":"Либерти Страхование (ID: 50)"}
 		];
+
+		this.search = function(query) {
+			var items, deferred = $q.defer();
+
+			items = _.chain(tags)
+				.filter(function(x) {
+					return x.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+				})
+				.take(10)
+				.value();
+
+			deferred.resolve(items);
+			return deferred.promise;
+		};
 
 		this.load = function() {
 			var deferred = $q.defer();
@@ -472,26 +571,25 @@ angular.module('app', [
 
 			// Autocomplete
 			$scope.getProducts = function(query) {
-				console.log(Products.load());
-				return Products.load();
+				return Products.search(query);
 			};
 			$scope.getBanks = function(query) {
-				return Banks.load();
+				return Banks.search(query);
 			};
 			$scope.getBanksInfo = function(query) {
-				return BanksInfo.load();
+				return BanksInfo.search(query);
 			};
 			$scope.getMfo = function(query) {
-				return Mfo.load();
+				return Mfo.search(query);
 			};
 			$scope.getRss = function(query) {
-				return Rss.load();
+				return Rss.search(query);
 			};
 			$scope.getRegions = function(query) {
-				return Regions.load();
+				return Regions.search(query);
 			};
 			$scope.getInsurance = function(query) {
-				return Insurance.load();
+				return Insurance.search(query);
 			};
 			
 			$scope.otherServices = '<ul class="services"><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li><li class="services__item"><a href=""><span class="services__icon"><img src="assets/img/logo.png" alt=""/></span><span class="services__name">Title</span></a></li></ul>';

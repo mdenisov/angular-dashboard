@@ -106,6 +106,7 @@ module.exports = function(grunt) {
 				},
                 src: [
 					'vendor/bower/jquery/dist/jquery.js',
+					'vendor/bower/underscore/underscore.js',
 					'vendor/redactor/redactor.js',
 					'vendor/redactor/lang/ru.js',
 					'vendor/redactor/plugins/fullscreen/fullscreen.js',
