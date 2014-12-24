@@ -1,0 +1,274 @@
+<section class="panel animated fadeInDown">
+
+    <header id="page-header">
+        <div class="panel-heading">
+            <h2>{{item.id ? 'Редактирование новости' : 'Добавление новости'}}</h2>
+            <!--<label class="color">{{{this.subtitle}}}</label>-->
+        </div>
+    </header>
+
+    <div id="page-tools"></div>
+
+    <div id="page-content" class="panel-body">
+
+        <form class="form-horizontal" crud-edit="item" name="form" enctype="multipart/form-data">
+
+            <tabset>
+
+                <tab heading="Основные">
+
+                    <div class="padding--vertical">
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Заголовок</label>
+                            <div class="col-md-10 col-lg-11">
+                                <textarea class="form-control" name="title" ng-model="item.title" required></textarea>
+                                <div ng-messages="form.title.$error">
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Активность</label>
+                            <div class="col-md-4 col-lg-5">
+                                <switch name="active" ng-model="item.active" class="green"></switch>
+                            </div>
+                            <label class="control-label col-md-2 col-lg-1">Начало публикации</label>
+                            <div class="col-md-4 col-lg-5">
+                                <input class="form-control" type="text" name="date_start" datepicker-popup="dd.MM.yyyy" ng-model="item.date_start" is-open="datepickers.date_start_opened" date-disabled="disabled(date, mode)" ng-click="openDatepicker($event, 'date_start_opened')" show-button-bar="false" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Статус</label>
+                            <div class="col-md-4 col-lg-5">
+                                <select class="form-control" name="status"  ng-model="item.status">
+                                    <option value="1">[1] Опубликован</option>
+                                    <option value="3">[3] Готов к публикации</option>
+                                    <option value="2">[2] Черновик</option>
+                                </select>
+                            </div>
+                            <label class="control-label col-md-2 col-lg-1">Окончание публикации</label>
+                            <div class="col-md-4 col-lg-5">
+                                <input class="form-control" type="text" name="date_finish" datepicker-popup="dd.MM.yyyy" ng-model="item.date_finish" is-open="datepickers.date_finish_opened" date-disabled="disabled(date, mode)" ng-click="openDatepicker($event, 'date_finish_opened')" show-button-bar="false" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Корректура</label>
+                            <div class="col-md-5 col-lg-5">
+                                <switch name="correction" ng-model="item.correction" class="green"></switch>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Банковские продукты</label>
+                            <div class="col-md-5 col-lg-5">
+                                <tags-input ng-model="item.products" display-property="name">
+                                    <auto-complete source="getProducts($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Показывать на главной вместе с онлайн-конференцией</label>
+                            <div class="col-md-5 col-lg-5">
+                                <switch name="with_online" ng-model="item.with_online" class="green"></switch>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Источник</label>
+                            <div class="col-md-5 col-lg-5">
+                                <input class="form-control" type="text" name="source_name" ng-model="item.source_name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Ссылка на источник</label>
+                            <div class="col-md-5 col-lg-5">
+                                <input class="form-control" type="url" name="source_url" ng-model="item.source_url"/>
+                                <div ng-messages="form.source_url.$error">
+                                    <div ng-message="url" class="help-block text-danger">{{messages.validation.invalidUrl}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Банки</label>
+                            <div class="col-md-2 col-lg-3">
+                                <tags-input ng-model="item.banks" display-property="name">
+                                    <auto-complete source="getBanks($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                            <label class="control-label col-md-2 col-lg-1">Информация о банках</label>
+                            <div class="col-md-2 col-lg-3">
+                                <tags-input ng-model="item.banks_info" display-property="name">
+                                    <auto-complete source="getBanksInfo($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                            <label class="control-label col-md-2 col-lg-1">Микрофинансовые организации</label>
+                            <div class="col-md-2 col-lg-3">
+                                <tags-input ng-model="item.mfo" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Страховые компании</label>
+                            <div class="col-md-5 col-lg-5">
+                                <tags-input ng-model="item.insurance" display-property="name">
+                                    <auto-complete source="getInsurance($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Регионы</label>
+                            <div class="col-md-5 col-lg-5">
+                                <tags-input ng-model="item.regions" display-property="name">
+                                    <auto-complete source="getRegions($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">RSS</label>
+                            <div class="col-md-5 col-lg-5">
+                                <tags-input ng-model="item.rss" display-property="name">
+                                    <auto-complete source="getRss($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Анонс</label>
+                            <div class="col-md-10 col-lg-11">
+                                <textarea class="form-control" name="preview_text" ng-model="item.preview_text" redactor="{'buttons': ['html','|','formatting','|','bold','italic','deleted','|','unorderedlist','orderedlist','outdent','indent','|','alignment']}" required></textarea>
+                                <div ng-messages="form.preview_text.$error">
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Текст</label>
+                            <div class="col-md-10 col-lg-11">
+                                <textarea class="form-control" name="text" ng-model="item.text" redactor="{plugins: ['table','placeholders','clips','fullscreen']}" data-placeholders='{"placeholders": [{"name": "placeholder_gallery","value": "Иллюстрации"}]}' required></textarea>
+                                <div ng-messages="form.text.$error">
+                                    <div ng-message="required" class="help-block text-danger">{{messages.validation.required}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Сюжеты</label>
+                            <div class="col-md-5 col-lg-5">
+                                <tags-input ng-model="item.topic" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Изображение</label>
+                            <div class="col-md-5 col-lg-3">
+                                <fieldset>
+                                    <div class="form-group" ng-show="item.image.src">
+                                        <div class="col-md-12 col-lg-12">
+                                            <img class="img-thumbnail img-responsive" ng-attr-src="{{item.image.src}}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="file-input-wrapper">
+                                                <upload-button
+                                                        class="btn btn-primary btn-upload"
+                                                        url="/file/upload"
+                                                        param="file"
+                                                        accept="acceptImageTypes"
+                                                        force-iframe-upload="forceIframeUpload"
+                                                        data="uploadData"
+                                                        on-upload="onUpload(files)"
+                                                        on-success="onSuccess(response)"
+                                                        on-error="onImageError(response)"
+                                                        on-complete="onImageComplete(response)">
+                                                    {{ item.image.src ? 'Заменить' : 'Выбрать' }}
+                                                </upload-button>
+                                            </div>
+                                            <button type="button" class="btn btn-danger" ng-show="item.image.src" ng-click="removeImage()">Удалить</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-horizontal col-md-12 col-lg-12" ng-show="item.image.src" style="margin-top: 15px;">
+                                        <div class="form-group">
+                                            <label class="control-label">Источник</label>
+                                            <input class="form-control" type="text" name="image.source" ng-model="item.image.source"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Ссылка</label>
+                                            <input class="form-control" type="text" name="image.source_url" ng-model="item.image.source_url"/>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 0;">
+                                            <label class="control-label">Подпись</label>
+                                            <input class="form-control" type="text" name="image.sign" ng-model="item.image.sign"/>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Внутреннее название</label>
+                            <div class="col-md-5 col-lg-5">
+                                <input class="form-control" type="text" name="inside" ng-model="item.inside"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Автор</label>
+                            <div class="col-md-5 col-lg-5">
+                                <input class="form-control" type="text" name="personname" ng-model="item.personname"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Профессия или статус</label>
+                            <div class="col-md-5 col-lg-5">
+                                <input class="form-control" type="text" name="personinfo" ng-model="item.personinfo"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Лизинг</label>
+                            <div class="col-md-5 col-lg-5">
+                                <tags-input ng-model="item.leasing" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Показывать только в тематическом разделе</label>
+                            <div class="col-md-4 col-lg-5">
+                                <switch name="razdel_only" ng-model="item.razdel_only" class="green"></switch>
+                            </div>
+                            <label class="control-label col-md-2 col-lg-1">Не показывать в карточке банка</label>
+                            <div class="col-md-4 col-lg-5">
+                                <switch name="noshowinbankcard" ng-model="item.noshowinbankcard" class="green"></switch>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-1">Видеоновости</label>
+                            <div class="col-md-5 col-lg-5">
+                                <tags-input ng-model="item.video" display-property="name">
+                                    <auto-complete source="getMfo($query)"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                    </div>
+
+                </tab>
+                <tab heading="Иллюстрации">
+
+                    <div ng-include="'views/partials/news/illustrations.tpl.html'"></div>
+
+                </tab>
+
+            </tabset>
+
+            <footer class="panel-footer">
+
+                <crud-buttons></crud-buttons>
+
+            </footer>
+
+        </form>
+
+    </div>
+
+    <div id="page-footer"></div>
+
+    <div class="page__flip"></div>
+
+</section>

@@ -26,6 +26,7 @@ angular.module('app', [
 		'daytheme',
 		'lenta',
 		'bankpress',
+		'interview',
 		'history',
 		'topic',
 		'settings',

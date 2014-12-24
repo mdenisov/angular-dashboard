@@ -79,6 +79,12 @@ module.exports = {
             type: 'boolean',
             defaultsTo: false
         },
+        personname: {
+            type: 'string'
+        },
+        personinfo: {
+            type: 'string'
+        },
         preview_text: {
             type: 'string',
             required: true
@@ -123,6 +129,10 @@ module.exports = {
         },
         video: {
             type: 'array'
+        },
+        with_online: {
+            type: 'boolean',
+            defaultsTo: false
         }
     },
 
