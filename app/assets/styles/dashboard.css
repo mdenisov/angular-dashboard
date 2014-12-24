@@ -15813,6 +15813,7 @@ tags-input .tags {
   padding: 0 1px;
   min-height: 34px;
   height: 100%;
+  cursor: text;
 }
 
 tags-input .tags:before,
@@ -15842,6 +15843,7 @@ tags-input .tags .input {
   padding: 6px 11px;
   float: left;
   height: 31px;
+  width: 10%;
   max-width: 100%;
 }
 
