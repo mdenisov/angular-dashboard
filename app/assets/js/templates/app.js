@@ -504,22 +504,6 @@ angular.module("views/columnist/edit.tpl.html", []).run(["$templateCache", funct
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
-    "                            <label class=\"control-label col-md-2 col-lg-1\">Рубрика</label>\n" +
-    "                            <div class=\"col-md-5 col-lg-5\">\n" +
-    "                                <select class=\"form-control\" name=\"sub_category\" ng-model=\"item.sub_category\">\n" +
-    "                                    <option value=\"\">(не установлено)</option>\n" +
-    "                                    <option value=\"lenta_banks\">Банки</option>\n" +
-    "                                    <option value=\"lenta_products_and_services\">Продукты и услуги</option>\n" +
-    "                                    <option value=\"lenta_buisness\">Бизнес</option>\n" +
-    "                                    <option value=\"lenta_market\">Рынки</option>\n" +
-    "                                    <option value=\"lenta_macroeconomic\">Макроэкономика</option>\n" +
-    "                                    <option value=\"lenta_in_world\">В мире</option>\n" +
-    "                                    <option value=\"lenta_accidents\" selected=\"selected\">Происшествия</option>\n" +
-    "                                    <option value=\"lenta_projects_bankiru\">Проекты Банки.ру</option>\n" +
-    "                                </select>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Источник</label>\n" +
     "                            <div class=\"col-md-5 col-lg-5\">\n" +
     "                                <input class=\"form-control\" type=\"text\" name=\"source_name\" ng-model=\"item.source_name\"/>\n" +
@@ -607,19 +591,13 @@ angular.module("views/columnist/edit.tpl.html", []).run(["$templateCache", funct
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Автор</label>\n" +
     "                            <div class=\"col-md-5 col-lg-5\">\n" +
-    "                                <input type=\"text\" name=\"author\" ng-model=\"item.author\"/>\n" +
+    "                                <input class=\"form-control\" type=\"text\" name=\"author\" ng-model=\"item.author\"/>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
     "                            <label class=\"control-label col-md-2 col-lg-1\">Метка</label>\n" +
     "                            <div class=\"col-md-5 col-lg-5\">\n" +
     "                                <input class=\"form-control\" type=\"text\" name=\"label\" ng-model=\"item.label\"/>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <label class=\"control-label col-md-2 col-lg-1\">Альтернативная ссылка на статью</label>\n" +
-    "                            <div class=\"col-md-5 col-lg-5\">\n" +
-    "                                <input class=\"form-control\" type=\"text\" name=\"source_url\" ng-model=\"item.source_url\"/>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
