@@ -8,6 +8,9 @@
 module.exports = {
 
     attributes: {
+        author: {
+            type: 'string'
+        },
         active: {
             type: 'boolean',
             defaultsTo: true
@@ -47,11 +50,18 @@ module.exports = {
         illustrations: {
             type: 'array'
         },
+        hide_columnist_photo: {
+            type: 'boolean',
+            defaultsTo: false
+        },
         image: {
             type: 'object'
         },
         insurance: {
             type: 'array'
+        },
+        label: {
+            type: 'string'
         },
         leasing: {
             type: 'array'
