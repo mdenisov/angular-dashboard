@@ -27,6 +27,7 @@ angular.module('app', [
 		'lenta',
 		'bankpress',
 		'interview',
+		'author',
 		'columnist',
 		'history',
 		'topic',

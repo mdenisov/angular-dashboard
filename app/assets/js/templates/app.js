@@ -1,4 +1,4 @@
-angular.module('templates.app', ['users/users-edit.tpl.html', 'users/users-list.tpl.html', 'views/bankpress/edit.tpl.html', 'views/bankpress/list.tpl.html', 'views/columnist/edit.tpl.html', 'views/columnist/list.tpl.html', 'views/daytheme/edit.tpl.html', 'views/daytheme/list.tpl.html', 'views/directives/popover/popover-html.tpl.html', 'views/history/edit.tpl.html', 'views/history/list.tpl.html', 'views/home/edit.tpl.html', 'views/home/list.tpl.html', 'views/interview/edit.tpl.html', 'views/interview/list.tpl.html', 'views/lenta/edit.tpl.html', 'views/lenta/list.tpl.html', 'views/modals/history.tpl.html', 'views/notify.tpl.html', 'views/partials/breadcrumb.tpl.html', 'views/partials/footer.tpl.html', 'views/partials/header.tpl.html', 'views/partials/news/filter.tpl.html', 'views/partials/news/history.tpl.html', 'views/partials/news/illustrations.tpl.html', 'views/partials/news/list.tpl.html', 'views/partials/sidebar.tpl.html', 'views/settings/edit.tpl.html', 'views/topic/edit.tpl.html', 'views/topic/list.tpl.html']);
+angular.module('templates.app', ['users/users-edit.tpl.html', 'users/users-list.tpl.html', 'views/author/edit.tpl.html', 'views/author/list.tpl.html', 'views/bankpress/edit.tpl.html', 'views/bankpress/list.tpl.html', 'views/columnist/edit.tpl.html', 'views/columnist/list.tpl.html', 'views/daytheme/edit.tpl.html', 'views/daytheme/list.tpl.html', 'views/directives/popover/popover-html.tpl.html', 'views/history/edit.tpl.html', 'views/history/list.tpl.html', 'views/home/edit.tpl.html', 'views/home/list.tpl.html', 'views/interview/edit.tpl.html', 'views/interview/list.tpl.html', 'views/lenta/edit.tpl.html', 'views/lenta/list.tpl.html', 'views/modals/history.tpl.html', 'views/notify.tpl.html', 'views/partials/breadcrumb.tpl.html', 'views/partials/footer.tpl.html', 'views/partials/header.tpl.html', 'views/partials/news/filter.tpl.html', 'views/partials/news/history.tpl.html', 'views/partials/news/illustrations.tpl.html', 'views/partials/news/list.tpl.html', 'views/partials/sidebar.tpl.html', 'views/settings/edit.tpl.html', 'views/topic/edit.tpl.html', 'views/topic/list.tpl.html']);
 
 angular.module("users/users-edit.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("users/users-edit.tpl.html",
@@ -130,6 +130,186 @@ angular.module("users/users-list.tpl.html", []).run(["$templateCache", function(
     "        <button class=\"btn btn-primary btn-sm pull-right\" role=\"button\" ng-click=\"new()\">Add User</button>\n" +
     "    </div>\n" +
     "</div>");
+}]);
+
+angular.module("views/author/edit.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("views/author/edit.tpl.html",
+    "<section class=\"panel animated fadeInDown\">\n" +
+    "\n" +
+    "    <header id=\"page-header\">\n" +
+    "        <div class=\"panel-heading\">\n" +
+    "            <h2>{{item.id ? 'Редактирование новости' : 'Добавление новости'}}</h2>\n" +
+    "            <!--<label class=\"color\">{{{this.subtitle}}}</label>-->\n" +
+    "        </div>\n" +
+    "    </header>\n" +
+    "\n" +
+    "    <div id=\"page-tools\"></div>\n" +
+    "\n" +
+    "    <div id=\"page-content\" class=\"panel-body\">\n" +
+    "\n" +
+    "        <form class=\"form-horizontal\" crud-edit=\"item\" name=\"form\" enctype=\"multipart/form-data\">\n" +
+    "\n" +
+    "            <tabset>\n" +
+    "\n" +
+    "                <tab heading=\"Основные\">\n" +
+    "\n" +
+    "                    <div class=\"padding--vertical\">\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Заголовок</label>\n" +
+    "                            <div class=\"col-md-10 col-lg-11\">\n" +
+    "                                <textarea class=\"form-control\" name=\"title\" ng-model=\"item.title\" required></textarea>\n" +
+    "                                <div ng-messages=\"form.title.$error\">\n" +
+    "                                    <div ng-message=\"required\" class=\"help-block text-danger\">{{messages.validation.required}}</div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Активность</label>\n" +
+    "                            <div class=\"col-md-4 col-lg-5\">\n" +
+    "                                <switch name=\"active\" ng-model=\"item.active\" class=\"green\"></switch>\n" +
+    "                            </div>\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Начало публикации</label>\n" +
+    "                            <div class=\"col-md-4 col-lg-5\">\n" +
+    "                                <input class=\"form-control\" type=\"text\" name=\"date_start\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_start\" is-open=\"datepickers.date_start_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"openDatepicker($event, 'date_start_opened')\" show-button-bar=\"false\" />\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Статус</label>\n" +
+    "                            <div class=\"col-md-4 col-lg-5\">\n" +
+    "                                <select class=\"form-control\" name=\"status\"  ng-model=\"item.status\">\n" +
+    "                                    <option value=\"1\">[1] Опубликован</option>\n" +
+    "                                    <option value=\"3\">[3] Готов к публикации</option>\n" +
+    "                                    <option value=\"2\">[2] Черновик</option>\n" +
+    "                                </select>\n" +
+    "                            </div>\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Окончание публикации</label>\n" +
+    "                            <div class=\"col-md-4 col-lg-5\">\n" +
+    "                                <input class=\"form-control\" type=\"text\" name=\"date_finish\" datepicker-popup=\"dd.MM.yyyy\" ng-model=\"item.date_finish\" is-open=\"datepickers.date_finish_opened\" date-disabled=\"disabled(date, mode)\" ng-click=\"openDatepicker($event, 'date_finish_opened')\" show-button-bar=\"false\" />\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Корректура</label>\n" +
+    "                            <div class=\"col-md-5 col-lg-5\">\n" +
+    "                                <switch name=\"correction\" ng-model=\"item.correction\" class=\"green\"></switch>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Имя</label>\n" +
+    "                            <div class=\"col-md-5 col-lg-5\">\n" +
+    "                                <input class=\"form-control\" type=\"text\" name=\"name\" ng-model=\"item.name\"/>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Фамилия</label>\n" +
+    "                            <div class=\"col-md-5 col-lg-5\">\n" +
+    "                                <input class=\"form-control\" type=\"url\" name=\"surname\" ng-model=\"item.surname\"/>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Профессия или статус</label>\n" +
+    "                            <div class=\"col-md-5 col-lg-5\">\n" +
+    "                                <input class=\"form-control\" type=\"url\" name=\"columnist_status\" ng-model=\"item.columnist_status\"/>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Фото</label>\n" +
+    "                            <div class=\"col-md-5 col-lg-3\">\n" +
+    "                                <fieldset>\n" +
+    "                                    <div class=\"form-group\" ng-show=\"item.image.src\">\n" +
+    "                                        <div class=\"col-md-12 col-lg-12\">\n" +
+    "                                            <img class=\"img-thumbnail img-responsive\" ng-attr-src=\"{{item.image.src}}\" />\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"form-group\" style=\"margin-bottom: 0;\">\n" +
+    "                                        <div class=\"col-md-12 col-lg-12\">\n" +
+    "                                            <div class=\"file-input-wrapper\">\n" +
+    "                                                <upload-button\n" +
+    "                                                        class=\"btn btn-primary btn-upload\"\n" +
+    "                                                        url=\"/file/upload\"\n" +
+    "                                                        param=\"file\"\n" +
+    "                                                        accept=\"acceptImageTypes\"\n" +
+    "                                                        force-iframe-upload=\"forceIframeUpload\"\n" +
+    "                                                        data=\"uploadData\"\n" +
+    "                                                        on-upload=\"onUpload(files)\"\n" +
+    "                                                        on-success=\"onSuccess(response)\"\n" +
+    "                                                        on-error=\"onImageError(response)\"\n" +
+    "                                                        on-complete=\"onImageComplete(response)\">\n" +
+    "                                                    {{ item.image.src ? 'Заменить' : 'Выбрать' }}\n" +
+    "                                                </upload-button>\n" +
+    "                                            </div>\n" +
+    "                                            <button type=\"button\" class=\"btn btn-danger\" ng-show=\"item.image.src\" ng-click=\"removeImage()\">Удалить</button>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                </fieldset>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label col-md-2 col-lg-1\">Информация об авторе</label>\n" +
+    "                            <div class=\"col-md-10 col-lg-11\">\n" +
+    "                                <textarea class=\"form-control\" name=\"info\" ng-model=\"item.info\" redactor=\"{'buttons': ['html','|','formatting','|','bold','italic','deleted','|','unorderedlist','orderedlist','outdent','indent','|','alignment']}\" required></textarea>\n" +
+    "                                <div ng-messages=\"form.preview_text.$error\">\n" +
+    "                                    <div ng-message=\"required\" class=\"help-block text-danger\">{{messages.validation.required}}</div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                </tab>\n" +
+    "                <tab heading=\"Иллюстрации\">\n" +
+    "\n" +
+    "                    <div ng-include=\"'views/partials/news/illustrations.tpl.html'\"></div>\n" +
+    "\n" +
+    "                </tab>\n" +
+    "\n" +
+    "            </tabset>\n" +
+    "\n" +
+    "            <footer class=\"panel-footer\">\n" +
+    "\n" +
+    "                <crud-buttons></crud-buttons>\n" +
+    "\n" +
+    "            </footer>\n" +
+    "\n" +
+    "        </form>\n" +
+    "\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"page-footer\"></div>\n" +
+    "\n" +
+    "    <div class=\"page__flip\"></div>\n" +
+    "\n" +
+    "</section>");
+}]);
+
+angular.module("views/author/list.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("views/author/list.tpl.html",
+    "<section class=\"panel animated fadeInDown\">\n" +
+    "\n" +
+    "    <header id=\"page-header\">\n" +
+    "        <div class=\"panel-heading\">\n" +
+    "            <h2>Авторы</h2>\n" +
+    "            <!--<label class=\"color\">{{{this.subtitle}}}</label>-->\n" +
+    "        </div>\n" +
+    "    </header>\n" +
+    "\n" +
+    "    <div id=\"page-tools\"></div>\n" +
+    "\n" +
+    "    <div id=\"page-content\" class=\"panel-body\">\n" +
+    "\n" +
+    "        <form role=\"form\">\n" +
+    "\n" +
+    "            <div ng-include=\"'views/partials/news/filter.tpl.html'\"></div>\n" +
+    "\n" +
+    "            <div ng-include=\"'views/partials/news/list.tpl.html'\"></div>\n" +
+    "\n" +
+    "        </form>\n" +
+    "\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"page-footer\"></div>\n" +
+    "\n" +
+    "    <div class=\"page__flip\"></div>\n" +
+    "\n" +
+    "</section>");
 }]);
 
 angular.module("views/bankpress/edit.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -2620,7 +2800,7 @@ angular.module("views/partials/sidebar.tpl.html", []).run(["$templateCache", fun
     "            <li class=\"navigation__item\" ng-class=\"{'navigation__item--active': isActive('/news/author')}\">\n" +
     "                <a class=\"navigation__link\" role=\"nav-main\" href=\"#/news/author\"><i class=\"navigation__link__icon fa fa-user\"></i>Авторы</a>\n" +
     "            </li>\n" +
-    "            <li class=\"navigation__item\" ng-class=\"{'navigation__item--active': isActive('/news/columnists')}\">\n" +
+    "            <li class=\"navigation__item\" ng-class=\"{'navigation__item--active': isActive('/news/columnist')}\">\n" +
     "                <a class=\"navigation__link\" role=\"nav-main\" href=\"#/news/columnist\"><i class=\"navigation__link__icon fa fa-list\"></i>Колумнисты</a>\n" +
     "            </li>\n" +
     "            <li class=\"navigation__item\" ng-class=\"{'navigation__item--active': isActive('/news/video')}\">\n" +

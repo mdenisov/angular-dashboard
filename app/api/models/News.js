@@ -25,6 +25,9 @@ module.exports = {
             type: 'boolean',
             defaultsTo: false
         },
+        columnist_status: {
+            type: 'string'
+        },
         correction: {
             type: 'boolean',
             defaultsTo: false
@@ -50,6 +53,9 @@ module.exports = {
         illustrations: {
             type: 'array'
         },
+        info: {
+            type: 'string'
+        },
         hide_columnist_photo: {
             type: 'boolean',
             defaultsTo: false
@@ -72,6 +78,9 @@ module.exports = {
         },
         mfo: {
             type: 'array'
+        },
+        name: {
+            type: 'string'
         },
         noshowonfrontpage: {
             type: 'boolean',
@@ -124,6 +133,9 @@ module.exports = {
             defaultsTo: 1
         },
         sub_category: {
+            type: 'string'
+        },
+        surname: {
             type: 'string'
         },
         text: {
