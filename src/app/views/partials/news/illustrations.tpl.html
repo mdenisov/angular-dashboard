@@ -19,7 +19,6 @@
                 </div>
             </li>
             <li>
-                {{$parent.selectAll}}
                 <label class="btn btn-default" tooltip="Выбрать все" ng-class="{'disabled' : !item.illustrations.length}">
                     <input type="checkbox" class="default" ng-disabled="!item.illustrations.length" ng-click="selectIllustrationItems()" ng-true-value="true" ng-false-value="false" ng-checked="$parent.isSelectedAllIllustrationItems()">
                 </label>
